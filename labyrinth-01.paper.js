@@ -1,5 +1,5 @@
 // WIP
-// http://sketch.paperjs.org/#S/nVZLb9pAEP4rWy4xL4s8qkppyCVqb60qpVIPgNBiD2Bhdt21TaAJ/70zu2t7bUzShovNzPfNe3b93BF8C53bzuMGsmDdGXQCGdL/HVcsW0fBRkCasjG7HE0FydKMqwz/C3hiP2QkMu9qNGBXo65VR38AtTeINoKYLw4KYWs2ngqGv4lDvRwwIpJ44IjR4GWLeHgePizwM/I7FctcBFkkBdvB/qd8kFKFqYfvXfZscBRakCsFgpIxSfWqhA0o0DzUTyx0Zsmw95dSfeHB2is8kXWIu9a8Zlvz/THTulP7lQ8/ydO1Zxk2laN9KshyJSxwKo61/BQXodx+z8MVMK+WncK4v/Fs7RuIZ61FS+YpdsdG/tXHEu+4aW3Oscl9g+o08IT66Q3u8NRvm33d8XotBKxsIQQ9SjcFXet6yGwSM3WwxHJaBwY+YJEInbGhNLSE3VeT7ccgVjjgQ3bdltqSxynU8qH2zJ3FcEylcRRA0au5I0+0QvvG+tjwXsf1rw3SlsVWpUupF1HIIMiTCEKa8dnZzfCDWIoyKpx85hEqQj3ax+zxZd4sx2cW3eEbPvr9WlmIahbCZU2i2fnVqTTUAKv1DzRP7OWFVYJ7fQDV3LV3wulG0+y+aXb/brO6Snpcxk6QPXNK9isH9UCKpkw0dfb/bhsG0Hmmcmhbqar+zZ3gSRL/61aczHOxUGeZ1TZVvLbdceM7jb4ZPMURKv5UXE94+nnuBVC5wgAISIOdgsYVkjRTcgMPMpZ0gF4sYh5sLmq6X1FokixvxyG7qbN5Qtz0d84VXBSRFYMwqtVZiq8Kb2APdnTyl+eM3t/+Ow4dx4st2DQj7+b0G7sXBuVslO9t3odXu1drmeuh2VX94QCrLVaAbtv2lhmorrKCrdzBo2V4roqHYSkvTNJFgR82CwV8k9D9kXZuJ7PjXw==
+// http://sketch.paperjs.org/#S/nVZbb9owFP4rFlLVUCALtNMkVvpSbQ/TNk3qpD0AQm5iICPYkeNQaMt/3zmOkzgX2q48QDiX73w+N+epw+mWdcaduw1T/rrT7/giwP87Kolah/6GsyQhEzL0ZhxliaJSwX/OHsgvEXLljLw+GXldow4fGWivwDoTRPT+IMFsTSYzTuAztVyHfYKOKO5bYgAcvl08OIFySg4wgxPwrXILZo6nmvFlyn0VCk52bP9b3Aohg8SB5y55yuzw4H4qJeOYKifL2UWZTwPna0+wmBrjuXFne3cp5Bfqr508FuKzqGsCaG8ToAcRtLIlQhnFjdNk7Rgfoz2aX8lUKrkxnPFj5YyS8kBsf6bBihGnckIJzH9QtXYzE8eghUviSHJNPHf0sbC3wrRm9lj3fcXV6oWG66dXfAfNuG34uhmqueBsRRyOqSgi5J46PxfgVPdR8mCSV4xCPzPvk5AHVtfgCbQET0GenzM1uSlnyI0YX8EoDchl2xGXNEpYIykZtQmO7KrkMNXg8+7bcLDcC2uULUpJFPosr/3CksdaocNAvs2ZX7brXWaWQDSz7mIqcwLC99M4ZAEOzLxt0PScuX4keEEIxgimA6xC0AM0JBAeFvWMfibhNTzBT69XyQi6ZsNle03DeescastSg9k3WveQF7UU3OhtWQnXXgSrEHXYfR12/25YnSXdcROL5EW20ntlgCqRvCh5P/132BoABFcyZW3TWea/PmM0jqO3TlmjlfMBPelZjlLp1zY2Nr8m+zp55BFI+pDfpbBInczhiSRstYVcJ+PKDVMGzy+pREmxYbciEnJMzu8j6m/Oq7pvsM1AJUXKg5rqTxio9di65AfkqiAOIZAcDlPCNDc9irEUf5mvXAp537Hv9MCkG4sk1FXo2W8FQw9XtOd187PmreVVKreS4sG6VnIjswd7sOTJWWP/AYJCSLPZ7CtK01TvqfFMtVR4poqWKajpK28ZQU2cxh75MOoCadNwZ809U0FsZ7iwKRaLsG8ImNIbsif6ET829qLemTOFLYhf1TkS/KuE10GH7fAlIYcsd+jEw0U59Jp7EuvoVO9U/TpoGplMXuxk3WqSbcWO3RkPx1bRICjkOSRezvC6ei8Z3cTYcklnPJ0f/wE=
 
 var thickness = 10
 var start = new Point(20, 20)
@@ -8,16 +8,20 @@ var size = 40
 var labyrinth =
     [ new Point(1, 0)
     , new Point(0, 1)
+    , new Point(0, 1)
+    , new Point(-1, 0)
     , new Point(-1, 0)
     , new Point(0, -1)
+    , new Point(0, -1)
+    , new Point(1, 0)
     ]
 
 
 function vexToCoords(vex) {
-    var current = start * thickness
+    var current = (start * thickness)
     coords = [current]
     vex.forEach(function(vexel){
-        current += vexel * thickness
+        current += (vexel * thickness)
         coords.push(current)
     })
     return coords
@@ -37,17 +41,20 @@ function randomNudge () {
     return new Point(0, -1)
 }
 
-function negNudge (nudge) {
+function neg (nudge) {
     return nudge * -1
 }
 
 function tryNudge (labyrinth, nudge, index) {
-    if (index > labyrinth.length - 3) {
+    if (index < 0 || index > labyrinth.length - 3) {
+        return false
+    }
+    if (nudge == neg(labyrinth[index])) {
         return false
     }
     var _labyrinth = labyrinth.slice()
     _labyrinth.splice(index, 0, nudge)
-    _labyrinth.splice(index+3, 0, negNudge(nudge))
+    _labyrinth.splice(index+3, 0, neg(nudge))
 
     var occupied = []
     var current = start.clone()
@@ -77,25 +84,36 @@ function applyNudge (labyrinth, nudge, index) {
     return labyrinth
 }
 
-var draw = new Path(vexToCoords(labyrinth))
+var draw = new Path(
+    { segments: vexToCoords(labyrinth)
+    , strokeColor: 'black'
+    , strokeJoin: 'round'
+    , strokeWidth: thickness - 4
+    }
+)
 draw.closePath()
-draw.strokeColor = 'black'
-draw.strokeWidth = thickness - 4
-draw.strokeCap = 'square'
+
+project.activeLayer.position += new Point(100, 100)
 
 var index = 0
 
-function onFrame(event) {
-    index++
-    if (index > labyrinth.length - 3) {
-        index = 0
-    }
+function grow () {
+    index = (index + 1) % labyrinth.length
 	var nudge = randomNudge()
 	var _labyrinth = tryNudge(labyrinth, nudge, index)
-    if (!_labyrinth) {
-        return
+	if (_labyrinth) {
+	    var _index = (Math.floor(_labyrinth.length/2) + index) % _labyrinth.length
+	    var __labyrinth = tryNudge(_labyrinth, neg(nudge), _index)
+    	if (__labyrinth) {
+            labyrinth = __labyrinth
+    	}
+	}
+}
+
+function onFrame(event) {
+    for (var i=0; i<10; i++) {
+        grow()
     }
-    labyrinth = _labyrinth
     var segments = vexToCoords(labyrinth)
     draw.removeSegments()
     draw.addSegments(segments)
