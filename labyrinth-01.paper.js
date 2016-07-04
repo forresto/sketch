@@ -1,61 +1,102 @@
 // WIP
-// http://sketch.paperjs.org/#S/fVRNj5swEP0rIy4LLUHJqqtKUfe06rFVpa3aQ7IHx54UC2NT22S3ivjvtQEHTNpwQPD83ny8GTgnktSYbJPnCi0tkzyhivn3E9FwUK1kBh5hs95LD9iS00qimWNaNQiPewnu2oHEV/imuLTpJod1NsD5DF7nsPkHvPo/fRX4L0NC2bJf6CvYOWAvj62klisJJ3z7rp6U0syk7jmD8yDzGtpqjdI60RT6/sEFd7dsRuvVjuX0RU2aNAT3AVFkY0R/hYjvezIKeDe5M7E02lbLQB7wbkwYzvqce9lFzWgimaq/+lYhFSijbrSr8AuxZTGw0lkHp+GRHyHV8AnWxf3DRdpzIgtmpneAwuBMeEs3G+KV7uMt4eo644J7PfZu6o6Hxo/CuZZGHrgBeJ8ib89cMnzbAs/dkKhVegunbmk1Nz+I4Gz0ehxVPqxZZLuitG04snH1AlyqGpfuhB7HaMVR6c+Elpd9gvQUuTRtRlwbaRrx53ZlS0lNKny2xDqF/zRHulnyfeWN829Y9suH4yVZOGeavIbOHDX1fHfo4YIKZbBHA2KsVhU+KaH8ft4dBKHVXXT2k7M+4fQbWcGHWE0arzW/W6LRid3/6KCRVI031iTb3Uv3Fw==
+// http://sketch.paperjs.org/#S/nVZLb9pAEP4rWy4xL4s8qkppyCVqb60qpVIPgNBiD2Bhdt21TaAJ/70zu2t7bUzShovNzPfNe3b93BF8C53bzuMGsmDdGXQCGdL/HVcsW0fBRkCasjG7HE0FydKMqwz/C3hiP2QkMu9qNGBXo65VR38AtTeINoKYLw4KYWs2ngqGv4lDvRwwIpJ44IjR4GWLeHgePizwM/I7FctcBFkkBdvB/qd8kFKFqYfvXfZscBRakCsFgpIxSfWqhA0o0DzUTyx0Zsmw95dSfeHB2is8kXWIu9a8Zlvz/THTulP7lQ8/ydO1Zxk2laN9KshyJSxwKo61/BQXodx+z8MVMK+WncK4v/Fs7RuIZ61FS+YpdsdG/tXHEu+4aW3Oscl9g+o08IT66Q3u8NRvm33d8XotBKxsIQQ9SjcFXet6yGwSM3WwxHJaBwY+YJEInbGhNLSE3VeT7ccgVjjgQ3bdltqSxynU8qH2zJ3FcEylcRRA0au5I0+0QvvG+tjwXsf1rw3SlsVWpUupF1HIIMiTCEKa8dnZzfCDWIoyKpx85hEqQj3ax+zxZd4sx2cW3eEbPvr9WlmIahbCZU2i2fnVqTTUAKv1DzRP7OWFVYJ7fQDV3LV3wulG0+y+aXb/brO6Snpcxk6QPXNK9isH9UCKpkw0dfb/bhsG0Hmmcmhbqar+zZ3gSRL/61aczHOxUGeZ1TZVvLbdceM7jb4ZPMURKv5UXE94+nnuBVC5wgAISIOdgsYVkjRTcgMPMpZ0gF4sYh5sLmq6X1FokixvxyG7qbN5Qtz0d84VXBSRFYMwqtVZiq8Kb2APdnTyl+eM3t/+Ow4dx4st2DQj7+b0G7sXBuVslO9t3odXu1drmeuh2VX94QCrLVaAbtv2lhmorrKCrdzBo2V4roqHYSkvTNJFgR82CwV8k9D9kXZuJ7PjXw==
 
-var bounds = 10
 var thickness = 10
-var rope =
+var start = new Point(20, 20)
+var size = 40
+
+var labyrinth =
     [ new Point(1, 0)
     , new Point(0, 1)
     , new Point(-1, 0)
     , new Point(0, -1)
     ]
-var nudges = []
+
 
 function vexToCoords(vex) {
-    var current = new Point(250, 250)
-    var coords = vex.map(function(vexel){
+    var current = start * thickness
+    coords = [current]
+    vex.forEach(function(vexel){
         current += vexel * thickness
-        return current
+        coords.push(current)
     })
     return coords
 }
 
-function randomNudge (len) {
+function randomNudge () {
     var r = Math.random()
-    var v
     if (r < 0.25) {
-        v = new Point(1, 0)
-    } else if (r < 0.5) {
-        v = new Point(0, 1)
-    } else if (r < 0.75) {
-        v = new Point(-1, 0)
-    } else {
-        v = Point(0, -1)
+        return new Point(1, 0)
     }
-    var i = Math.floor(Math.random() * len)
-    return {index: i, vector: v}
+    if (r < 0.5) {
+        return new Point(0, 1)
+    }
+    if (r < 0.75) {
+        return new Point(-1, 0)
+    }
+    return new Point(0, -1)
 }
 
-function isValidNudge (current, nudge) {
+function negNudge (nudge) {
+    return nudge * -1
+}
+
+function tryNudge (labyrinth, nudge, index) {
+    if (index > labyrinth.length - 3) {
+        return false
+    }
+    var _labyrinth = labyrinth.slice()
+    _labyrinth.splice(index, 0, nudge)
+    _labyrinth.splice(index+3, 0, negNudge(nudge))
+
     var occupied = []
-    var home = new Point(0, 0)
-    current.forEach(function (v) {
-        
-    })
+    var current = start.clone()
+    for (var i = 0, len = _labyrinth.length; i<len; i++) {
+        var vexel = _labyrinth[i]
+        current += vexel
+        if (current.y < 0 || current.y > size) {
+            return false
+        }
+        if (current.x < 0 || current.x > size) {
+            return false
+        }
+        var index = current.y * size + current.x
+        if (occupied[index]) {
+            return false
+        }
+        occupied[index] = true
+    }
+    return _labyrinth
 }
 
-function applyNudge (current, nudge) {
-    
+function applyNudge (labyrinth, nudge, index) {
+    var _labyrinth = tryNudge(labyrinth, nudge, index)
+    if (_labyrinth) {
+        return _labyrinth
+    }
+    return labyrinth
 }
 
-function makeState (rope, nudges) {
-    
-}
-
-var path = vexToCoords(rope)
-
-var draw = new Path(path)
+var draw = new Path(vexToCoords(labyrinth))
 draw.closePath()
 draw.strokeColor = 'black'
 draw.strokeWidth = thickness - 4
 draw.strokeCap = 'square'
+
+var index = 0
+
+function onFrame(event) {
+    index++
+    if (index > labyrinth.length - 3) {
+        index = 0
+    }
+	var nudge = randomNudge()
+	var _labyrinth = tryNudge(labyrinth, nudge, index)
+    if (!_labyrinth) {
+        return
+    }
+    labyrinth = _labyrinth
+    var segments = vexToCoords(labyrinth)
+    draw.removeSegments()
+    draw.addSegments(segments)
+}
