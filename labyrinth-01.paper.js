@@ -1,8 +1,8 @@
 // WIP
-// http://sketch.paperjs.org/#S/nVdZb9s4EP4rhBdFpFjxkW1awI370KB9WGDbBbpAHyzDYCTaZiyTBkXl2NT/fYeXREpym9Z5kDQ3Z+bjTJ4HDO/JYDb4uiMy2w6SQcZz9X2PBZJbmu0YKUs0R5evU6ZopRR8R77RXG6BOnVU+h9RQldOCAsJ34w8oH84ZTL6G8vtKCO0iJTo+DJOkCatC86Fo8UpM/oFvn0SoAYuUobgt/BMTRM0iQ058ciTBE1fTr44YeUUHcxcnDDfS/fMLNWpUrauWCYpZ+iePP7Lb+DYeRnBe4yejZw6eFYJQZhKXWRyeN4UwZrLtCZILJZoPF5YjaW1QR5Hay4+4mwbOYfKCSli60WbsF6G4EYze9w0rkaHqtxGVsdyj/YpiKwEs4IpOwYHFZjlfP+5yjcERcExBYSvy29EImuNrlEk0DWajC6vannPTW96j23dn6h6DdFRffsT3Yuu3z77uiPCXDCyQRFTqag9OE2dn3NQautI8WSTV+MhMeIJoiz3Wkd/QU7N81WDn1FB2EZum3Mab/N5I7LQSsu+g69xUZJOqmoTcKaoY+ZldlQTrDyUexGXBc2I64iVRz9ohnYDVbCZiMMEGPbwzxiSsOrPwg9NwomMWX0VuUh5llUHSnINuj6waqyOsoKzOnJAIYALpCjwwTSEAC+dmN4heg1v8BgOg9QpVYNNX2tBl70w1pINR5XJckdP6BoCQN+/o4byXl/Ygb/+cnkla9t97Nh9/G27fpJXrpZNuOdmvgwbT2FITnUR2lj+eiCnLEE4UlSkD/lNcdr4xYdD8VIEdwDhwH9SswFko9cHPj++bvTt4M3feIw+4Gy3EbxiuRnJAue0UmMHJn7Q21PoXdUKqkRhG9did0bsrhG7a3W7vj7VQLihIitIFJbtGWVQdSJmaEH9UZWASe9zGWolNuaZfba5a1oUN7zgYPbsD0LIWSjgdUVz4x/dhpIL/OAWHIjbBvyMSrLZQ6zg1B/zTYHcpgB3RUnymddViV2tekKCcjjuXzBjgKkLcxYq6p1s5n/U/C3O+YMzfFtAac9C3oeiAtabkPhlvS6JnIWzzRt/9brmEDsJ2h+658Gb++EVDWCexr2TKpXKpB0y/g6hblbD/FWgpLIHJqmscVeHFnk7aeeqhgUVoraw7RkvijsN77RVf6QrP9R65CQ2kNjFpoM+AW71822v2jC3NUrlsX0tcfZJwM4fkXu1z3XASucTNZSmV92ZpCoaheuP3vZtz6P5D5teQWYkyJ7fk69WI/JZOM9rujPp88s95zXSDNrk04FAR2dY7quiuBB874EYEI4zqVoedsLObe82NPiP51YQvDuoBi8Hs8Xy+D8=
+// http://sketch.paperjs.org/#S/nVftb+I2GP9XLKapoYQAvfUmsTJpV20fJm036SbtA0EoTQy4GBs5TmnX43/f47fETsJdb1RqiJ+3n593XgcsO+DBfPBpj2W+G8SDnBfq/SkTSO5Ivme4LNEC3fyQMnVWSsH3+B9SyB2czt7bU/IvVky3jikTEt4ZPqG/OGEy+iOTuyTHhEaKdXIzjJE+2lDOhTsbpszI0+zhRYAYmEgZgs/SUzWL0XRojmPveBqj2duPxxe0XDoHNeML6nvPPTUrdauUbSqWS8IZesLPf/N7uHZRRvB9iF4Nn7p4XgmBmXJdZHx43QTBqsu1JHAsV2gyWVqJldWBn5MNF79m+S5yBpURTIfWilZhrYzAjCb2mGlMJceq3EVWxlLP9imwrASzjCk7BxcVGSv44c+q2GIUBdcUAF+H37BEVhvZoEigOzRNbm5rfs9Mr3vPbdmviHoJ0RH98Suy467dPv06I0JfMLxFEVOuqC04Se2faxBqy0jxYp1X10Ns2GNEWOGljn4Dn5rn9039JBSzrdw19zTWFouGZamFVn0X32S0xB1X1SrgTlFHzdv0qCRYe1XuIS4pybHLiLV3ftQEbQaiYD0xDB1gyKN3Q3DCut8LX1QJNzJqdStySHmeV0eCC110fcWqazXJKWc1cqhCKC7gIkAH1QABvnQw/YTIHXyDx2gUuE6Jmtr0pZZk1VvGmrOhqDBZavKC7gAA+vwZNSc/64Yd2OsPlxeytt7njt7n/63Xd/LaxbKBe23my6ixFEJyostQx+rbgVzSBHCkqHBf5TfBaddvdjzSt1ZwpyBc8V+UbAqykesrPh9fF30bvPmbTNCHLN9vBa9YYUayyApSqbEDe0CQ2zPIXZUKKkRhGtdsj4btsWF7bGW7bp9qINwTkVMchWF7RTlEHYs5WhJ/VMWg0ntdhVKxxTy3zzZ1Qyi955SD2qvvMMZXIYOXFU3HP7sNpRDZyS04gNsCfkUl3h4AKxj1x3wTILcpQK8ocTH3siq2q1UPJAiHo/4OMwaIOjBXoaDeyeb+S03fZQU/OcUPFEJ7FdI+0ApI78PDj5tNieU8nG3e+KvXtVNG91h47gjD2ISvs9M4gy5S/nY5RrOpo/ux8vH7KFzfmDag1gUBkyzH5tirTUjtk7eUhPMDOs1s2DtGU6lU2wnoLziq7Rvit1ZxKntqOJV1U6ihRd7C3JkjsD0DattTemafos7ChrvuR7r2odbzMLZAhg6bBn2h86iPr3vd7kE2dKk8t3smZ78J+EES4Se1bHY6CVlM1cSc3XYHpopoFO5m+qeILUi0+GJFqnpOBD7wJ/zJSkQ+KSuK+typ9OnlgfO6DZikly9HDOmaZ/JQUToW/OB1GEjpLJcqn2Fh7Ywiq9n8bydyFB6MkPZVUmAqM6it26lKAA3KX3tMjSZHXhLt6IVh2WKpS/sXGap1Cyz8IHwQONsfFVM5mC9X5/8A
 
 var thickness = 24
-var strokeWidth = 14
+var strokeWidth = 16
 var size = 25
 var start = new Point(Math.ceil(size/2), Math.floor(size/2))
 
@@ -115,7 +115,15 @@ var draw = new Path(
     }
 )
 
+var walker = new Path.Circle(
+    { center: start * thickness
+    , radius: strokeWidth - 10
+    , fillColor: 'black'
+    }
+)
+
 var index = 0
+var walk_distance = 0
 
 function grow () {
     index = (index + 1) % labyrinth.length
@@ -142,4 +150,7 @@ function onFrame(event) {
         , factor: 0.5
         }
     )
+    
+    walk_distance = (walk_distance + event.delta * 50) % draw.length
+    walker.position = draw.getPointAt(walk_distance)
 }
