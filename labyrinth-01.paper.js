@@ -1,5 +1,5 @@
 // WIP
-// http://sketch.paperjs.org/#S/nVftb+I2GP9XLKapoYQAvfUmsTJpV20fJm036SbtA0EoTQy4GBs5TmnX43/f47fETsJdb1RqiJ+3n593XgcsO+DBfPBpj2W+G8SDnBfq/SkTSO5Ivme4LNEC3fyQMnVWSsH3+B9SyB2czt7bU/IvVky3jikTEt4ZPqG/OGEy+iOTuyTHhEaKdXIzjJE+2lDOhTsbpszI0+zhRYAYmEgZgs/SUzWL0XRojmPveBqj2duPxxe0XDoHNeML6nvPPTUrdauUbSqWS8IZesLPf/N7uHZRRvB9iF4Nn7p4XgmBmXJdZHx43QTBqsu1JHAsV2gyWVqJldWBn5MNF79m+S5yBpURTIfWilZhrYzAjCb2mGlMJceq3EVWxlLP9imwrASzjCk7BxcVGSv44c+q2GIUBdcUAF+H37BEVhvZoEigOzRNbm5rfs9Mr3vPbdmviHoJ0RH98Suy467dPv06I0JfMLxFEVOuqC04Se2faxBqy0jxYp1X10Ns2GNEWOGljn4Dn5rn9039JBSzrdw19zTWFouGZamFVn0X32S0xB1X1SrgTlFHzdv0qCRYe1XuIS4pybHLiLV3ftQEbQaiYD0xDB1gyKN3Q3DCut8LX1QJNzJqdStySHmeV0eCC110fcWqazXJKWc1cqhCKC7gIkAH1QABvnQw/YTIHXyDx2gUuE6Jmtr0pZZk1VvGmrOhqDBZavKC7gAA+vwZNSc/64Yd2OsPlxeytt7njt7n/63Xd/LaxbKBe23my6ixFEJyostQx+rbgVzSBHCkqHBf5TfBaddvdjzSt1ZwpyBc8V+UbAqykesrPh9fF30bvPmbTNCHLN9vBa9YYUayyApSqbEDe0CQ2zPIXZUKKkRhGtdsj4btsWF7bGW7bp9qINwTkVMchWF7RTlEHYs5WhJ/VMWg0ntdhVKxxTy3zzZ1Qyi955SD2qvvMMZXIYOXFU3HP7sNpRDZyS04gNsCfkUl3h4AKxj1x3wTILcpQK8ocTH3siq2q1UPJAiHo/4OMwaIOjBXoaDeyeb+S03fZQU/OcUPFEJ7FdI+0ApI78PDj5tNieU8nG3e+KvXtVNG91h47gjD2ISvs9M4gy5S/nY5RrOpo/ux8vH7KFzfmDag1gUBkyzH5tirTUjtk7eUhPMDOs1s2DtGU6lU2wnoLziq7Rvit1ZxKntqOJV1U6ihRd7C3JkjsD0DattTemafos7ChrvuR7r2odbzMLZAhg6bBn2h86iPr3vd7kE2dKk8t3smZ78J+EES4Se1bHY6CVlM1cSc3XYHpopoFO5m+qeILUi0+GJFqnpOBD7wJ/zJSkQ+KSuK+typ9OnlgfO6DZikly9HDOmaZ/JQUToW/OB1GEjpLJcqn2Fh7Ywiq9n8bydyFB6MkPZVUmAqM6it26lKAA3KX3tMjSZHXhLt6IVh2WKpS/sXGap1Cyz8IHwQONsfFVM5mC9X5/8A
+// http://sketch.paperjs.org/#S/tVfrb+o2FP9XLKapoYQA3bpJrEzaqu3bnSbdSftAEHITAy7Bjhynj/Xyv+/4ldhJuLd30qjUkOPz+Pm8eRsxfCKj5ejjkcjsMIpHGc/V+xMWSB5odmSkqtAK3XyfMkWrpOBH8jfN5QGoix8slf5DFNOtY8JCwjsjz+hPTpmMPmB5SDJCi0ixzm7GMdKkXcG5cLRxyox8gR9eBYiBiZQh+Kw9VYsYzceGHHvkeYwW7ydPL2i5RAc10wvqB+memo26Vcp2Ncsk5Qw9kZe/+D1cO68i+D5Gb4ZPXTyrhSBMuS4yPrxug2DVZVoSONYbNJutrcTG6iAvyY6L33B2iJxBZYQUY2tFq7BWJmBGHw6YaU0lZV0dIitjT8/2KYisBbOMKTsHFxWY5fz0R53vCYqCawqAr8NvWCKrje5QJNAdmic3tw2/Z2bQveeu7BdEvYToif74Bdlp3+6Qfp0RoS8Y2aOIKVc0Fpyk9s81CHVlpHi1zmvqITbsMaIs91JHv4FPzfPbtn6SgrC9PLT3NNZWq5ZlrYU2Qxff4aIiPVc1KuBOUU/N+/SoJNh6Ve4hrgqaEZcRW49e6gNtBqJgPTEOHWCOJ9+NwQnbYS98ViXcyKjVrcgh5VlWl5TkuuiGilXXapIVnDXIoQqhuICLwjmoBgjwpYfpJ0Tv4Bs8JpPAdUrU1KYvtaabwTLWnO2JCpM9TV7RHQBAnz6hlvKzbtiBveFweSHr6n3p6X35z3p9J29dLFu412a+TFpLISQnug51bL4eyCVNAEeKmgxVfhucbv3isizeW8G9gnDFf1GyLchWbqj4fHx99F3w5m82Q7/i7LgXvGY5yrmszFwWOKe1mj2wDAQJvoAEVvmg4hTmcsP2aNgeW7bHTsrrHqqmwj0VWUGiMHZvKIPQE7FEa+rPqxhUeq+bUCq2mJf22T3d0aK45wUHtVffEEKuQgYvNdq2f3ZrSnXAOX92ew4gt5DfUEX2J0ALZv1p38bJLQzQMiqSL73kiu2G5UA9FBCIq/BMb1/LYBWbqJBYfM0aVWKdSv8jOs9ll8H1gZ04O3rAwoC3ge6tQM6Si6nvgSlazN25H1XfgT4G12bm5vUZF8dtTsEky4ghe6UMlfDs7TDhuAHnL8aDUzeVSrUdmP4+pKaEOfzaok/lQMmnsukhDbTI2697YweWbUBtW9DAqFSni7A/b4eRbn2ozfiMLZCxw6ZBX2hU6uPr3nZblg1dKs/dFsvZ7wJ+v0TkSe2mvZ5DV3M1YBe3/fmqIhqFq5wuaVsaaPXZ2ij18kpO/Il8tBKRf4TzvKE7lf55deK8KUiT9PK1JJCuGZanuiimgp+8XgQpjTOp8hn2297ksppNO0q8Kxhb9t0wmf/dbI9CwgRphyY5KSSGArydqyzR2vxVSpVxUvKK6lhYc3si9SL8iwyVupUYfmI+CIKPpWKqRsv15vwv
 
 var thickness = 24
 var strokeWidth = 16
@@ -90,7 +90,7 @@ function applyNudge (labyrinth, nudge, index) {
 
 
 
-// Background
+// Background dots
 var radius = 4
 for (var i = 1; i <= size; i++) {
     for (var j = 1; j <= size; j++) {
@@ -103,19 +103,23 @@ for (var i = 1; i <= size; i++) {
     }
 }
 
-var draw = new Path(
+var shadow = new Path(
     { segments: vexToCoords(labyrinth)
     , closed: true
-    , strokeColor: '#eee'
-    // , strokeJoin: 'round'
-    , strokeWidth: strokeWidth
-    , shadowColor: 'black'
-    , shadowBlur: 6
-    , shadowOffset: new Point(0, 0)
+    , strokeColor: 'black'
+    , strokeWidth: strokeWidth + 4
     }
 )
 
-var walker = new Path.Circle(
+var path = new Path(
+    { segments: vexToCoords(labyrinth)
+    , closed: true
+    , strokeColor: '#eee'
+    , strokeWidth: strokeWidth
+    }
+)
+
+var monk = new Path.Circle(
     { center: start * thickness
     , radius: strokeWidth - 10
     , fillColor: 'black'
@@ -143,14 +147,15 @@ function onFrame(event) {
         grow()
     }
     var segments = vexToCoords(labyrinth)
-    draw.removeSegments()
-    draw.addSegments(segments)
-    draw.smooth(
+    path.removeSegments()
+    path.addSegments(segments)
+    path.smooth(
         { type: 'catmull-rom'
         , factor: 0.5
         }
     )
+    shadow.segments = path.segments
     
-    walk_distance = (walk_distance + event.delta * 50) % draw.length
-    walker.position = draw.getPointAt(walk_distance)
+    walk_distance = (walk_distance + event.delta * 50) % path.length
+    monk.position = path.getPointAt(walk_distance)
 }
