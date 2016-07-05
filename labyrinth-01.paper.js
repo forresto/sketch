@@ -1,16 +1,18 @@
 // WIP
-// http://sketch.paperjs.org/#S/rVZtb9MwEP4rVhGas6alHeNFZeULgg9IIKQh8aGJqixx26ipXTlO27H1v3N2nNhJ3G0M8iWJ7+65x+d78V2PRhvSm/Su10TEq57fi1ki/3cRR2KVxmtK8hxN0fhtQOVaLjhbk19pIlawajT66FIrpL8JSC5HlX7EBfxTskc/WEoFlgqvLnxUvr2AlopZdHPLQQ6wAUXwzCybsY9GXrnsW8sjH40dy4MT6qfWAWbgwrHUQ0kzoIuCxiJlFO3I4Sf7xBhPcgzfHror9eRO4oJzQuWmcbn7cxMnDRcrS9CYaeVQm5PDcMH45yhe4cqXxCeZpx0oa+2gDx6U0OHBeBlui3yFtY2WHvWbE1FwqhUDemzskUc0YZvvRbIkCDd2yIH5t0ishqUK1mjpAmGOrtBoePGm1rfcOCN7bNs+Ymqdecf03SO2g65fF75KhmYsKFkiTGUoag+VpYrPORi1bQS/1cGrc9sv1X2U0sTKGvUHMS3fL00tDDNCl2Jl9ll6m06NykwZha6NL6IsJ51Q1RCwJ9yBeRqOTIK5VbEW4zxLY1JlxNxa3yqBcgOnoCPhNQNQivuvPQjC3B2FByFhRyWsaisVUxbHxTYliay30FWnqkyHccZozRyqEIoLtFKQAzRQgI8Opw8ovYIvePX7jdBJ07I2batZGjrLWGkaiTwmLR3eoisggO7vkVn5qJpnw5/7uKwja+MeOriHZ+PaQZ5XZ2nonpdDoW88NSlVprMmRvj3RE4hyVHFC+KqfHM47fqNttvsqRXcKYiq+E9amoI0dq7is/l12bfJSx4Jj/bVxIUmjUuDO5ST5Qain08a08s4rwZgOeI/sYzxCTq7yaJ4fdaUfYVOCSLOCpq0ROpmMLF/atrgQFKTdZYTxawe/vsoW/8/yi8IIf/CGA3Qe5u1ZOdiXWX6qJE2S8721rxstjYogrHn7PCBkJC6OduzV/kTz0mwQDjSKxB1vtbUsBrmiwzCizstDu5owFqnu6MtS+m42QvmbqZzm2rdqn1NxKu4KdInikI+Nva8XR761AJxbJczo1843HUx2cl7UAVq+vx0JJv5xajby+WJ4ua1QV1tdXKi6YPZqXKekw3bkWttgW1RlCT1egWp5Srx3KZKdML0CNf4G06i9VbeaPLeZBYe/wA=
+// http://sketch.paperjs.org/#S/rVdbb9owFP4rFtPUpAQK3apNrOxh1fYwadOkTtoDQShNDLgEGzkJ0FH++44dO7ET03XV4CHE5/b53Dl0aLTGnVHndoXzeNkJOjFLxPs24ihfknhFcZahMbp8G1JxluWcrfAvkuRLOK05ukgzkN9Y8F9p/ojn8E7xDv1ghObetyhf9mNMUk+wXlz6AZJH85Qxrs/8kJbyaXT3wEEMrIUUwWdiqBoGaOCXx4FxPAjQ8PnHvRNaTp2Dmt4J9c5zQ81U3Cqk84LGOWEUbfH+J7uBayeZB799dCj5xMXjgnNMheu80ofntbeVulhKAsdEMU+VON7354x/juKlp20J/Tj1lQEprQx0wYIkOizUVvqbIlt6SkZRj+rJcV5wqhhDerTuyCOasPX3Illg5Fk35IBcRr5k8ZQ2MkceR9do0L+8qvgNM07PHpuyfxE1cqEl+u4vsr22XZd+mQy2LyheII8KV1QWtKT0zzkINWVy/qCcV5VCULIHiNDEyBr5Bj4tn6/r0umnmC7yZX3P0tp4XLNMpNDUdfF5lGa45apKBdzJa6l5nh6RBDOjwA3EWUpirDNiZpxvJEGagSgoT/i2A0py940PTpi5vfCkSrhRqVZ2IY2UxXGxITgR9TZ11aks036cMlohhyqE4gIuAnRQDRDgRwvTB0Su4Rc8ul3LdUK0rE1TakKmzjKWnDVFhElR+w/oGgCgx0dUn3yUvdqy5w6XEbKm3n1L7/7Fek0nz3Qsa7jn5Wjp1pZsSFp0YuuY/juQU5rEwOMFdlV+HZxm/UabTfrcCm4VhC7+k5J1QdZyruIz8bXRN8GX34sL9CmKVwvOCpqU05hHCSnExIFhb+X2EHJXpIIIkZ3GFdt9yXZfs903sl22TzEQbgiPU+zZYTugGKKO+QhNiDmqAlBpvE5tqUBhHqlnkzonaXrDUgZqz15hjM9sBiMr6o5/1MtJwqOd3m0AtwJ8QBlerAErGDUnfB0gvSSUy5Q2f5eCt89s2leYJkCSIWiQ5A42Ml8qgGBAQBO9KMMSWbVP7aJ09f8gGx57EWLUQ+9N1AKdC7XuBgOrtCAzd8ZOYbd/aBRD3zkFw1yoVAPM3E+kvfwlRRjmjhIM86qmK2ieseq2xgDsvYBatQTH6BLUod0vZ26kMxNqNc4CBcTX2CToE41DfEzds2YLUVEL82Oz5TH6hcO/Cg9vxa7YagRkPBADb3jVnnciop69Wsk/ESo50fjJ7JQ5z/GabfGtkvBMUpQk1blWqegy8dyiknRCVN4b/jTdcRytNmLzyzqjyfT4Bw==
 
-var thickness = 16
+var thickness = 24
 var strokeWidth = thickness + 4
-var size = 40
-var start = new Point(size/2, size/2)
+var size = 25
+var start = new Point(Math.ceil(size/2), Math.floor(size/2))
 
 var labyrinth =
     [ new Point(1, 0)
     , new Point(0, 1)
+    , new Point(0, 1)
     , new Point(-1, 0)
     , new Point(-1, 0)
+    , new Point(0, -1)
     , new Point(0, -1)
     , new Point(1, 0)
     ]
@@ -85,6 +87,22 @@ function applyNudge (labyrinth, nudge, index) {
     return labyrinth
 }
 
+
+
+
+// Background
+var radius = 4
+for (var i = 1; i <= size; i++) {
+    for (var j = 1; j <= size; j++) {
+        new Path.Circle(
+            { center: [i * thickness, j * thickness]
+            , radius: radius
+            , fillColor: '#eee'
+            }
+        )
+    }
+}
+
 var draw = new Path(
     { segments: vexToCoords(labyrinth)
     , strokeColor: 'black'
@@ -119,7 +137,7 @@ function grow () {
 }
 
 function onFrame(event) {
-    for (var i=0; i<20; i++) {
+    for (var i=0; i<15; i++) {
         grow()
     }
     var segments = vexToCoords(labyrinth)
