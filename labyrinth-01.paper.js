@@ -1,8 +1,8 @@
 // WIP
-// http://sketch.paperjs.org/#S/rVdbb9owFP4rFtPUpAQK3apNrOxh1fYwadOkTtoDQShNDLgEGzkJ0FH++44dO7ET03XV4CHE5/b53Dl0aLTGnVHndoXzeNkJOjFLxPs24ihfknhFcZahMbp8G1JxluWcrfAvkuRLOK05ukgzkN9Y8F9p/ojn8E7xDv1ghObetyhf9mNMUk+wXlz6AZJH85Qxrs/8kJbyaXT3wEEMrIUUwWdiqBoGaOCXx4FxPAjQ8PnHvRNaTp2Dmt4J9c5zQ81U3Cqk84LGOWEUbfH+J7uBayeZB799dCj5xMXjgnNMheu80ofntbeVulhKAsdEMU+VON7354x/juKlp20J/Tj1lQEprQx0wYIkOizUVvqbIlt6SkZRj+rJcV5wqhhDerTuyCOasPX3Illg5Fk35IBcRr5k8ZQ2MkceR9do0L+8qvgNM07PHpuyfxE1cqEl+u4vsr22XZd+mQy2LyheII8KV1QWtKT0zzkINWVy/qCcV5VCULIHiNDEyBr5Bj4tn6/r0umnmC7yZX3P0tp4XLNMpNDUdfF5lGa45apKBdzJa6l5nh6RBDOjwA3EWUpirDNiZpxvJEGagSgoT/i2A0py940PTpi5vfCkSrhRqVZ2IY2UxXGxITgR9TZ11aks036cMlohhyqE4gIuAnRQDRDgRwvTB0Su4Rc8ul3LdUK0rE1TakKmzjKWnDVFhElR+w/oGgCgx0dUn3yUvdqy5w6XEbKm3n1L7/7Fek0nz3Qsa7jn5Wjp1pZsSFp0YuuY/juQU5rEwOMFdlV+HZxm/UabTfrcCm4VhC7+k5J1QdZyruIz8bXRN8GX34sL9CmKVwvOCpqU05hHCSnExIFhb+X2EHJXpIIIkZ3GFdt9yXZfs903sl22TzEQbgiPU+zZYTugGKKO+QhNiDmqAlBpvE5tqUBhHqlnkzonaXrDUgZqz15hjM9sBiMr6o5/1MtJwqOd3m0AtwJ8QBlerAErGDUnfB0gvSSUy5Q2f5eCt89s2leYJkCSIWiQ5A42Ml8qgGBAQBO9KMMSWbVP7aJ09f8gGx57EWLUQ+9N1AKdC7XuBgOrtCAzd8ZOYbd/aBRD3zkFw1yoVAPM3E+kvfwlRRjmjhIM86qmK2ieseq2xgDsvYBatQTH6BLUod0vZ26kMxNqNc4CBcTX2CToE41DfEzds2YLUVEL82Oz5TH6hcO/Cg9vxa7YagRkPBADb3jVnnciop69Wsk/ESo50fjJ7JQ5z/GabfGtkvBMUpQk1blWqegy8dyiknRCVN4b/jTdcRytNmLzyzqjyfT4Bw==
+// http://sketch.paperjs.org/#S/nVdZb9s4EP4rhBdFpFjxkW1awI370KB9WGDbBbpAHyzDYCTaZiyTBkXl2NT/fYeXREpym9Z5kDQ3Z+bjTJ4HDO/JYDb4uiMy2w6SQcZz9X2PBZJbmu0YKUs0R5evU6ZopRR8R77RXG6BOnVU+h9RQldOCAsJ34w8oH84ZTL6G8vtKCO0iJTo+DJOkCatC86Fo8UpM/oFvn0SoAYuUobgt/BMTRM0iQ058ciTBE1fTr44YeUUHcxcnDDfS/fMLNWpUrauWCYpZ+iePP7Lb+DYeRnBe4yejZw6eFYJQZhKXWRyeN4UwZrLtCZILJZoPF5YjaW1QR5Hay4+4mwbOYfKCSli60WbsF6G4EYze9w0rkaHqtxGVsdyj/YpiKwEs4IpOwYHFZjlfP+5yjcERcExBYSvy29EImuNrlEk0DWajC6vannPTW96j23dn6h6DdFRffsT3Yuu3z77uiPCXDCyQRFTqag9OE2dn3NQautI8WSTV+MhMeIJoiz3Wkd/QU7N81WDn1FB2EZum3Mab/N5I7LQSsu+g69xUZJOqmoTcKaoY+ZldlQTrDyUexGXBc2I64iVRz9ohnYDVbCZiMMEGPbwzxiSsOrPwg9NwomMWX0VuUh5llUHSnINuj6waqyOsoKzOnJAIYALpCjwwTSEAC+dmN4heg1v8BgOg9QpVYNNX2tBl70w1pINR5XJckdP6BoCQN+/o4byXl/Ygb/+cnkla9t97Nh9/G27fpJXrpZNuOdmvgwbT2FITnUR2lj+eiCnLEE4UlSkD/lNcdr4xYdD8VIEdwDhwH9SswFko9cHPj++bvTt4M3feIw+4Gy3EbxiuRnJAue0UmMHJn7Q21PoXdUKqkRhG9did0bsrhG7a3W7vj7VQLihIitIFJbtGWVQdSJmaEH9UZWASe9zGWolNuaZfba5a1oUN7zgYPbsD0LIWSjgdUVz4x/dhpIL/OAWHIjbBvyMSrLZQ6zg1B/zTYHcpgB3RUnymddViV2tekKCcjjuXzBjgKkLcxYq6p1s5n/U/C3O+YMzfFtAac9C3oeiAtabkPhlvS6JnIWzzRt/9brmEDsJ2h+658Gb++EVDWCexr2TKpXKpB0y/g6hblbD/FWgpLIHJqmscVeHFnk7aeeqhgUVoraw7RkvijsN77RVf6QrP9R65CQ2kNjFpoM+AW71822v2jC3NUrlsX0tcfZJwM4fkXu1z3XASucTNZSmV92ZpCoaheuP3vZtz6P5D5teQWYkyJ7fk69WI/JZOM9rujPp88s95zXSDNrk04FAR2dY7quiuBB874EYEI4zqVoedsLObe82NPiP51YQvDuoBi8Hs8Xy+D8=
 
 var thickness = 24
-var strokeWidth = thickness + 4
+var strokeWidth = 14
 var size = 25
 var start = new Point(Math.ceil(size/2), Math.floor(size/2))
 
@@ -20,7 +20,7 @@ var labyrinth =
 
 function vexToCoords(vex) {
     var current = (start * thickness)
-    coords = [current]
+    coords = [] //[current]
     vex.forEach(function(vexel){
         current += (vexel * thickness)
         coords.push(current)
@@ -105,21 +105,15 @@ for (var i = 1; i <= size; i++) {
 
 var draw = new Path(
     { segments: vexToCoords(labyrinth)
-    , strokeColor: 'black'
-    , strokeJoin: 'round'
-    , strokeWidth: strokeWidth
-    }
-)
-draw.closePath()
-
-var walk = new Path(
-    { segments: vexToCoords(labyrinth)
+    , closed: true
     , strokeColor: '#eee'
-    , strokeJoin: 'round'
-    , strokeWidth: strokeWidth - 8
+    // , strokeJoin: 'round'
+    , strokeWidth: strokeWidth
+    , shadowColor: 'black'
+    , shadowBlur: 6
+    , shadowOffset: new Point(0, 0)
     }
 )
-walk.closePath()
 
 var index = 0
 
@@ -143,6 +137,9 @@ function onFrame(event) {
     var segments = vexToCoords(labyrinth)
     draw.removeSegments()
     draw.addSegments(segments)
-    walk.removeSegments()
-    walk.addSegments(segments)
+    draw.smooth(
+        { type: 'catmull-rom'
+        , factor: 0.5
+        }
+    )
 }
