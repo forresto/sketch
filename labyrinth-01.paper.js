@@ -1,11 +1,10 @@
 // WIP
-// http://sketch.paperjs.org/#S/rVdtb9MwEP4rVhFasrQlHRugsu4Lgg9IIKQh8aGpqixx26ipXTnpG1v/O+e3xE7cbQzyJY3v7rnnzndn975D4hXuDDu3S1wmi063k9CUf29jhspFliwJLgo0QoN3EeFrRcnoEv/K0nIBq7VGgC6VQvYbg+Qy1PoxK+Gb4B36QTNSelzhzUUXybev1A6rFS7ZgWOyDY6IXM7juwMDI/AVEQTP2AAadFHoy+WusRx20cCx3DuhfmodYHouHEN9wmlGZLYhSZlRgrZ4/5N+opSlhQe/fXQv9XgkyYYxTHgmPJmS8zp5Ci4RlqAxVsoTZY73/Rlln+Nk4WlfHB/nvnIgrJWDADwIocND7aW/3hQLT9ko6VG9GS43jCjFiBytGFlMUrr6vknnGHlWhAyYf4vLRV+qeAotmyGPoWsU9i+uKn3DjTOzx6btE6bGnrdM3z9h22v7deGLYrBzQfAceYSnovKgLUV+zsGoaQM1rpJX1XZXqndRRlKjasQX5FS+X9e90M8xmZeLOk7pbTSqVcbCaOIKfBbnBW6lqoKAmLwWzPNweBFMjY41GBd5lmBdEVNjfS0Ewg3sgsqEbydAioO3PiRh6s7Co5AQkYT1+U5opjRJNusMp7zfJq4+FW3aT3JKKubQhdBcoJWBHKCBAvxocfqIsmv4Ba8gsFLHTWVvmlbjbOJsY6FZS/g2KWn/gK6BAHp4QPXKjZiolj/3dhlb1sTdt3D3L8Y1kzzVe1nTPZcnRVB7silp07GNMfl7IqeQqrPG0Fdg9eY0+zder/PndnCrIXTzn7SsG7K2czWfya/Nvkme80hZvNPHMAxpTxrcowLPV5D9YmidXrVzfQDKc/8TzSkborO7PE6WZ7bsK0xKEDG6IWlDJK4LQ/Ojog0OODXeZwUWzHxNeRfny/9H+RXG+F8Yox76YLLm7FysdaWH9sVmOouzXC4b1TRndGcco/bEg94Y+M7BH5UcWs1s80gWNMqX1F1UOqouKnU56jAqqlIkPFWsPXH8z3LYEK81FOGqBwGpBnEMci4daJcVtjuMqRlHNd67iopvMhRRnWgm/Zg+ps3WkjBHhGG82MHzx9reIGiKzdTJCrhBV2Hot4FMMKBhTLNa52gx0rmyqTljMkIyjI/N2UbJFwb/Bjy85ZdCjVgfeqOQn2wXYftg43Xs2XcoUfyqU9Ho0VYVA4DhFd3iW2XhmaI4Tat1DankogvdpkJ0wvQIf3TuGI6Xa369KzrD8eT4Bw==
+// http://sketch.paperjs.org/#S/rVZtb9MwEP4rVhGas6alHeNFZeULgg9IIKQh8aGJqixx26ipXTlO27H1v3N2nNhJ3G0M8iWJ7+65x+d78V2PRhvSm/Su10TEq57fi1ki/3cRR2KVxmtK8hxN0fhtQOVaLjhbk19pIlawajT66FIrpL8JSC5HlX7EBfxTskc/WEoFlgqvLnxUvr2AlopZdHPLQQ6wAUXwzCybsY9GXrnsW8sjH40dy4MT6qfWAWbgwrHUQ0kzoIuCxiJlFO3I4Sf7xBhPcgzfHror9eRO4oJzQuWmcbn7cxMnDRcrS9CYaeVQm5PDcMH45yhe4cqXxCeZpx0oa+2gDx6U0OHBeBlui3yFtY2WHvWbE1FwqhUDemzskUc0YZvvRbIkCDd2yIH5t0ishqUK1mjpAmGOrtBoePGm1rfcOCN7bNs+Ymqdecf03SO2g65fF75KhmYsKFkiTGUoag+VpYrPORi1bQS/1cGrc9sv1X2U0sTKGvUHMS3fL00tDDNCl2Jl9ll6m06NykwZha6NL6IsJ51Q1RCwJ9yBeRqOTIK5VbEW4zxLY1JlxNxa3yqBcgOnoCPhNQNQivuvPQjC3B2FByFhRyWsaisVUxbHxTYliay30FWnqkyHccZozRyqEIoLtFKQAzRQgI8Opw8ovYIvePX7jdBJ07I2batZGjrLWGkaiTwmLR3eoisggO7vkVn5qJpnw5/7uKwja+MeOriHZ+PaQZ5XZ2nonpdDoW88NSlVprMmRvj3RE4hyVHFC+KqfHM47fqNttvsqRXcKYiq+E9amoI0dq7is/l12bfJSx4Jj/bVxIUmjUuDO5ST5Qain08a08s4rwZgOeI/sYzxCTq7yaJ4fdaUfYVOCSLOCpq0ROpmMLF/atrgQFKTdZYTxawe/vsoW/8/yi8IIf/CGA3Qe5u1ZOdiXWX6qJE2S8721rxstjYogrHn7PCBkJC6OduzV/kTz0mwQDjSKxB1vtbUsBrmiwzCizstDu5owFqnu6MtS+m42QvmbqZzm2rdqn1NxKu4KdInikI+Nva8XR761AJxbJczo1843HUx2cl7UAVq+vx0JJv5xajby+WJ4ua1QV1tdXKi6YPZqXKekw3bkWttgW1RlCT1egWp5Srx3KZKdML0CNf4G06i9VbeaPLeZBYe/wA=
 
 var thickness = 16
 var strokeWidth = thickness + 4
 var size = 40
 var start = new Point(size/2, size/2)
-var symmetry = true
 
 var labyrinth =
     [ new Point(1, 0)
@@ -105,27 +104,17 @@ var walk = new Path(
 walk.closePath()
 
 var index = 0
-var symmetry_fail = 0
 
 function grow () {
     index = (index + 1) % labyrinth.length
 	var nudge = randomNudge()
 	var _labyrinth = tryNudge(labyrinth, nudge, index)
 	if (_labyrinth) {
-	    if (symmetry) {
-    	    var _index = ((Math.floor(_labyrinth.length/2) + index) % _labyrinth.length) + 1
-	        var __labyrinth = tryNudge(_labyrinth, neg(nudge), _index)
-    	    if (__labyrinth) {
-                labyrinth = __labyrinth
-    	    } else {
-    	        symmetry_fail++
-    	        if (symmetry_fail > 500) {
-    	            symmetry = false
-    	        }
-    	    }
-	    } else {
-            labyrinth = _labyrinth
-	    }
+	    var _index = ((Math.floor(_labyrinth.length/2) + index) % _labyrinth.length) + 1
+        var __labyrinth = tryNudge(_labyrinth, neg(nudge), _index)
+	    if (__labyrinth) {
+            labyrinth = __labyrinth
+        }
 	}
 }
 
