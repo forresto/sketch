@@ -1,10 +1,11 @@
 // WIP
-// http://sketch.paperjs.org/#S/tVdbb+JGFP4rU6oKOxgD0aataKjURt2HSq1W2kp9AGQ59gATzIw1HkjSLP99z9zsGdtsNpWWSAGfOZdvzt0vA5oe8GA++LjHItsNokHGcvl8SjkSO5LtKa4qtEDX71ZU0irB2R7/S3KxA+rsZ0Ml/2HJdGOZUi7gmeJH9IERKoK/UrGLM0yKQLJOrsMIKdKmYIxbWriiWr5I7585iIGJFUXwWTqqZhGahpocOeRphGZfTx5f0HKJDmrGF9T30h01a3mrFd0caSYIo+iEn/5hd3DtvArgd4heNJ+8eHbkHFPpukD78KoJglGXKUngWK7RZLI0EmujAz/FG8b/SLNdYA1KI7gIjRWlwlgZgRl12GOmMRWXx2oXGBlzejbfHIsjp4ZxRc/eRXlKc3b4+5hvMQq8a3KAr8KvWQKjjWxQwNEtmsbXNzW/Y6bXvee27CuiTkJ0RH96RXbctdunX2WE7wuKtyig0hW1BSup/HMFQm0ZwZ+N8+p6iDR7hAjNndRRT+BT/f1DUz9xgelW7Jp7Gs7FosODxuCXnttv0qLC3pVlBBOnRB1VVUEybMOZOPRSHSjr4EJzjdBHb8CN0HUId0j6L/FFpXhrfKw6icXKsuxYEpyrmumrNVVqcVYwWmOHIoLaAC4C56AaIMCPDqZfELmFX/A1GnnOk6K6tFypJVn3VqHibE5koMxp/IxuAQD69Ak1lF9Vv/Xs9QfMCVpb71NH79P/1us6ObHRbOBe6fEwaiz5kKzo0texfjuQS5oAjuBH3Fe4TXDa5ZeWZfG1BdgpCVu7FyWbkmzk+srPxddF3wav/yYT9Hua7becHWmOciagNXsJPYOElfGXcfFzt2Z70GwPDdtDK8VVy5NN/I7wrMCBH6sXlEGoMZ+jJXHHSwQqnce1LxXB0MjJsZqjd+2DDSmKO1Yw0Dj8HmM89BmcLGga9NkuFNUuzdmj3UgAtEH7giq8PQBQsOjO5SYkdrRDd6hwPnfyKDK7kAV1X4DPh/6Z2pPm3tI0slezPH/C2ABxFaxhDb3ehcpUJdQ3BO548zLuN2E+MLpPvgXwE6nIfYHnrankGXZs+qnZpGRnt7L6W9nnZ50bYNeo7XhT/fiYFvskJ2CDZliTna4CRfnobEOd2TcLe+f3SkjVeldYuJuVHFj68K39ZyV6us9K1O2shhY4m3pnAsLaDqhNN+yZ2vJ05o+KpB9p4kKtJ3lkgIQWmwJ9oWfKj6s7aXdP+zHts0ktE9OVUP/8QeOPBUbfc3hlCvBJrsPuACjTTL8EwV6u19uKUM0XC3KQS96PIfybTaVPrrVgO1sCnzBCRkGOC5GCsDQSSk/XNeatR5Ial6wiCuvC4dpioRbU34RvwluVOM55KvukU1/N5FhM5b4zu+muOzIoMrODsGdoG5UdZztfUv47zdkzBDvbp20haPHFHqLuzfGBnfBHIxG4R2me13Sr0pzrgRE7hpSEfW6cnXj0V/kOjNWtUPck8VxCPxtmqTgci2LM2cGZbNCA0kzI7gPvNR3n6bcMeGe/5zjdlzK61WC+XJ8/Aw==
+// http://sketch.paperjs.org/#S/tVdtb+JGEP4rW6oKOxgI6KKeaKjURu2Hk1pVukr9AAg59gIb7F20XpPQHP+9s2/2rm2So9IFKeDZmWded2b82qNxjnuz3uc9FsmuF/USlsrnY8yR2JFkT3FRoDmaflhSSSsEZ3v8D0nFDqiTj4ZK/sWS6c4yxVzAM8XP6C9GqAj+iMVulGCSBZJ1PA0jpEibjDFuaaGRPuU5FvwEAIKXeEk1OYsfTxywQO+SIvhbOPiTCN2Gmhw55NsITb6ePLyAcokOMMML8J10B2YlvVrSTUkTQRhFR/zyN3uAWKRFAL9D9Kr5pONJyTmmMp6BDuxNnRkDlyhJ4Fis0Hi8MBIrg4FfRhvGf4uTXWAVSiU4C40WBWG0DECNOuxQU6saHcpiFxgZc3o23xyLklPDuKRnz1Ee05Tlf5bpFqPAc5OD+aomNEtg0MgGBRzdo9vR9K7id9R0hvfclH1H1CmIluiP78gO23q78FVF+LGgeIsCKkNRabCSKj43INSUgXthglfdh0izR4jQ1Ckd9QQx1d8/1PdnlGG6FbvaT8M5n7d40BDi0uH9Js4K7LksM7h2rqgDVWQkwTada4d+UAdKO4TQuBH61hvjBmgagg/rbifeBMVbE2ODXPttG43nYUtxS+d4qsNy0Zx2XFuMrcB2B9cJ8NV+Xh3Fa9KjitLmnSVJeSA4Vf2nq2+ptjVKMkarOoCGBH0GuAicAzgYgjri9BMi9/ALvgYDL15SVLcpV2pBVp0dTXH6yTGnoxO6BwPQly+opvysBtr1+XFxX1q4L/8b1w3y2ua0NvdGz99Brck3yYoufIzV9YZcQqpGtcNvwOrkNFtZfDhkX9vMWu3F9sGLkvU1r+W6WplrX9v6pvH6Mx6jX+Nkv+WspClKmYAx5xX0BApW5l/mxa/diu1Jsz3VbE+NElfjQw7EB8KTDAd+rl5RAqnGfIYWxB3VEUA6jytfKoIBnJKymKEPzYMNybIHljFA7H+PMe77DE4V1D3gbJezYhen7NmufGC0sfYVFXibg6Gg0d1x6pTYNQm6Q4HTmVNHkVk2rVGPGcS875+pRXTmbaUD65rl+QQjGMRVsvqV6aE1/RCrgvqGhjvRvGz3VTbnjO7X38LwIynIY4ZnjQnvKXZ0+qVZl2RrT7X4jerzq85NsKvUdrxb/fgcZ/t1SkAHTbAmO10FLuWzs1m2JqAa3O0BuBQSWu9dc3dLlQNLH17bf5bije7jYjVbkNN/zAuQkBdN+O3Zb6aM/s7hTS7AR7mQu23zEKsoqdW6IFRzjATJ5YL5MYR/k6mMi0lJM7qBTxggA5DiTMQgLOFDGdOqJr2lQlJHB1YQZeXc4dpioZbjX4SvInRXC45THsu+4tRj3Wnnt3I/mNy11wMZeVkJQdgx5AxkXfdOf3PW/+80Z8fQaG2+9sqh+Zt3TvnNcc6O+LORCNyjOE0ruoU057rBjhxFSsI+18Fee/R3+XLGqtah77A4HeD+95NY5GWWDTnLnUkAFzZOhLyt8E7VCp5+w+lFvUeO4/1BZrfozRar838=
 
 var thickness = 24
 var strokeWidth = 18
 var size = 25
 var start = new Point(Math.ceil(size/2), Math.floor(size/2))
+var symmetry = true
 
 var labyrinth =
     [ new Point(1, 0)
@@ -55,6 +56,16 @@ function tryNudge (labyrinth, nudge, index) {
     _labyrinth.splice(index, 0, nudge)
     index = (index + 2) % _labyrinth.length
     _labyrinth.splice(index, 0, neg(nudge))
+    
+    if (symmetry) {
+        index = (index + _labyrinth.length/2 - 1) % _labyrinth.length
+        if (index === _labyrinth.length - 1) {
+            return false
+        }
+        _labyrinth.splice(index, 0, neg(nudge))
+        index = (index + 2) % _labyrinth.length
+        _labyrinth.splice(index, 0, nudge)
+    }
 
     var occupied = []
     var current = start.clone()
@@ -139,18 +150,14 @@ function grow () {
 	var nudge = randomNudge()
 	var _labyrinth = tryNudge(labyrinth, nudge, index)
 	if (_labyrinth) {
-	    var _index = ((Math.floor(_labyrinth.length/2) + index) % _labyrinth.length) + 1
-        var __labyrinth = tryNudge(_labyrinth, neg(nudge), _index)
-	    if (__labyrinth) {
-            labyrinth = __labyrinth
-            return true
-        }
+        labyrinth = _labyrinth
+        return true
 	}
 	return false
 }
 
 function onFrame(event) {
-    var pace = 25 // Math.sin(event.time * 6) * 10 + 12
+    var pace = Math.sin(event.time * 8) * 12 + 14
     walk_distance = (walk_distance + (event.delta * pace)) % monk_path.length
     monk.position = monk_path.getPointAt(walk_distance)
 
