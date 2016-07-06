@@ -1,5 +1,5 @@
 // WIP
-// http://sketch.paperjs.org/#S/tVfrb+o2FP9XLKapoYQA1XonsTJpq7ZvmybdSfcDQchNDLgEO3KcPtbL/77jV2In4d7eSaNSQ47P4+fz5m3E8ImMlqOPRyKzwygeZTxX709YIHmg2ZGRqkIrdPNDyhStkoIfySeaywNQFx8slf5DFNOtY8JCwjsjz+gvTpmM/sDykGSEFpFind2MY6RJu4Jz4WjjlBn5Aj+8ChADEylD8Fl7qhYxmo8NOfbI8xgt3k+eXtByiQ5qphfUD9I9NRt1q5TtapZJyhl6Ii9/83u4dl5F8H2M3gyfunhWC0GYcl1kfHjdBsGqy7QkcKw3aDZbW4mN1UFekh0Xv+HsEDmDyggpxtaKVmGtTMCMPhww05pKyro6RFbGnp7tUxBZC2YZU3YOLiowy/npzzrfExQF1xQAX4ffsERWG92hSKA7NE9ubht+z8yge89d2a+IegnRE/3xK7LTvt0h/TojQl8wskcRU65oLDhJ7Z9rEOrKSPFqndfUQ2zYY0RZ7qWOfgOfmuf3bf0kBWF7eWjvaaytVi3LWgtthi6+w0VFeq5qVMCdop6a9+lRSbD1qtxDXBU0Iy4jth691AfaDETBemIcOsAcowm6GYMbtsN++KJSuJNRrJuRw8qzrC4pyXXZDZWrrtYkKzhrsEMdQnkBF4VzUA0Q4EsP00+I3sE3eEwmgfOUqKlOX2pNN4OFrDnbExUoe5q8ojsAgD5/Ri3lZ92yA3vDAfOC1tX70tP78p/1+k7eumi2cK/NhJm0lkJITnQd6th8O5BLmgCOFDUZqv02ON0KxmVZvLeGeyXhyv+iZFuSrdxQ+fn4+ui74M3fbIZ+xdlxL3jNcpRzWZnJLHBOazV9YB0IEnwBCazyQcUpzOWG7dGwPbZsj52U111UzYV7KrKCRGHs3lAGoSdiidbUn1gxqPReN6FUbDEv7bN7uqNFcc8LDmqvviOEXIUMXmq0jf/sFpXqgHP+7DYdQG4hv6GK7E+AFsz6876Nk1sZoGVUJF96yRXbHcuBeiggEFfhmd6/lsEyNlEhsfiaRarEOpX+R3Seyy6D6wM7cXb0gIUBbwPdW4KcJRdT3wNTtJi7cz+qvgN9DK7NzM3rMy6O25yCSZYRQ/ZKGSrh2dtiegNnMR6cu6lUqu3I9DciNSXM4bcWfSoHSj6VTQ9poEXeht0bO7BuA2rbggZGpTpdhP15O4x060NtxmdsgYwdNg36QqNSH1/3ttuybOhSee62WM5+F/ALJiJPajvt9Ry6mqsBu7jtz1cV0Shc5nRJ29JAqy/WRqnXV3LiT+SjlYj8I5znDd2p9M+rE+dNQZqkl68lgXTNsDzVRTEV/OT1IkhpnEmVz7Dh9iaX1WzaUeJdwdiy74bJ/O9mexQSJkg7NMlJITEU4O1cZYnW5q9SqoyTkldUx8Ka2xOpV+FfZKjULcXwI/NBEHwsFVM1Wq43538B
+// http://sketch.paperjs.org/#S/tVfra+s2FP9XtIxRu3GcpKwbZM1gK9uHwcbgDvYhDkG1lUSNIwVZ7mO9+d939LIl27n3drAU6vjoPH4677yNGD6S0WL04UBkvh8lo5wX6v0JCyT3ND8wUlVoiW6+zZiiVVLwA/mbFnIP1Pl3lkr/IYrp1jFhIeGdkWf0J6dMRr9juU9zQstIsU5v4gRp0rbkXDhanDEjX+KHVwFiYCJjCD4rT9U8QbPYkBOPPEvQ/MvJkwtaLtFBzeSC+kG6p2atbpWxbc1ySTlDT+TlL34P1y6qCL7H6M3wqYvntRCEKddFxofXbRCsulxLAsdqjabTlZVYWx3kJd1y8QvO95EzqIyQMrZWtAprZQxm9OGAmdZUeqqrfWRl7OnZPgWRtWCWMWPn4KICs4If/6iLHUFRcE0B8HX4DUtktdEtigS6Q7P05rbh98wMuvfclf2MqJcQPdHvPyM76dsd0q8zIvQFIzsUMeWKxoKT1P65BqGujBSv1nlNPSSGPUGUFV7q6DfwqXl+09ZPWhK2k/v2npZzuezxoAn4ZeD2W1xWJLiyiuDGK1FPVVXSnLhwbjz6SR9o6+BCe404RG/BjdFNDHfYDF/ik0rJzvpYdxKHled5faKk0DUzVGu61NK85KzBDkUEtQFcFM5BNUCALz1MPyB6B9/gMR4HzlOiprR8qRVdD1ah5mxPVKDsafqK7gAA+vgRtZQfdb8N7A0HzAtaV+9LT+/Lf9brO3njotnCvTbjYdxaCiE50VWoY/1+IJc0ARwpajJUuG1wuuWHT6fySwuwVxKudi9KtiXZyg2Vn4+vj74L3vxNp+hnnB92gtesQAWXlRmrAhe0VqMDZnmQ4HNIYJUPKk5hLjdsj4btsWV77KS8boGqqd9TkZckCmP3hnIIPRELtKL+uElApfe6DqUSi3lhn93TLS3Le15yUHv1NSHkKmTwUqPt2me3ZVR7XPBnt6YAcgv5DVVkdwS0YNYf1m2c3LyHllGRYuElV2IXJAfqoYRAXIVnenlaBJvUWIVE8UDoHNtvME5Agw7iVYO+2ZFOWCfa/4jdc+hl6O+FfeTs4MEOk6VNkt7243C4fPC9B5Nr5s79jPCd72NwLWpmXp9xedgUFEyynBiy1wagip699aU3rObx4MDNpFJthvvSX4XUhDGH720YmRxoF5ls+k8DLfJW697Igj0bUNv2NTBm1ek87O2bYaQbH2ozehMLJHbYNOgLTU59fN2bbrvrdMM2WW1MM6n/hZMh7OOc/SrgN05EntT+6qx3gx6FhDHS7GlBSokhD29nylmq5oJtRGVzeuIV1ZaWhmFHpF4Ff5Kh0mApEaQQWDUfb5q1PXk5U5vF/La/WChvqpSM4oHxaFX2vOQ9lPxXhnNg3PT2PNdN0PKT7UTfW5AjfyIfrETkH+GiaOhOpX9eHTlvepjpBPL1RKCGcyyPdVlOBD96zR3qHOdSFTns+72rWs2mv6feFYwt+67zBH7wPgiCDycVsGq0WK3P/wI=
 
 var thickness = 24
 var strokeWidth = 16
@@ -48,10 +48,7 @@ function neg (nudge) {
 
 function tryNudge (labyrinth, nudge, index) {
     index = index % labyrinth.length
-    if (nudge == labyrinth[index]) {
-        return false
-    }
-    if (nudge == neg(labyrinth[index])) {
+    if (index === labyrinth.length - 1) {
         return false
     }
     var _labyrinth = labyrinth.slice()
@@ -108,6 +105,7 @@ var shadow = new Path(
     , closed: true
     , strokeColor: 'black'
     , strokeWidth: strokeWidth + 4
+    // , strokeJoin: 'round'
     }
 )
 
@@ -116,6 +114,7 @@ var path = new Path(
     , closed: true
     , strokeColor: '#eee'
     , strokeWidth: strokeWidth
+    // , strokeJoin: 'round'
     }
 )
 
@@ -138,13 +137,24 @@ function grow () {
         var __labyrinth = tryNudge(_labyrinth, neg(nudge), _index)
 	    if (__labyrinth) {
             labyrinth = __labyrinth
+            return true
         }
 	}
+	return false
 }
 
 function onFrame(event) {
+    walk_distance = (walk_distance + event.delta * 50) % path.length
+    monk.position = path.getPointAt(walk_distance)
+
+    var redraw = false
     for (var i=0; i<15; i++) {
-        grow()
+        if (grow()) {
+            redraw = true
+        }
+    }
+    if (!redraw) {
+        return
     }
     var segments = vexToCoords(labyrinth)
     path.removeSegments()
@@ -155,7 +165,4 @@ function onFrame(event) {
         }
     )
     shadow.segments = path.segments
-    
-    walk_distance = (walk_distance + event.delta * 50) % path.length
-    monk.position = path.getPointAt(walk_distance)
 }
