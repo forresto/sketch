@@ -1,8 +1,8 @@
 // WIP
-// http://sketch.paperjs.org/#S/tVfra+s2FP9XtIxRu3GcpKwbZM1gK9uHwcbgDvYhDkG1lUSNIwVZ7mO9+d939LIl27n3drAU6vjoPH4677yNGD6S0WL04UBkvh8lo5wX6v0JCyT3ND8wUlVoiW6+zZiiVVLwA/mbFnIP1Pl3lkr/IYrp1jFhIeGdkWf0J6dMRr9juU9zQstIsU5v4gRp0rbkXDhanDEjX+KHVwFiYCJjCD4rT9U8QbPYkBOPPEvQ/MvJkwtaLtFBzeSC+kG6p2atbpWxbc1ySTlDT+TlL34P1y6qCL7H6M3wqYvntRCEKddFxofXbRCsulxLAsdqjabTlZVYWx3kJd1y8QvO95EzqIyQMrZWtAprZQxm9OGAmdZUeqqrfWRl7OnZPgWRtWCWMWPn4KICs4If/6iLHUFRcE0B8HX4DUtktdEtigS6Q7P05rbh98wMuvfclf2MqJcQPdHvPyM76dsd0q8zIvQFIzsUMeWKxoKT1P65BqGujBSv1nlNPSSGPUGUFV7q6DfwqXl+09ZPWhK2k/v2npZzuezxoAn4ZeD2W1xWJLiyiuDGK1FPVVXSnLhwbjz6SR9o6+BCe404RG/BjdFNDHfYDF/ik0rJzvpYdxKHled5faKk0DUzVGu61NK85KzBDkUEtQFcFM5BNUCALz1MPyB6B9/gMR4HzlOiprR8qRVdD1ah5mxPVKDsafqK7gAA+vgRtZQfdb8N7A0HzAtaV+9LT+/Lf9brO3njotnCvTbjYdxaCiE50VWoY/1+IJc0ARwpajJUuG1wuuWHT6fySwuwVxKudi9KtiXZyg2Vn4+vj74L3vxNp+hnnB92gtesQAWXlRmrAhe0VqMDZnmQ4HNIYJUPKk5hLjdsj4btsWV77KS8boGqqd9TkZckCmP3hnIIPRELtKL+uElApfe6DqUSi3lhn93TLS3Le15yUHv1NSHkKmTwUqPt2me3ZVR7XPBnt6YAcgv5DVVkdwS0YNYf1m2c3LyHllGRYuElV2IXJAfqoYRAXIVnenlaBJvUWIVE8UDoHNtvME5Agw7iVYO+2ZFOWCfa/4jdc+hl6O+FfeTs4MEOk6VNkt7243C4fPC9B5Nr5s79jPCd72NwLWpmXp9xedgUFEyynBiy1wagip699aU3rObx4MDNpFJthvvSX4XUhDGH720YmRxoF5ls+k8DLfJW697Igj0bUNv2NTBm1ek87O2bYaQbH2ozehMLJHbYNOgLTU59fN2bbrvrdMM2WW1MM6n/hZMh7OOc/SrgN05EntT+6qx3gx6FhDHS7GlBSokhD29nylmq5oJtRGVzeuIV1ZaWhmFHpF4Ff5Kh0mApEaQQWDUfb5q1PXk5U5vF/La/WChvqpSM4oHxaFX2vOQ9lPxXhnNg3PT2PNdN0PKT7UTfW5AjfyIfrETkH+GiaOhOpX9eHTlvepjpBPL1RKCGcyyPdVlOBD96zR3qHOdSFTns+72rWs2mv6feFYwt+67zBH7wPgiCDycVsGq0WK3P/wI=
+// http://sketch.paperjs.org/#S/tVdbb+JGFP4rU6oKOxgD0aataKjURt2HSq1W2kp9AGQ59gATzIw1HkjSLP99z9zsGdtsNpWWSAGfOZdvzt0vA5oe8GA++LjHItsNokHGcvl8SjkSO5LtKa4qtEDX71ZU0irB2R7/S3KxA+rsZ0Ml/2HJdGOZUi7gmeJH9IERKoK/UrGLM0yKQLJOrsMIKdKmYIxbWriiWr5I7585iIGJFUXwWTqqZhGahpocOeRphGZfTx5f0HKJDmrGF9T30h01a3mrFd0caSYIo+iEn/5hd3DtvArgd4heNJ+8eHbkHFPpukD78KoJglGXKUngWK7RZLI0EmujAz/FG8b/SLNdYA1KI7gIjRWlwlgZgRl12GOmMRWXx2oXGBlzejbfHIsjp4ZxRc/eRXlKc3b4+5hvMQq8a3KAr8KvWQKjjWxQwNEtmsbXNzW/Y6bXvee27CuiTkJ0RH96RXbctdunX2WE7wuKtyig0hW1BSup/HMFQm0ZwZ+N8+p6iDR7hAjNndRRT+BT/f1DUz9xgelW7Jp7Gs7FosODxuCXnttv0qLC3pVlBBOnRB1VVUEybMOZOPRSHSjr4EJzjdBHb8CN0HUId0j6L/FFpXhrfKw6icXKsuxYEpyrmumrNVVqcVYwWmOHIoLaAC4C56AaIMCPDqZfELmFX/A1GnnOk6K6tFypJVn3VqHibE5koMxp/IxuAQD69Ak1lF9Vv/Xs9QfMCVpb71NH79P/1us6ObHRbOBe6fEwaiz5kKzo0texfjuQS5oAjuBH3Fe4TXDa5ZeWZfG1BdgpCVu7FyWbkmzk+srPxddF3wav/yYT9Hua7becHWmOciagNXsJPYOElfGXcfFzt2Z70GwPDdtDK8VVy5NN/I7wrMCBH6sXlEGoMZ+jJXHHSwQqnce1LxXB0MjJsZqjd+2DDSmKO1Yw0Dj8HmM89BmcLGga9NkuFNUuzdmj3UgAtEH7giq8PQBQsOjO5SYkdrRDd6hwPnfyKDK7kAV1X4DPh/6Z2pPm3tI0slezPH/C2ABxFaxhDb3ehcpUJdQ3BO548zLuN2E+MLpPvgXwE6nIfYHnrankGXZs+qnZpGRnt7L6W9nnZ50bYNeo7XhT/fiYFvskJ2CDZliTna4CRfnobEOd2TcLe+f3SkjVeldYuJuVHFj68K39ZyV6us9K1O2shhY4m3pnAsLaDqhNN+yZ2vJ05o+KpB9p4kKtJ3lkgIQWmwJ9oWfKj6s7aXdP+zHts0ktE9OVUP/8QeOPBUbfc3hlCvBJrsPuAKgELtVLEOzler2tCNV8sSAHueT9GMK/2VT65FoLtrMl8AkjpOVzXIhUTlKwIf0si8vbi2TmxyWriAK5aEow3mKhNtPfhK/b25E4znkqG6RTWM3IWEzlojO76e45MhoypYOwZ1oblR0vO19S/jvN2TP9Omun7R1o8cXmoe7N8YGd8EcjEbhHaZ7XdKvSnOtJETuGlIR9bpydePRX+Q6M1T1QNyPxXEIjG2apOByLYszZwRlp0HnSTMi2Ay80Hefp1wt4Wb/nON2XMrrVYL5cnz8D
 
 var thickness = 24
-var strokeWidth = 16
+var strokeWidth = 18
 var size = 25
 var start = new Point(Math.ceil(size/2), Math.floor(size/2))
 
@@ -88,12 +88,11 @@ function applyNudge (labyrinth, nudge, index) {
 
 
 // Background dots
-var radius = 4
 for (var i = 1; i <= size; i++) {
     for (var j = 1; j <= size; j++) {
         new Path.Circle(
             { center: [i * thickness, j * thickness]
-            , radius: radius
+            , radius: 4
             , fillColor: '#eee'
             }
         )
@@ -105,7 +104,7 @@ var shadow = new Path(
     , closed: true
     , strokeColor: 'black'
     , strokeWidth: strokeWidth + 4
-    // , strokeJoin: 'round'
+    , strokeJoin: 'round'
     }
 )
 
@@ -114,13 +113,20 @@ var path = new Path(
     , closed: true
     , strokeColor: '#eee'
     , strokeWidth: strokeWidth
-    // , strokeJoin: 'round'
+    , strokeJoin: 'round'
+    }
+)
+
+var monk_path = new Path(
+    { segments: vexToCoords(labyrinth)
+    , closed: true
+    , visible: false
     }
 )
 
 var monk = new Path.Circle(
     { center: start * thickness
-    , radius: strokeWidth - 10
+    , radius: 4
     , fillColor: 'black'
     }
 )
@@ -144,8 +150,9 @@ function grow () {
 }
 
 function onFrame(event) {
-    walk_distance = (walk_distance + event.delta * 50) % path.length
-    monk.position = path.getPointAt(walk_distance)
+    var step = 25 // Math.sin(event.time * 6) * 10 + 12
+    walk_distance = (walk_distance + event.delta * step) % path.length
+    monk.position = monk_path.getPointAt(walk_distance)
 
     var redraw = false
     for (var i=0; i<15; i++) {
@@ -159,10 +166,11 @@ function onFrame(event) {
     var segments = vexToCoords(labyrinth)
     path.removeSegments()
     path.addSegments(segments)
-    path.smooth(
+    shadow.segments = path.segments
+    monk_path.segments = path.segments
+    monk_path.smooth(
         { type: 'catmull-rom'
         , factor: 0.5
         }
     )
-    shadow.segments = path.segments
 }
