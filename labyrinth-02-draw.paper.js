@@ -1,11 +1,11 @@
 // Drag path to make labyrinth
 // Double-click to automatically fill
 
-var spacing = 24
-var strokeWidth = 16
-var size = 25
+var spacing = 6
+var strokeWidth = 4
+var size = 50
 var start = new Point(Math.ceil(size/2), Math.floor(size/2))
-var auto_grow = false
+var auto_grow = true
 var symmetry = true
 
 var labyrinth =
@@ -100,17 +100,17 @@ function applyNudge (labyrinth, nudge, index) {
 
 
 // Background dots
-var radius = 4
-for (var i = 1; i <= size; i++) {
-    for (var j = 1; j <= size; j++) {
-        new Path.Circle(
-            { center: [i * spacing, j * spacing]
-            , radius: radius
-            , fillColor: '#eee'
-            }
-        )
-    }
-}
+// var radius = 4
+// for (var i = 1; i <= size; i++) {
+//     for (var j = 1; j <= size; j++) {
+//         new Path.Circle(
+//             { center: [i * spacing, j * spacing]
+//             , radius: radius
+//             , fillColor: '#eee'
+//             }
+//         )
+//     }
+// }
 
 var shadow = new Path(
     { segments: vexToCoords(labyrinth)
@@ -160,6 +160,13 @@ function onFrame(event) {
     redraw = false
 }
 
+path.onClick = function (event) {
+    path.selected = false //!path.selected
+    var index = path.getNearestLocation(event.point).index
+    console.log(index)
+    // index = index
+}
+
 path.onMouseDrag = function (event) {
     var index = path.getNearestLocation(event.point).index
     var dx = event.delta.x
@@ -186,10 +193,48 @@ path.onMouseDrag = function (event) {
             redraw = true
         }
     }
-    console.log(index, nudge)
 }
 
 view.onDoubleClick = function () {
   auto_grow = !auto_grow
   path.strokeColor = auto_grow ? 'lightgreen' : '#eee'
+  path.selected = false
+}
+
+// "UI"
+
+var width = size * spacing
+
+var history_fill = new Path.Rectangle(
+    { point: new Point(0 - width, width + 20)
+    , size: [width, 20]
+    , fillColor: 'lightgrey'
+    }
+)
+history_fill.onFrame = function () {
+    var percent = labyrinth.length / (size * size)
+    var x = 0 - width * (1 - percent)
+    history_fill.position.x = x + width / 2
+}
+
+var history = new Path.Rectangle(
+    { point: new Point(0, width + 20)
+    , size: [width, 20]
+    , strokeWidth: 1
+    , strokeColor: 'black'
+    , fillColor: new Color(0, 0, 0, 0.001)
+    }
+)
+history.onClick = function (event) {
+    console.log(event.point)
+}
+
+var history_text = new PointText({
+    point: history.point + new Point(0, 40),
+    content: '% full',
+    fontSize: 12
+})
+history_text.onFrame = function () {
+    var percent = labyrinth.length / (size * size)
+    this.content = Math.floor(percent * 100) + '%'
 }
