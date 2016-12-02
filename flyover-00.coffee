@@ -1,5 +1,24 @@
-# http://jsbin.com/nuhozo/8/edit?js,output
+# http://jsbin.com/nuhozo/11/edit?js,output
 
+WIDTH = 720
+HEIGHT = 720
+MID = [WIDTH/2, HEIGHT/2]
+COUNT = 7
+SPACING = WIDTH / (COUNT + 1)
+SIZE = SPACING / 4
+SIZE_HALF = SIZE / 2
+Z_OFFSET = -1/8
+
+BG = 'hsl(60, 10%, 95%)'
+GRID = 'hsl(60, 10%, 70%)'
+FG = 'hsl(60, 10%, 20%)'
+
+scrollX = 0
+scrollY = 0
+
+canvas = document.createElement 'canvas'
+document.body.appendChild canvas
+canvas.style.maxWidth = '100%'
 WIDTH = 720
 HEIGHT = 720
 MID = [WIDTH/2, HEIGHT/2]
