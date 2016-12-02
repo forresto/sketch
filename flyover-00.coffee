@@ -1,33 +1,22 @@
-# http://jsbin.com/nuhozo/11/edit?js,output
+# http://jsbin.com/nuhozo/edit?js,output
 
 WIDTH = 720
 HEIGHT = 720
-MID = [WIDTH/2, HEIGHT/2]
+MID = [WIDTH / 2, HEIGHT / 2]
 COUNT = 13
 SPACING = WIDTH / (COUNT + 1)
 SIZE = SPACING / 4
 SIZE_HALF = SIZE / 2
-Z_OFFSET = -1/8
+Z_OFFSET = -1 / 8
 GRID_COUNT = WIDTH / SIZE_HALF
 
 BG = 'hsl(60, 10%, 95%)'
 GRID = 'hsl(60, 10%, 80%)'
 FG = 'hsl(60, 10%, 35%)'
 
-scrollX = 0
-scrollY = 0
-
-canvas = document.createElement 'canvas'
-document.body.appendChild canvas
-canvas.style.maxWidth = '100%'
-context = canvas.getContext '2d'
-canvas.width = WIDTH
-canvas.height = HEIGHT
-
-context.fillStyle = BG
-context.strokeStyle = FG
-
-draw = () ->
+draw = (context, scrollX=0, scrollY=0) ->
+  context.fillStyle = BG
+  context.strokeStyle = FG
   context.fillRect(0, 0, WIDTH, HEIGHT)
 
   # grid
@@ -42,6 +31,7 @@ draw = () ->
     context.lineTo(gx, HEIGHT + SPACING * 4)
     context.stroke()
 
+  context.strokeStyle = FG
   for x in [-1...COUNT+2]
     for y in [-1...COUNT+2]
       posX = x * SPACING + scrollX
@@ -50,7 +40,6 @@ draw = () ->
       topY = posY + (MID[1] - posY) * Z_OFFSET
       
       # bottom
-      context.strokeStyle = FG
       context.strokeRect(posX - SIZE_HALF, posY - SIZE_HALF, SIZE, SIZE)
 
       # sides
@@ -69,11 +58,20 @@ draw = () ->
       # top
       context.strokeRect(topX - SIZE_HALF, topY - SIZE_HALF, SIZE, SIZE)
     
-animate = () ->
-  requestAnimationFrame(animate)
-  scrollX = ((Date.now() / 2000) * 50) % SPACING
-  scrollY = scrollX
-  draw()
-  
-animate()
-#draw()
+if document?
+  canvas = document.createElement 'canvas'
+  document.body.appendChild canvas
+  canvas.style.maxWidth = '100%'
+  context = canvas.getContext '2d'
+  canvas.width = WIDTH
+  canvas.height = HEIGHT
+
+  animate = () ->
+    requestAnimationFrame(animate)
+    scrollX = ((Date.now() / 2000) * 50) % SPACING
+    scrollY = scrollX
+    draw(context, scrollX, scrollY)
+    
+  animate()
+
+module.exports = {WIDTH, HEIGHT, SPACING, draw}
