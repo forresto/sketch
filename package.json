@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo 'nah'",
     "png": "coffee flyover-png.node.coffee",
-    "gif": "ffmpeg -i output/fly%02d.png output/fly.gif",
+    "gif": "convert -delay 1x24 -loop 0 output/fly*.png output/fly.gif",
+    "giff": "ffmpeg -i output/fly%02d.png output/fly.gif",
     "mp4": "ffmpeg -framerate 30 -i output/fly%02d.png -y -s:v 720x720 -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p output/fly.mp4"
   },
   "repository": {
