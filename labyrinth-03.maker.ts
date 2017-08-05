@@ -306,11 +306,13 @@ function pathToMaker(path: AbsPath): MakerJs.IModel {
     const fillets = MakerJs.chain.fillet(chain, RADIUS);
     output.models = {fillets};
   });
+  // MakerJs.model.move(output, [SCALE / 2, SCALE / 2]);
 
   // Mirror Y to normalize coordinate system
-  const mirrored = MakerJs.model.mirror(output, false, true);
-  // MakerJs.model.moveRelative(mirrored, [SCALE, BOARD])
-  return mirrored;
+  // const mirrored = MakerJs.model.mirror(output, false, true);
+  // mirrored.units = MakerJs.unitType.Millimeter;
+  // MakerJs.model.move(mirrored, [0, 0 - BOARD]);
+  return output;
 }
 
 const makerPath = pathToMaker(laby);
@@ -323,6 +325,7 @@ function simpleExpand(model, stroke = STROKE): MakerJs.IModel {
     if (lines.hasOwnProperty(key)) {
       let line: MakerJs.paths.Line = lines[key];
       if (line.end[X] === line.origin[X]) {
+        // Vertical line segment
         paths[key + 'L'] = MakerJs.path.moveRelative(
           MakerJs.cloneObject(line),
           [-stroke2, 0]
@@ -332,6 +335,7 @@ function simpleExpand(model, stroke = STROKE): MakerJs.IModel {
           [stroke2, 0]
         );
       } else {
+        // Horizontal line segment
         paths[key + 'U'] = MakerJs.path.moveRelative(
           MakerJs.cloneObject(line),
           [0, stroke2]
@@ -356,22 +360,51 @@ function simpleExpand(model, stroke = STROKE): MakerJs.IModel {
 
 // const expanded = MakerJs.model.expandPaths(makerPath, STROKE);
 
-// For stacked paper with approx circular path
+const points = [
+  [0, 0],
+  [0, BOARD - SCALE],
+  [BOARD - SCALE, 0],
+  [BOARD - SCALE, BOARD - SCALE],
+  [(BOARD - SCALE) / 2, (BOARD - SCALE) / 2]
+  // [-SCALE / 2, SCALE / 2],
+  // [BOARD - SCALE * 3/2, SCALE / 2],
+  // [-SCALE/2, -BOARD + SCALE * 3/2],
+  // [BOARD - SCALE * 3/2, -BOARD + SCALE * 3/2],
+];
+const holes: MakerJs.IModel = new MakerJs.models.Holes(2, points);
+MakerJs.model.move(holes, [0 - SCALE / 2, 0 - SCALE / 2]);
+
+/* 
+
+  The Stack To Cut
+
+  stacked paper with approx semicircular path
+
+*/
+
 const expanded = {};
+const layerOptions = {};
+const MARGIN = 12;
+const COLS = 3;
 for (let i = 0; i < PAGES; i++) {
-  const depth = THICKNESS * i;
+  const depth = THICKNESS * (PAGES - i - 1);
   // Length of chord, like Pythagoras
   const stroke = 2 * Math.sqrt(DEPTH * DEPTH - depth * depth);
-  console.log(depth, stroke);
+  console.log(i, depth, stroke);
   const name = 'expanded' + i;
   const layer = simpleExpand(makerPath, stroke);
   // MakerJs.model.moveRelative(layer, [SCALE, -BOARD])
   const border = MakerJs.model.move(
     new MakerJs.models.RoundRectangle(BOARD, BOARD, RADIUS),
-    [-SCALE, 0 - BOARD + SCALE]
+    [0 - SCALE, 0 - SCALE]
   );
-  layer.models = {border};
+  layer.models = {border, holes};
   layer.layer = name;
+  // layerOptions[name] = {fill: `hsla(${360 / PAGES * i}, 100%, 50%, 1)`};
+  // layerOptions[name] = {fill: i%2===0 ? 'grey' : 'black'};
+  const x = i % COLS * (BOARD + MARGIN);
+  const y = Math.floor(i / COLS) * (BOARD + MARGIN);
+  MakerJs.model.move(layer, [x, -y]);
   expanded[name] = layer;
 }
 
@@ -383,13 +416,13 @@ const cut = {
 };
 
 console.log(cut);
-const svg = MakerJs.exporter.toSVG(
-  cut,
-  {
-    // useSvgPathOnly: !DEBUG,
-    // annotate: DEBUG
-    fill: 'hsla(200, 75%, 25%, .2)',
-    stroke: 'none'
-  }
-);
+const svg = MakerJs.exporter.toSVG(cut, {
+  // useSvgPathOnly: !DEBUG,
+  // annotate: DEBUG,
+  fill: 'white',
+  // stroke: 'none',
+  layerOptions
+});
 document.write(svg);
+
+document.body.style.backgroundColor = 'hsla(0, 0%, 90%, 1)';
