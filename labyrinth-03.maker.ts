@@ -50,6 +50,7 @@ const SIZE = 15;
 const MAX = Math.floor(SIZE / 2);
 const MIN = -1 * MAX;
 const SCALE = 48;
+const BOARD = (SIZE + 1) * SCALE;
 const RADIUS = 18;
 const STROKE = 36;
 const SYMMETRY = true;
@@ -308,6 +309,7 @@ function pathToMaker(path: AbsPath): MakerJs.IModel {
 
   // Mirror Y to normalize coordinate system
   const mirrored = MakerJs.model.mirror(output, false, true);
+  // MakerJs.model.moveRelative(mirrored, [SCALE, BOARD])
   return mirrored;
 }
 
@@ -355,13 +357,22 @@ function simpleExpand(model, stroke = STROKE): MakerJs.IModel {
 // const expanded = MakerJs.model.expandPaths(makerPath, STROKE);
 
 // For stacked paper with approx circular path
-const expanded = {}
+const expanded = {};
 for (let i = 0; i < PAGES; i++) {
   const depth = THICKNESS * i;
   // Length of chord, like Pythagoras
   const stroke = 2 * Math.sqrt(DEPTH * DEPTH - depth * depth);
-  console.log(depth, stroke)
-  expanded['expanded' + i] = simpleExpand(makerPath, stroke);
+  console.log(depth, stroke);
+  const name = 'expanded' + i;
+  const layer = simpleExpand(makerPath, stroke);
+  // MakerJs.model.moveRelative(layer, [SCALE, -BOARD])
+  const border = MakerJs.model.move(
+    new MakerJs.models.RoundRectangle(BOARD, BOARD, RADIUS),
+    [-SCALE, 0 - BOARD + SCALE]
+  );
+  layer.models = {border};
+  layer.layer = name;
+  expanded[name] = layer;
 }
 
 const cut = {
@@ -377,6 +388,8 @@ const svg = MakerJs.exporter.toSVG(
   {
     // useSvgPathOnly: !DEBUG,
     // annotate: DEBUG
+    fill: 'hsla(200, 75%, 25%, .2)',
+    stroke: 'none'
   }
 );
 document.write(svg);
