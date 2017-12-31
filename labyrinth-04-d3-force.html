@@ -1,0 +1,124 @@
+<html>
+
+<head>
+  <script src="https://d3js.org/d3-collection.v1.min.js"></script>
+  <script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+  <script src="https://d3js.org/d3-quadtree.v1.min.js"></script>
+  <script src="https://d3js.org/d3-timer.v1.min.js"></script>
+  <script src="https://d3js.org/d3-force.v1.min.js"></script>
+</head>
+
+<body>
+
+  <canvas width="960" height="600"></canvas>
+
+  <script>
+    const TAU = Math.PI * 2;
+    let count = 50;
+
+    const canvas = document.querySelector("canvas"),
+      context = canvas.getContext("2d"),
+      width = canvas.width,
+      height = canvas.height;
+
+    // MAKE CHAIN
+    const nodes = [];
+    const links = [];
+    for (let i = 0; i < count; i++) {
+      nodes.push({
+        id: i,
+        x: Math.cos(TAU * i / count) * 100 + width / 2,
+        y: Math.sin(TAU * i / count) * 100 + height / 2,
+      });
+      links.push({
+        source: i,
+        target: (i + 1) % count,
+      })
+    }
+    const graph = { nodes, links, addOne }
+
+    function addOne() {
+      const index = count;
+      nodes.push({
+        index,
+        id: index,
+        x: (nodes[0].x + nodes[nodes.length - 1].x) / 2,
+        y: (nodes[0].y + nodes[nodes.length - 1].y) / 2,
+      })
+      links.pop()
+      links.push({
+        source: index - 1,
+        target: index
+      })
+      links.push({
+        source: index,
+        target: 0
+      })
+      count++;
+      simulation.nodes(nodes);
+      simulation.alphaTarget(0.1);
+    }
+
+    const simulation = d3.forceSimulation(nodes)
+      .force("charge", d3.forceManyBody().strength(-20))
+      .force("collide", d3.forceCollide().radius(20).strength(1))
+      .force("link", d3.forceLink(links).distance(10).strength(1))
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("size", forceBbox)
+      .on("tick", ticked);
+
+    function forceBbox(alpha) {
+      for (let i = 0, n = nodes.length, k = alpha * 0.1; i < n; ++i) {
+        let node = nodes[i];
+        if (node.x < 5) {
+          node.x = 5;
+        }
+        if (node.x > width - 5) {
+          node.x = width - 5;
+        }
+        if (node.y < 5) {
+          node.y = 5;
+        }
+        if (node.y > height - 5) {
+          node.y = height - 5;
+        }
+      }
+    }
+
+    let lastAdd = 0;
+
+    function ticked() {
+      context.clearRect(0, 0, width, height);
+
+      context.strokeStyle = "#999";
+      graph.nodes.forEach(drawNode);
+
+      context.beginPath();
+      graph.links.forEach(drawLink);
+      context.strokeStyle = "#000";
+      context.stroke();
+
+      if (count < 500 && Date.now() > lastAdd + 20) {
+        lastAdd = Date.now()
+        addOne()
+      }
+    }
+
+    function drawLink(d) {
+      context.moveTo(d.source.x, d.source.y);
+      context.lineTo(d.target.x, d.target.y);
+    }
+
+    function drawNode(d) {
+      context.beginPath();
+      context.arc(d.x, d.y, 3, 0, TAU);
+      context.stroke();
+      context.beginPath();
+      context.arc(d.x, d.y, 20, 0, TAU);
+      context.stroke();
+    }
+
+  </script>
+</body>
+
+</html>
