@@ -75,6 +75,13 @@
       // console.log(prev.index, newNode.index, next.index);
     }
 
+    function addTwo() {
+      const index = Math.floor(count * Math.random());
+      addOne(index)
+      const symmetricalIndex = (index + Math.floor(count / 2)) % count;
+      addOne(symmetricalIndex);
+    }
+
     const simulation = d3.forceSimulation(nodes)
       .force("symmetry", forceSymmetry)
       .force("charge", d3.forceManyBody().strength(-2))
@@ -130,15 +137,10 @@
       context.stroke();
 
       if (count < 448 && Date.now() > lastAdd + 50) {
-        lastAdd = Date.now()
-        const index = Math.floor(count * Math.random());
-        addOne(index)
-        const symmetricalIndex = (index + Math.floor(count / 2)) % count;
-        addOne(symmetricalIndex);
+        lastAdd = Date.now();
+        addTwo();
       }
     }
-    addOne();
-    addOne();
 
     function drawLink(link) {
       context.moveTo(link.source.x, link.source.y);
