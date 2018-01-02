@@ -21,7 +21,7 @@
   <script>
     const TAU = Math.PI * 2;
     const RADIUS = 20;
-    let count = 50;
+    let count = 12;
 
     const canvas = document.querySelector("canvas"),
       context = canvas.getContext("2d"),
@@ -53,8 +53,7 @@
     }
     const graph = { nodes, links, addOne }
 
-    function addOne() {
-      const index = Math.floor(count * Math.random());
+    function addOne(index) {
       const prev = nodes[index];
       const next = nodes[(index + 1) % count];
       const newNode = {
@@ -114,9 +113,12 @@
       context.strokeStyle = "#000";
       context.stroke();
 
-      if (count < 455 && Date.now() > lastAdd + 50) {
+      if (count < 454 && Date.now() > lastAdd + 50) {
         lastAdd = Date.now()
-        addOne()
+        const index = Math.floor(count * Math.random());
+        addOne(index)
+        const symmetricalIndex = (index + Math.floor(count / 2)) % count;
+        addOne(symmetricalIndex);
       }
     }
     addOne();
