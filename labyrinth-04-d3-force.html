@@ -124,7 +124,9 @@
     let lastAdd = 0;
 
     function ticked() {
-      context.clearRect(0, 0, width, height);
+      // context.clearRect(0, 0, width, height);
+      context.fillStyle = "hsla(0, 0%, 100%, 0.01)";
+      context.fillRect(0, 0, width, height);
 
       context.strokeStyle = "#999";
       context.lineWidth = 1;
@@ -153,8 +155,9 @@
       context.stroke();
       context.beginPath();
       context.arc(node.x, node.y, RADIUS, 0, TAU);
-      context.fillStyle = `hsla(${360 * i / count}, 100%, 50%, 0.1)`;
+      context.fillStyle = `hsla(${360 * i / count}, 100%, 90%, 0.1)`;
       context.fill();
+      context.strokeStyle = `hsla(${360 * i / count}, 100%, 25%, 0.5)`;
       context.stroke();
     }
 
