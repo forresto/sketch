@@ -120,11 +120,13 @@
       context.clearRect(0, 0, width, height);
 
       context.strokeStyle = "#999";
+      context.lineWidth = 1;
       graph.nodes.forEach(drawNode);
 
+      context.strokeStyle = "#000";
+      // context.lineWidth = 2;
       context.beginPath();
       graph.links.forEach(drawLink);
-      context.strokeStyle = "#000";
       context.stroke();
 
       if (count < 448 && Date.now() > lastAdd + 50) {
@@ -138,17 +140,19 @@
     addOne();
     addOne();
 
-    function drawLink(d) {
-      context.moveTo(d.source.x, d.source.y);
-      context.lineTo(d.target.x, d.target.y);
+    function drawLink(link) {
+      context.moveTo(link.source.x, link.source.y);
+      context.lineTo(link.target.x, link.target.y);
     }
 
-    function drawNode(d) {
+    function drawNode(node, i) {
       context.beginPath();
-      context.arc(d.x, d.y, 3, 0, TAU);
+      context.arc(node.x, node.y, 3, 0, TAU);
       context.stroke();
       context.beginPath();
-      context.arc(d.x, d.y, RADIUS, 0, TAU);
+      context.arc(node.x, node.y, RADIUS, 0, TAU);
+      context.fillStyle = `hsla(${360 * i / count}, 100%, 50%, 0.1)`;
+      context.fill();
       context.stroke();
     }
 
