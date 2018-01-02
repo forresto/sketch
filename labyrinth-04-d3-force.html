@@ -6,18 +6,27 @@
   <script src="https://d3js.org/d3-quadtree.v1.min.js"></script>
   <script src="https://d3js.org/d3-timer.v1.min.js"></script>
   <script src="https://d3js.org/d3-force.v1.min.js"></script>
+  <style>
+    body {
+      padding: 10;
+      margin: 0
+    }
+  </style>
 </head>
 
 <body>
 
-  <canvas width="960" height="600"></canvas>
+  <canvas width="600" height="600"></canvas>
 
   <script>
     const TAU = Math.PI * 2;
+    const RADIUS = 20;
     let count = 50;
 
     const canvas = document.querySelector("canvas"),
       context = canvas.getContext("2d"),
+      // width = canvas.width = window.innerWidth,
+      // height = canvas.height = window.innerHeight;
       width = canvas.width,
       height = canvas.height;
 
@@ -26,43 +35,54 @@
     const links = [];
     for (let i = 0; i < count; i++) {
       nodes.push({
-        id: i,
         x: Math.cos(TAU * i / count) * 100 + width / 2,
         y: Math.sin(TAU * i / count) * 100 + height / 2,
       });
-      links.push({
-        source: i,
-        target: (i + 1) % count,
-      })
+      if (i > 0) {
+        links.push({
+          source: nodes[i - 1],
+          target: nodes[i],
+        })
+      }
+      if (i === count - 1) {
+        links.push({
+          source: nodes[i],
+          target: nodes[0],
+        })
+      }
     }
     const graph = { nodes, links, addOne }
 
     function addOne() {
-      const index = count;
-      nodes.push({
-        index,
-        id: index,
-        x: (nodes[0].x + nodes[nodes.length - 1].x) / 2,
-        y: (nodes[0].y + nodes[nodes.length - 1].y) / 2,
+      // const index = count - 1;
+      // const index = 0;
+      const index = Math.floor(count * Math.random());
+      console.log(index);
+      const prev = nodes[index];
+      const next = nodes[(index + 1) % count];
+      const newNode = {
+        x: (prev.x + next.x) / 2,
+        y: (prev.y + next.y) / 2,
+      }
+      nodes.splice((index + 1) % count, 0, newNode)
+      links.splice(index, 1, {
+        source: prev,
+        target: newNode
       })
-      links.pop()
-      links.push({
-        source: index - 1,
-        target: index
-      })
-      links.push({
-        source: index,
-        target: 0
+      links.splice((index + 1) % count, 0, {
+        source: newNode,
+        target: next
       })
       count++;
       simulation.nodes(nodes);
-      simulation.alphaTarget(0.1);
+      simulation.alphaTarget(0.05);
+      console.log(prev.index, newNode.index, next.index);
     }
 
     const simulation = d3.forceSimulation(nodes)
-      .force("charge", d3.forceManyBody().strength(-20))
-      .force("collide", d3.forceCollide().radius(20).strength(1))
-      .force("link", d3.forceLink(links).distance(10).strength(1))
+      .force("charge", d3.forceManyBody().strength(-5))
+      .force("collide", d3.forceCollide().radius(RADIUS * 0.8).strength(0.9))
+      .force("link", d3.forceLink(links).distance(RADIUS * 0.75).strength(1))
       .force("center", d3.forceCenter(width / 2, height / 2))
       .force("size", forceBbox)
       .on("tick", ticked);
@@ -98,11 +118,13 @@
       context.strokeStyle = "#000";
       context.stroke();
 
-      if (count < 500 && Date.now() > lastAdd + 20) {
+      if (count < 500 && Date.now() > lastAdd + 50) {
         lastAdd = Date.now()
         addOne()
       }
     }
+    addOne();
+    addOne();
 
     function drawLink(d) {
       context.moveTo(d.source.x, d.source.y);
@@ -114,7 +136,7 @@
       context.arc(d.x, d.y, 3, 0, TAU);
       context.stroke();
       context.beginPath();
-      context.arc(d.x, d.y, 20, 0, TAU);
+      context.arc(d.x, d.y, RADIUS, 0, TAU);
       context.stroke();
     }
 
