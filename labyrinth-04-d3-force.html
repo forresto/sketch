@@ -54,10 +54,7 @@
     const graph = { nodes, links, addOne }
 
     function addOne() {
-      // const index = count - 1;
-      // const index = 0;
       const index = Math.floor(count * Math.random());
-      console.log(index);
       const prev = nodes[index];
       const next = nodes[(index + 1) % count];
       const newNode = {
@@ -76,31 +73,30 @@
       count++;
       simulation.nodes(nodes);
       simulation.alphaTarget(0.05);
-      console.log(prev.index, newNode.index, next.index);
+      // console.log(prev.index, newNode.index, next.index);
     }
 
     const simulation = d3.forceSimulation(nodes)
-      .force("charge", d3.forceManyBody().strength(-5))
+      .force("charge", d3.forceManyBody().strength(-10))
       .force("collide", d3.forceCollide().radius(RADIUS * 0.8).strength(0.9))
       .force("link", d3.forceLink(links).distance(RADIUS * 0.75).strength(1))
-      .force("center", d3.forceCenter(width / 2, height / 2))
-      .force("size", forceBbox)
+      .force("bbox", forceBbox)
       .on("tick", ticked);
 
     function forceBbox(alpha) {
       for (let i = 0, n = nodes.length, k = alpha * 0.1; i < n; ++i) {
         let node = nodes[i];
-        if (node.x < 5) {
-          node.x = 5;
+        if (node.x < RADIUS) {
+          node.x = RADIUS;
         }
-        if (node.x > width - 5) {
-          node.x = width - 5;
+        if (node.x > width - RADIUS) {
+          node.x = width - RADIUS;
         }
-        if (node.y < 5) {
-          node.y = 5;
+        if (node.y < RADIUS) {
+          node.y = RADIUS;
         }
-        if (node.y > height - 5) {
-          node.y = height - 5;
+        if (node.y > height - RADIUS) {
+          node.y = height - RADIUS;
         }
       }
     }
@@ -118,7 +114,7 @@
       context.strokeStyle = "#000";
       context.stroke();
 
-      if (count < 500 && Date.now() > lastAdd + 50) {
+      if (count < 455 && Date.now() > lastAdd + 50) {
         lastAdd = Date.now()
         addOne()
       }
