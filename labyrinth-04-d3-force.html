@@ -144,6 +144,8 @@
 
     function ticked() {
       context.clearRect(0, 0, width, height);
+      context.fillStyle = "#FFF"
+      context.fillRect(0, 0, width, height);
 
       context.strokeStyle = "#999";
       context.lineWidth = 1;
@@ -155,7 +157,7 @@
       graph.links.forEach(drawLink);
       context.stroke();
 
-      if (count < 320 && Date.now() > lastAdd + 500) {
+      if (count < 354 && Date.now() > lastAdd + 500) {
         lastAdd = Date.now();
         addTwo();
       }
@@ -179,7 +181,7 @@
           RADIUS,
           Math.max(
             0,
-            (Date.now() - node.created) / 5000 * RADIUS
+            (Date.now() - node.created) / 500 * RADIUS
           )
         );
         if (node.radius < timeRadius) {
