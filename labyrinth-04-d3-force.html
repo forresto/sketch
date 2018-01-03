@@ -110,19 +110,20 @@
     }
 
     function forceBbox(alpha) {
+      const MARGIN = RADIUS + 1;
       for (let i = 0, n = nodes.length, k = alpha * 0.1; i < n; ++i) {
         let node = nodes[i];
-        if (node.x < RADIUS) {
-          node.x = RADIUS;
+        if (node.x < MARGIN) {
+          node.x = MARGIN;
         }
-        if (node.x > width - RADIUS) {
-          node.x = width - RADIUS;
+        if (node.x > width - MARGIN) {
+          node.x = width - MARGIN;
         }
-        if (node.y < RADIUS) {
-          node.y = RADIUS;
+        if (node.y < MARGIN) {
+          node.y = MARGIN;
         }
-        if (node.y > height - RADIUS) {
-          node.y = height - RADIUS;
+        if (node.y > height - MARGIN) {
+          node.y = height - MARGIN;
         }
       }
     }
@@ -157,7 +158,7 @@
       graph.links.forEach(drawLink);
       context.stroke();
 
-      if (count < 354 && Date.now() > lastAdd + 500) {
+      if (count < 354 && Date.now() > lastAdd + 300) {
         lastAdd = Date.now();
         addTwo();
       }
