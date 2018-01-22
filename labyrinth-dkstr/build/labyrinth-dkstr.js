@@ -26,7 +26,7 @@ function labyrinthToCanvas(labyrinth, grid, seed) {
     context.fillRect(0, 0, size, size);
     context.strokeStyle = '#FFF';
     var space = Math.floor(size / (grid + 1));
-    var lineWidthMax = space - 2;
+    var lineWidthMax = space - 4;
     // const {lineWidth, lineJoin} = seededDrawingParams(seed, lineWidthMax);
     // context.lineWidth = lineWidth;
     // context.lineJoin = lineJoin;
