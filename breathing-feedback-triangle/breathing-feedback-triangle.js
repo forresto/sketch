@@ -1,5 +1,6 @@
 // Reset
 document.body.style.margin = 0;
+document.body.style.backgroundColor = 'black';
 
 // Measure
 const WIDTH = window.innerWidth;
@@ -26,11 +27,17 @@ const context2 = canvas2.getContext('2d');
 
 const PADDING_V = HEIGHT / 6;
 const TRIHEIGHT = HEIGHT - PADDING_V * 2;
-const PADDING_H = Math.max(WIDTH / 6, (WIDTH - (TRIHEIGHT * 2 / Math.sqrt(3))) / 2);
+const PADDING_H = Math.max(
+  WIDTH / 6,
+  (WIDTH - TRIHEIGHT * 2 / Math.sqrt(3)) / 2
+);
+const TRIWIDTH = WIDTH - PADDING_H * 2;
 const MAXZOOM = PADDING_V;
 const MINZOOM = Math.max(WIDTH, HEIGHT) / 100;
-const INHALE = 5;
-const EXHALE = INHALE * 3;
+const INHALE = 3;
+const EXHALE = INHALE * 4;
+const BREATHPERIOD = 8000;
+const CYCLE = 16 * BREATHPERIOD;
 const TAU = Math.PI * 2;
 const START = Date.now();
 
@@ -44,14 +51,16 @@ function draw() {
 
   context2.drawImage(canvas, 0, 0);
 
-  context.fillStyle = 'hsla(0, 0%, 0%, 1)';
+  context.fillStyle = 'black';
   context.fillRect(0, 0, WIDTH, HEIGHT);
 
-  const timeElapsed = START - Date.now();
-  const hue = (timeElapsed / 3000 * 360) % 360;
-  context.strokeStyle = `hsla(${hue}, 100%, 50%, 1)`;
+  const timeElapsed = Date.now() - START;
+  const hue = (timeElapsed / BREATHPERIOD / 2 * 360) % 360;
+  context.strokeStyle = `hsla(${hue}, 100%, 75%, 1)`;
 
-  context.translate(WIDTH / 2, HEIGHT / 2);
+  const x = WIDTH / 2;
+  const y = HEIGHT / 2;
+  context.translate(x, y);
   context.rotate(rotation);
   context.drawImage(
     canvas2,
@@ -61,7 +70,7 @@ function draw() {
     HEIGHT - zoom * 2
   );
   context.rotate(-1 * rotation);
-  context.translate(-1 * WIDTH / 2, -1 * HEIGHT / 2);
+  context.translate(-1 * x, -1 * y);
 
   // Triangle
   context.lineWidth = 2;
@@ -72,20 +81,15 @@ function draw() {
   context.closePath();
   context.stroke();
 
-  context.lineWidth = 1;
-  context.beginPath();
-  context.moveTo(PADDING_H, HEIGHT - PADDING_V);
-  context.lineTo(PADDING_H + zoom, PADDING_V);
-
   if (!interactive) {
-    zoom = Math.sin(timeElapsed / 1000) * EXHALE + EXHALE + INHALE;
-    rotation = Math.cos(timeElapsed / 30000) * Math.PI + Math.PI;
+    zoom = Math.cos(timeElapsed / BREATHPERIOD * TAU) * EXHALE + EXHALE + INHALE;
+    rotation = Math.cos(timeElapsed / CYCLE * Math.PI) * Math.PI + Math.PI;
   }
 }
 
 window.requestAnimationFrame(draw);
 
-window.addEventListener('pointermove', function(event) {
+window.addEventListener('mousemove', function(event) {
   if (!interactive) {
     return;
   }
@@ -94,6 +98,7 @@ window.addEventListener('pointermove', function(event) {
   // Rotate around center, confusing with zoom connected to X
   // rotation = Math.atan2(clientX - WIDTH / 2, clientY - HEIGHT / 2);
   rotation = clientX / WIDTH * TAU + Math.PI;
+  console.log({rotation, zoom});
 });
 
 window.addEventListener('click', function() {
