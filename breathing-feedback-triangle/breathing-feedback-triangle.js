@@ -5,7 +5,7 @@ document.body.style.backgroundColor = 'black';
 // Measure
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
-const RATIO = Math.min(window.devicePixelRatio, 2);
+const RATIO = window.devicePixelRatio;
 
 // Setup master canvas
 const canvas = document.createElement('canvas');
