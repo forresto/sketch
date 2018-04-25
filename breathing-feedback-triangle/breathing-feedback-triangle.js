@@ -34,12 +34,58 @@ const PADDING_H = Math.max(
 const TRIWIDTH = WIDTH - PADDING_H * 2;
 const MAXZOOM = PADDING_V;
 const MINZOOM = Math.max(WIDTH, HEIGHT) / 100;
-const INHALE = 3;
-const EXHALE = INHALE * 4;
+const INHALE = 4;
+const EXHALE = INHALE * 3;
 const BREATHPERIOD = 8000;
 const CYCLE = 16 * BREATHPERIOD;
 const TAU = Math.PI * 2;
 const START = Date.now();
+const EASE = [
+  0,
+  0,
+  1 / 24,
+  1 / 12,
+  1 / 9,
+  1 / 8,
+  1 / 7,
+  1 / 6,
+  1 / 5,
+  1 / 4,
+  1 / 3,
+  1 / 2,
+  1 / 2,
+  1 - 1 / 3,
+  1 - 1 / 4,
+  1 - 1 / 5,
+  1 - 1 / 6,
+  1 - 1 / 7,
+  1 - 1 / 8,
+  1 - 1 / 9,
+  1 - 1 / 12,
+  1 - 1 / 24,
+  1,
+  1,
+  1 - 1 / 24,
+  1 - 1 / 12,
+  1 - 1 / 9,
+  1 - 1 / 8,
+  1 - 1 / 7,
+  1 - 1 / 6,
+  1 - 1 / 5,
+  1 - 1 / 4,
+  1 - 1 / 3,
+  1 / 2,
+  1 / 2,
+  1 / 3,
+  1 / 4,
+  1 / 5,
+  1 / 6,
+  1 / 7,
+  1 / 8,
+  1 / 9,
+  1 / 12,
+  1 / 24,
+];
 
 let zoom = 5;
 let rotation = 0;
@@ -81,9 +127,17 @@ function draw() {
   context.closePath();
   context.stroke();
 
+  // context.font = '150px serif';
+  // context.fillText('🍩', WIDTH / 2, HEIGHT / 4);
+
   if (!interactive) {
-    zoom = Math.cos(timeElapsed / BREATHPERIOD * TAU) * EXHALE + EXHALE + INHALE;
-    rotation = Math.cos(timeElapsed / CYCLE * Math.PI) * Math.PI + Math.PI;
+    const count = timeElapsed / BREATHPERIOD;
+    zoom = Math.sin(count * TAU) * EXHALE + EXHALE + INHALE;
+    // rotation = Math.cos(timeElapsed / CYCLE * Math.PI) * Math.PI + Math.PI;
+    const easeFrom = EASE[Math.floor(count) % EASE.length];
+    const easeTo = EASE[Math.ceil(count) % EASE.length];
+    const diff = easeTo - easeFrom;
+    rotation = (easeFrom + (Math.cos((count % 1) * TAU / 2) / -2 + 0.5) * diff) * TAU;
   }
 }
 
