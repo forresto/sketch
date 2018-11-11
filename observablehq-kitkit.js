@@ -1,11 +1,11 @@
 // URL: https://beta.observablehq.com/@forresto/kitkit
 // Title: KitKit
 // Author: Forrest Oliphant (@forresto)
-// Version: 932
+// Version: 945
 // Runtime version: 1
 
 const m0 = {
-  id: "9a1587c3253575d7@932",
+  id: "9a1587c3253575d7@945",
   variables: [
     {
       inputs: ["md"],
@@ -33,9 +33,9 @@ Open design, with inspiration from [opendesk.cc](https://www.opendesk.cc/). If y
 )})
     },
     {
-      name: "layout",
-      inputs: ["width","DOM","HORIZONTAL","X","Y","SIZE","state","mutable state"],
-      value: (function(width,DOM,HORIZONTAL,X,Y,SIZE,state,$0)
+      name: "viewof layout",
+      inputs: ["width","DOM","HORIZONTAL","X","Y","SIZE"],
+      value: (function(width,DOM,HORIZONTAL,X,Y,SIZE)
 {
   const devicePixelRatio = window.devicePixelRatio || 1;
   const w = width * devicePixelRatio;
@@ -52,6 +52,20 @@ Open design, with inspiration from [opendesk.cc](https://www.opendesk.cc/). If y
   let mouseY = 0;
   let startX = null;
   let startY = null;
+
+  const initialState = [
+    [1, 1, true, 35],
+    [1, 22, true, 35],
+    [1, 1, false, 21],
+    [23, 1, false, 21],
+    [36, 1, false, 21],
+    [23, 14, true, 13],
+    [28, 14, false, 8],
+    [23, 17, true, 5],
+    [26, 14, false, 3]
+  ];
+  let state = null;
+  setState(initialState);
 
   function makeWall(startX, mouseX, startY, mouseY) {
     const dX = Math.abs(mouseX - startX);
@@ -151,9 +165,7 @@ Open design, with inspiration from [opendesk.cc](https://www.opendesk.cc/). If y
   function click(e) {
     if (startX) {
       if (startX !== mouseX || startY !== mouseY) {
-        $0.value = pushWallToState(
-          makeWall(startX, mouseX, startY, mouseY)
-        );
+        setState(pushWallToState(makeWall(startX, mouseX, startY, mouseY)));
       }
       startX = null;
       startY = null;
@@ -165,9 +177,20 @@ Open design, with inspiration from [opendesk.cc](https://www.opendesk.cc/). If y
   }
   canvas.addEventListener("click", click);
 
+  function setState(newState) {
+    state = newState;
+    canvas.value = state;
+    canvas.dispatchEvent(new CustomEvent("input"));
+  }
+
   return canvas;
 }
 )
+    },
+    {
+      name: "layout",
+      inputs: ["Generators","viewof layout"],
+      value: (G, _) => G.input(_)
     },
     {
       name: "X",
@@ -194,36 +217,16 @@ Open design, with inspiration from [opendesk.cc](https://www.opendesk.cc/). If y
 )})
     },
     {
-      name: "initial state",
-      value: (function(){return(
-[
-  [1, 1, true, 35],
-  [1, 22, true, 35],
-  [1, 1, false, 21],
-  [23, 1, false, 21],
-  [36, 1, false, 21],
-  [23, 14, true, 13],
-  [28, 14, false, 8],
-  [23, 17, true, 5],
-  [26, 14, false, 3]
-]
+      inputs: ["layout"],
+      value: (function(layout){return(
+layout
 )})
-    },
-    {
-      name: "mutable state",
-      inputs: ["Mutable","initial state"],
-      value: (M, _) => new M(_)
-    },
-    {
-      name: "state",
-      inputs: ["mutable state"],
-      value: _ => _.generator
     },
     {
       inputs: ["md"],
       value: (function(md){return(
 md`## App state ☝️
-\`state\` is set up with the \`mutable\` keyword, and is the simplest representation of the design. \`derivedState\` 👇 calculates the intersections of each piece, and is generated reactively, when \`state\` changes.`
+\`layout\` is the simplest representation of the design. \`derivedState\` 👇 calculates the intersections of each piece, and is generated reactively, when \`layout\` changes.`
 )})
     },
     {
@@ -286,7 +289,7 @@ unit / 8
     {
       name: "thick",
       value: (function(){return(
-15
+9
 )})
     },
     {
@@ -488,7 +491,7 @@ require("https://bundle.run/makerjs@0.12.1")
 };
 
 const notebook = {
-  id: "9a1587c3253575d7@932",
+  id: "9a1587c3253575d7@945",
   modules: [m0]
 };
 
