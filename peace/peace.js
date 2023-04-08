@@ -1,16 +1,3 @@
-const canvas = document.getElementById("peace");
-const ctx = canvas.getContext("2d");
-const width = canvas.width;
-const height = canvas.height;
-
-// Load card spritesheet
-const cardImage = new Image();
-cardImage.onload = () => {
-  animationLoop();
-};
-cardImage.src = "./cards.png";
-
-let deck = [];
 const suits = ["hearts", "diamonds", "clubs", "spades"];
 const values = [
   "Ace",
@@ -28,30 +15,65 @@ const values = [
   "King",
 ];
 
-for (let i = 0; i < suits.length; i++) {
-  for (let j = 0; j < values.length; j++) {
-    deck.push({ value: values[j], num: j, suit: suits[i] });
-  }
-}
+const canvas = document.getElementById("peace");
+const ctx = canvas.getContext("2d");
+const width = canvas.width;
+const height = canvas.height;
 
-const p1Seed = document.querySelector("[name='p1']").value;
-const p2Seed = document.querySelector("[name='p2']").value;
-
-const p1Rand = makeRand(p1Seed);
-const p2Rand = makeRand(p2Seed);
-
-let p1Hand = deck.slice(0, 26);
-let p2Hand = deck.slice(26);
-
-p1Hand = shuffle(p1Hand, p1Rand);
-p2Hand = shuffle(p2Hand, p2Rand);
-
-let p1Pile = [];
-let p2Pile = [];
-let p1Won = [];
-let p2Won = [];
-
+let p1Seed,
+  p2Seed,
+  p1Hand,
+  p2Hand,
+  p1Rand,
+  p2Rand,
+  p1Pile,
+  p2Pile,
+  p1Won,
+  p2Won,
+  turbo;
 let state = "drawing";
+
+// Load card spritesheet
+const cardImage = new Image();
+cardImage.src = "./cards.png";
+const cardBackImage = new Image();
+cardBackImage.src = "./back.png";
+
+function init() {
+  p1Seed = document.querySelector("[name='p1']").value;
+  p2Seed = document.querySelector("[name='p2']").value;
+
+  p1Rand = makeRand(p1Seed);
+  p2Rand = makeRand(p2Seed);
+
+  let deck = [];
+
+  for (let i = 0; i < suits.length; i++) {
+    for (let j = 0; j < values.length; j++) {
+      deck.push({ value: values[j], num: j, suit: suits[i] });
+    }
+  }
+
+  p1Hand = deck.slice(0, 26);
+  p2Hand = deck.slice(26);
+
+  p1Hand = shuffle(p1Hand, p1Rand);
+  p2Hand = shuffle(p2Hand, p2Rand);
+
+  p1Pile = [];
+  p2Pile = [];
+  p1Won = [];
+  p2Won = [];
+
+  const turboEl = document.getElementById("turbo");
+  turboEl.addEventListener("change", function (e) {
+    turbo = e.target.checked;
+  });
+
+  state = "drawing";
+  animationLoop();
+}
+document.addEventListener("DOMContentLoaded", init);
 
 function shuffle(deck, rand) {
   deck = deck.slice();
@@ -77,10 +99,12 @@ function draw(faceUp, next) {
   }
   if (p1Hand.length === 0) {
     p1Hand = shuffle(p1Won, p1Rand);
+    turnCards(p1Hand, false);
     p1Won = [];
   }
   if (p2Hand.length === 0) {
     p2Hand = shuffle(p2Won, p2Rand);
+    turnCards(p2Hand, false);
     p2Won = [];
   }
   const p1Card = p1Hand.shift();
@@ -96,6 +120,10 @@ function getCardValue(card) {
   return card.num === 0 ? 13 : card.num;
 }
 
+function turnCards(cards, faceUp) {
+  cards.forEach((card) => (card.faceUp = faceUp));
+}
+
 /* Advances the card state and returns the next state */
 function step() {
   if (state === "drawing") {
@@ -106,9 +134,8 @@ function step() {
     const player1Value = getCardValue(p1Card);
     const player2Value = getCardValue(p2Card);
 
-    // TODO: another state for showing the cards?
-    p1Pile.forEach((card) => (card.faceUp = true));
-    p2Pile.forEach((card) => (card.faceUp = true));
+    turnCards(p1Pile, true);
+    turnCards(p2Pile, true);
 
     if (player1Value > player2Value) {
       p1Won.push(...p2Pile, ...p1Pile);
@@ -127,14 +154,24 @@ function step() {
     return draw(false, "bet 2");
   } else if (state === "bet 2") {
     return draw(true, "compare");
+  } else if (state === "game over") {
+    turnCards(p1Pile, true);
+    turnCards(p2Pile, true);
+    turnCards(p1Hand, true);
+    turnCards(p2Hand, true);
+    return "stop";
   }
 }
 
 function animationLoop() {
   state = step();
-  if (state !== "game over") {
-    // setTimeout(animationLoop, 1000);
-    requestAnimationFrame(animationLoop);
+  if (state !== "stop") {
+    if (turbo) {
+      requestAnimationFrame(animationLoop);
+    } else {
+      const time = state === "drawing" ? 250 : state === "compare" ? 750 : 500;
+      setTimeout(animationLoop, time);
+    }
   }
   drawGame();
 }
@@ -144,14 +181,16 @@ function drawGame() {
   ctx.font = "12px Verdana";
   ctx.fillStyle = "black";
   ctx.fillText(`p1: "${p1Seed}" ${p1Hand.length + p1Won.length}`, 25, 45);
-  drawDeck(p1Won, 25, 50);
+  drawDeck(p1Hand, 25, 50);
+  drawDeck(p1Won, 540, 50);
   ctx.fillStyle = "black";
   ctx.fillText(state, 25, 170);
   drawDeck(p1Pile, 25, 175);
   drawDeck(p2Pile, 25, 275);
   ctx.fillStyle = "black";
   ctx.fillText(`p2: "${p2Seed}" ${p2Hand.length + p2Won.length}`, 25, 395);
-  drawDeck(p2Won, 25, 400);
+  drawDeck(p2Hand, 25, 400);
+  drawDeck(p2Won, 540, 400);
 }
 
 function drawDeck(deck, x, y) {
@@ -169,10 +208,7 @@ function drawCard(card, x, y) {
     const sy = num * 96;
     ctx.drawImage(cardImage, sx, sy, 71, 96, x, y, 71, 96);
   } else {
-    ctx.fillStyle = "green";
-    ctx.fillRect(x, y, 71, 96);
-    ctx.strokeStyle = "black";
-    ctx.strokeRect(x, y, 71, 96);
+    ctx.drawImage(cardBackImage, x, y);
   }
 }
 
