@@ -1,3 +1,18 @@
+/**
+ *
+ * war.js (wtfpl) 2023 forresto
+ *
+ * it's "war" the card game, written with a few copilot prompts, and then mostly
+ * rewritten by me b/c it did things in weird recursive ways that made animation
+ * hard.
+ *
+ * started sketching in https://p5ai.app so there's some ChatGPT in there too.
+ *
+ * shuffling is deterministic, so you can put seeds in with a friend to see
+ * whose shuffle is luckier.
+ *
+ */
+
 const suits = ["hearts", "diamonds", "clubs", "spades"];
 const values = [
   "Ace",
@@ -182,7 +197,7 @@ function drawGame() {
   ctx.fillStyle = "black";
   ctx.fillText(`p1: "${p1Seed}" ${p1Hand.length + p1Won.length}`, 25, 45);
   drawDeck(p1Hand, 25, 50);
-  drawDeck(p1Won, 540, 50);
+  drawDeck(p1Won, 25 + p1Hand.length * 13, 50);
   ctx.fillStyle = "black";
   ctx.fillText(state, 25, 170);
   drawDeck(p1Pile, 25, 175);
@@ -190,7 +205,7 @@ function drawGame() {
   ctx.fillStyle = "black";
   ctx.fillText(`p2: "${p2Seed}" ${p2Hand.length + p2Won.length}`, 25, 395);
   drawDeck(p2Hand, 25, 400);
-  drawDeck(p2Won, 540, 400);
+  drawDeck(p2Won, 25 + p2Hand.length * 13, 400);
 }
 
 function drawDeck(deck, x, y) {
