@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>fxplore</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- prettier-ignore -->
+    <script id="fxhash-snippet">
+  let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+  var fxhash = new URLSearchParams(document.location.search).get("fxhash") || "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: black;
+      }
+      input {
+        max-width: 80%;
+      }
+      #frames {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      iframe {
+        border: 0;
+      }
+      #name {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 80px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.9);
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+        margin-right: 12px;
+      }
+      /* fade in name */
+      #name {
+        animation: fadein 1s;
+      }
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="frames"></div>
+    <div id="name">emoji-mandala</div>
+    <script type="module">
+      const framesEl = document.getElementById("frames");
+      let slide = 0;
+
+      window.addEventListener("keyup", function (e) {
+        framesEl.textContent = "";
+        if (e.key == "ArrowRight") {
+          slide++;
+        }
+        if (e.key == "ArrowLeft") {
+          slide--;
+        }
+        const frameCount = slide * slide;
+        if (slide > 0) {
+          const w = window.innerWidth / slide;
+          const h = window.innerHeight / slide;
+          for (let i = 0; i < frameCount; i++) {
+            const frame = document.createElement("iframe");
+            frame.width = w;
+            frame.height = h;
+            frame.src = "http://localhost:3000/emoji-mandala/";
+            framesEl.appendChild(frame);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

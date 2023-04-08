@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>forresto/forest-looking-up</title>
+    <meta charset="UTF-8" />
+    <!-- prettier-ignore -->
+    <script id="fxhash-snippet">
+  //---- do not edit the following code (you can indent as you wish)
+  let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+  var fxhash = new URLSearchParams(document.location.search).get("fxhash") || "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
+  let b58dec = (str) => str.split('').reduce((p,c,i) => p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length-i-1)), 0)
+  let fxhashTrunc = fxhash.slice(2)
+  let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')
+  let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+  let sfc32 = (a, b, c, d) => {
+    return () => {
+      a |= 0; b |= 0; c |= 0; d |= 0
+      var t = (a + b | 0) + d | 0
+      d = d + 1 | 0
+      a = b ^ b >>> 9
+      b = c + (c << 3) | 0
+      c = c << 21 | c >>> 11
+      c = c + t | 0
+      return (t >>> 0) / 4294967296
+    }
+  }
+  var fxrand = sfc32(...hashes)
+  //---- /do not edit the following code
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 100%;
+        max-height: 100%;
+      }
+      #debug {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+    <link
+      href="./forresto-com-penrosefavicon.png"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <canvas id="bg"></canvas>
+    <canvas id="canvas"></canvas>
+    <pre id="debug"></pre>
+
+    <script type="module">
+      /** Imports */
+
+      // import { forceSimulation } from "https://cdn.skypack.dev/d3-force@3";
+      // console.log(forceSimulation);
+
+      /** Random utils */
+
+      // prettier-ignore
+      function randomReset() {
+        let b58dec = (str) => str.split('').reduce((p,c,i) => p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length-i-1)), 0)
+        let fxhashTrunc = fxhash.slice(2)
+        let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')
+        let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+        let sfc32 = (a, b, c, d) => {
+          return () => {
+            a |= 0; b |= 0; c |= 0; d |= 0
+            var t = (a + b | 0) + d | 0
+            d = d + 1 | 0
+            a = b ^ b >>> 9
+            b = c + (c << 3) | 0
+            c = c << 21 | c >>> 11
+            c = c + t | 0
+            return (t >>> 0) / 4294967296
+          }
+        }
+        fxrand = sfc32(...hashes)
+      }
+
+      function randomBetween(min, max) {
+        return min + (max - min) * fxrand();
+      }
+
+      function randomIntBetween(min, max) {
+        return Math.floor(randomBetween(min, max));
+      }
+
+      /*
+        Copyright ©2021, Forrest Oliphant
+        Non-commercial license: for educational and personal use only.
+        If you use this code in a commercial project or NFT, please send/split @forresto 7% royalties:
+        * Tezos: tz1a8U75BzpwevEveL3yGY8QrdRr7KVVLcXU
+        * Paypal: https://www.paypal.me/forresto
+      */
+
+      const TAU = Math.PI * 2;
+      let paused = false;
+
+      // Canvas with the pixel density, that resizes with the window size
+      const canvas = document.getElementById("canvas");
+      const context = canvas.getContext("2d");
+      let dpr = window.devicePixelRatio || 1;
+      let width;
+      let height;
+      let radius;
+      let centerX;
+      let centerY;
+      let radiusSquared;
+
+      const debug = new URLSearchParams(document.location.search).get("debug");
+      const debugEl = document.getElementById("debug");
+      debugEl.style.display = debug ? "block" : "none";
+
+      const bgCanvas = document.getElementById("bg");
+      const bgContext = bgCanvas.getContext("2d");
+      bgCanvas.style.display = debug ? "block" : "none";
+
+      let nextAnimationFrame;
+
+      function init() {
+        randomReset();
+
+        if (nextAnimationFrame) {
+          cancelAnimationFrame(nextAnimationFrame);
+        }
+
+        const branchCount = randomIntBetween(3, 12);
+
+        window.$fxhashFeatures = {
+          branchCount,
+        };
+        console.log(window.$fxhashFeatures);
+
+        debugEl.textContent = JSON.stringify(
+          { fxhash, features: window.$fxhashFeatures },
+          null,
+          2
+        );
+
+        // Particles
+        const firstHeading = TAU * fxrand();
+        function makeParticle(_, i) {
+          const size = randomBetween(0.05, 0.1) * radius;
+          const ratio = i / branchCount;
+          const heading =
+            firstHeading +
+            ratio * TAU +
+            randomBetween(-ratio * 0.5, ratio * 0.5) * TAU;
+          return {
+            x: centerX + Math.cos(heading + Math.PI) * radius * 0.75,
+            y: centerY + Math.sin(heading + Math.PI) * radius * 0.75,
+            heading,
+            size,
+            velocityRatio: randomBetween(0.05, 0.25),
+            // velocity: size * 0.15,
+            sibCount: randomIntBetween(3, 12),
+            strokeColor: `hsl(${ratio * 360}, 100%, 50%)`,
+            fillColor: `hsla(${ratio * 360}, 100%, 50%, 0.5)`,
+            wander: randomBetween(-0.0005, 0.0005),
+            branch: randomBetween(0.05, 0.1),
+            branchAngle: randomBetween(0.01, 0.25),
+          };
+        }
+        let particles = new Array(branchCount).fill(0).map(makeParticle);
+
+        // Animate
+        let frame = 0;
+        function draw() {
+          if (paused) {
+            nextAnimationFrame = window.requestAnimationFrame(draw);
+            return;
+          }
+          for (let particle of particles) {
+            const { text, dead, branch, branchAngle, size, velocityRatio } =
+              particle;
+
+            if (dead) {
+              continue;
+            }
+
+            const velocity = size * velocityRatio;
+            particle.heading += TAU * randomBetween(-0.02, 0.02);
+            particle.x += Math.cos(particle.heading) * velocity;
+            particle.y += Math.sin(particle.heading) * velocity;
+            if (
+              particle.x < radius * 0.05 ||
+              particle.x > width - radius * 0.05 ||
+              particle.y < radius * 0.05 ||
+              particle.y > height - radius * 0.05
+            ) {
+              particle.dead = true;
+            }
+
+            // Can this branch grow?
+            if (!particle.dead) {
+              const futureX =
+                particle.x + Math.cos(particle.heading) * (velocity * 4);
+              const futureY =
+                particle.y + Math.sin(particle.heading) * (velocity * 4);
+              const pixel = context.getImageData(
+                futureX | 0,
+                futureY | 0,
+                1,
+                1
+              ).data;
+              if (pixel[3] === 0) {
+                context.save();
+                context.translate(particle.x, particle.y);
+                context.rotate(particle.heading + TAU * 0.25);
+                context.fillStyle = particle.fillColor;
+                context.fillRect(
+                  0 - particle.size * 0.5,
+                  0,
+                  particle.size,
+                  velocity
+                );
+                context.restore();
+
+                if (particle.size < dpr * 0.5) {
+                  particle.dead = true;
+                }
+              } else {
+                // Hit another branch
+                particle.dead = true;
+              }
+            }
+
+            // Maybe branch after max check
+            if (!particle.dead && particles.length < 512) {
+              console.log(particles.length + " particles");
+              // Branch with probability
+              if (frame > 0 && fxrand() < branch) {
+                const sizeRatio = randomBetween(0.25, 0.85);
+                const headingDelta = TAU * branchAngle * (1 - sizeRatio);
+                // Dupe and add this one
+                particles.push({
+                  ...particle,
+                  heading: particle.heading + headingDelta,
+                  size: particle.size * 1.25 * sizeRatio,
+                  x:
+                    particle.x +
+                    Math.cos(particle.heading + TAU * 0.25) *
+                      particle.size *
+                      (1 - sizeRatio) *
+                      0.5,
+                  y:
+                    particle.y +
+                    Math.sin(particle.heading + TAU * 0.25) *
+                      particle.size *
+                      (1 - sizeRatio) *
+                      0.5,
+                });
+                // Shrink and curve this one
+                const prevSize = particle.size;
+                particle.heading = particle.heading - headingDelta;
+                particle.size = prevSize * 1.25 * (1 - sizeRatio);
+                particle.x =
+                  particle.x +
+                  Math.cos(particle.heading - TAU * 0.25) *
+                    prevSize *
+                    sizeRatio *
+                    0.5;
+                particle.y =
+                  particle.y +
+                  Math.sin(particle.heading - TAU * 0.25) *
+                    prevSize *
+                    sizeRatio *
+                    0.5;
+              }
+            }
+          }
+
+          if (particles.length > 500) {
+            particles = particles.filter((particle) => !particle.dead);
+          }
+
+          frame++;
+          nextAnimationFrame = window.requestAnimationFrame(draw);
+        }
+        draw();
+      }
+
+      canvas.addEventListener("click", () => {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        bgContext.clearRect(0, 0, bgContext.width, bgContext.height);
+        resize();
+        // paused = !paused;
+        // debugEl.style.display = debug || paused ? "block" : "none";
+      });
+
+      // Resize canvas with window, and restart
+      function resize() {
+        let dpr = window.devicePixelRatio;
+        width =
+          canvas.width =
+          bgCanvas.width =
+            Math.max(512, window.innerWidth) * dpr;
+        height =
+          canvas.height =
+          bgCanvas.height =
+            Math.max(512, window.innerHeight) * dpr;
+        radius = Math.min(width, height) / 2;
+        radiusSquared = radius * radius;
+        centerX = width * 0.5;
+        centerY = height * 0.5;
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.globalCompositeOperation = "destination-over";
+        init();
+      }
+      window.addEventListener("resize", resize);
+      resize();
+    </script>
+  </body>
+</html>

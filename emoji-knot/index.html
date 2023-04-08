@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>forresto/emoji-knot</title>
+    <meta charset="UTF-8" />
+    <!-- prettier-ignore -->
+    <script id="fxhash-snippet">
+  //---- do not edit the following code (you can indent as you wish)
+  let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+  var fxhash = new URLSearchParams(document.location.search).get("fxhash") || "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
+  let b58dec = (str) => str.split('').reduce((p,c,i) => p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length-i-1)), 0)
+  let fxhashTrunc = fxhash.slice(2)
+  let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')
+  let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+  let sfc32 = (a, b, c, d) => {
+    return () => {
+      a |= 0; b |= 0; c |= 0; d |= 0
+      var t = (a + b | 0) + d | 0
+      d = d + 1 | 0
+      a = b ^ b >>> 9
+      b = c + (c << 3) | 0
+      c = c << 21 | c >>> 11
+      c = c + t | 0
+      return (t >>> 0) / 4294967296
+    }
+  }
+  var fxrand = sfc32(...hashes)
+  //---- /do not edit the following code
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      #bg,
+      #canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      #debug {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <canvas id="bg"></canvas> -->
+    <canvas id="canvas"></canvas>
+    <pre id="debug"></pre>
+    <!-- prettier-ignore -->
+    <script type="module">
+      /* 
+        Copyright ©2021, Forrest Oliphant
+        Non-commercial license: for educational and personal use only.
+        If you use this code in a commercial project or NFT, please send/split @forresto 7% royalties:
+        * Tezos: tz1a8U75BzpwevEveL3yGY8QrdRr7KVVLcXU
+        * Paypal: https://www.paypal.me/forresto
+      */
+      window.EMOJI = {
+        person: [
+          "👩‍👩‍👧‍👧","👩‍👩‍👧‍👦","👩‍👩‍👦‍👦","👨‍👩‍👧‍👧","👨‍👩‍👧‍👦","👨‍👩‍👦‍👦","👨‍👨‍👧‍👧","👨‍👨‍👧‍👦","👨‍👨‍👦‍👦","👩‍👩‍👧","👩‍👩‍👦","👩‍👧‍👧","👩‍👧‍👦","👩‍👦‍👦","👨‍👩‍👧","👨‍👨‍👧","👨‍👨‍👦","👨‍👧‍👧","👨‍👧‍👦","👨‍👦‍👦","👩‍👧","👩‍👦","👨‍👧","👨‍👦","💁🏿‍♂","💁🏾‍♂","💁🏽‍♂","💁🏼‍♂","💁🏻‍♂","💁‍♂","💁🏿","💁🏾","💁🏽","💁🏼","💁🏻","💁","🙋🏿‍♂","🙋🏾‍♂","🙋🏽‍♂","🙋🏼‍♂","🙋🏻‍♂","🙋‍♂","🙋🏿","🙋🏾","🙋🏽","🙋🏼","🙋🏻","🙋","🙅🏿‍♂","🙅🏾‍♂","🙅🏽‍♂","🙅🏼‍♂","🙅🏻‍♂","🙅‍♂","🙅🏿","🙅🏾","🙅🏽","🙅🏼","🙅🏻","🙆🏿‍♂","🙆🏾‍♂","🙆🏽‍♂","🙆🏼‍♂","🙆🏻‍♂","🙆‍♂","🙆🏿","🙆🏾","🙆🏽","🙆🏼","🙆🏻","🙆","🙅","🚶🏿‍♀","🚶🏾‍♀","🚶🏽‍♀","🚶🏼‍♀","🚶🏻‍♀","🚶‍♀","🚶🏿","🚶🏾","🚶🏽","🚶🏼","🚶🏻","🚶","🙇🏿‍♀","🙇🏾‍♀","🙇🏽‍♀","🙇🏼‍♀","🙇🏻‍♀","🙇‍♀","🙇🏿","🙇🏾","🙇🏽","🙇🏼","🙇🏻","🙇","👯‍♂","👯","👫","👭","💆🏿‍♂","💆🏾‍♂","💆🏽‍♂","💆🏼‍♂","💆🏻‍♂","💆‍♂","💆🏿","💆🏾","💆🏽","💆🏼","💆🏻","💆","👸🏿","👸🏾","👸🏽","👸🏼","👸🏻","👸","🙍🏿‍♂","🙍🏾‍♂","🙍🏽‍♂","🙍🏼‍♂","🙍🏻‍♂","🙍‍♂","🙍🏿","🙍🏾","🙍🏽","🙍🏼","🙍🏻","🙍","💏","👩‍❤️‍💋‍👩","👨‍❤️‍💋‍👨","💑","👩‍❤️‍👩","👨‍❤️‍👨","👧🏿","👧🏾","👧🏽","👧🏼","👧🏻","👧","👨🏿","👨🏾","👨🏽","👨🏼","👨🏻","👨","👩🏿","👩🏾","👩🏽","👩🏼","👩🏻","👩","💇🏿‍♂","💇🏾‍♂","💇🏽‍♂","💇🏼‍♂","💇🏻‍♂","💇‍♂","💇🏿","💇🏾","💇🏽","💇🏼","💇🏻","💇","💂🏿‍♀","💂🏾‍♀","💂🏽‍♀","💂🏼‍♀","💂🏻‍♀","💂‍♀","💂🏿","💂🏾","💂🏽","💂🏼","💂🏻","💂","👦🏿","👦🏾","👦🏽","👦🏼","👦🏻","👦","🙎🏿‍♂","🙎🏾‍♂","🙎🏽‍♂","🙎🏼‍♂","🙎🏻‍♂","🙎‍♂","🙎🏿","🙎🏾","🙎🏽","🙎🏼","🙎🏻","🙎","👵🏿","👵🏾","👵🏽","👵🏼","👵🏻","👵","👪","👳🏿‍♀","👳🏾‍♀","👳🏽‍♀","👳🏼‍♀","👳🏻‍♀","👳‍♀","👳🏿","👳🏾","👳🏽","👳🏼","👳🏻","👳","👬","👱🏿‍♀","👱🏾‍♀","👱🏽‍♀","👱🏼‍♀","👱🏻‍♀","👱‍♀","👱🏿","👱🏾","👱🏽","👱🏼","👱🏻","👱","👰🏿","👰🏾","👰🏽","👰🏼","👰🏻","👰","👴🏿","👴🏾","👴🏽","👴🏼","👴🏻","👴","👲🏿","👲🏾","👲🏽","👲🏼","👲🏻","👲","👮🏿‍♀","👮🏾‍♀","👮🏽‍♀","👮🏼‍♀","👮🏻‍♀","👮‍♀","👮🏿","👮🏾","👮🏽","👮🏼","👮🏻","👮","👨‍🌾","👨‍🍳","👨‍🎓","👨‍🎤","👨‍🎨","👨‍🏫","👨‍🏭","👨‍💻","👨‍💼","👨‍🔧","👨‍🔬","👨‍🚀","👨‍🚒","👩‍🌾","👩‍🍳","👩‍🎓","👩‍🎤","👩‍🎨","👩‍🏫","👩‍🏭","👩‍💻","👩‍💼","👩‍🔧","👩‍🔬","👩‍🚀","👩‍🚒","👁️‍🗨️","👨‍👩‍👦","👨‍⚕️","👨‍⚖️","👨‍✈️","👩‍⚕️","👩‍⚖️","👩‍✈️","👩‍❤️‍👨","👩‍❤️‍💋‍👨","👷🏿‍♀","👷🏾‍♀","👷🏽‍♀","👷🏼‍♀","👷🏻‍♀","👷‍♀","👷🏿","👷🏾","👷🏽","👷🏼","👷🏻","👷","🛀🏿","🛀🏾","🛀🏽","🛀🏼","🛀🏻","🛀","🕵🏿‍♀","🕵🏾‍♀","🕵🏽‍♀","🕵🏼‍♀","🕵🏻‍♀","🕵‍♀","🕵🏿","🕵🏾","🕵🏽","🕵🏼","🕵🏻","🕵","🤰","🤴","🤵","🤶","🤷","🤦‍♀️","🤦‍♂️","🤷‍♀️","🤷‍♂️","🕺",
+        ],
+        workout: [
+          "🏃🏿‍♀","🏃🏾‍♀","🏃🏽‍♀","🏃🏼‍♀","🏃🏻‍♀","🏃‍♀","🏃🏿","🏃🏾","🏃🏽","🏃🏼","🏃🏻","🏃","🏄🏿‍♀","🏄🏾‍♀","🏄🏽‍♀","🏄🏼‍♀","🏄🏻‍♀","🏄‍♀","🏄🏿","🏄🏾","🏄🏽","🏄🏼","🏄🏻","🏄","🏊🏿‍♀","🏊🏾‍♀","🏊🏽‍♀","🏊🏼‍♀","🏊🏻‍♀","🏊‍♀","🏊🏿","🏊🏾","🏊🏽","🏊🏼","🏊🏻","🏊","⛷","⛹🏿‍♀","⛹🏾‍♀","⛹🏽‍♀","⛹🏼‍♀","⛹🏻‍♀","⛹‍♀","⛹🏿","⛹🏾","⛹🏽","⛹🏼","⛹🏻","⛹","⛹️‍♀️","⛹️‍♂️","💃🏿","💃🏾","💃🏽","💃🏼","💃🏻","💃","🏂","🏋🏿‍♀","🏋🏾‍♀","🏋🏽‍♀","🏋🏼‍♀","🏋🏻‍♀","🏋‍♀","🏋🏿","🏋🏾","🏋🏽","🏋🏼","🏋🏻","🏋","🏌","🏌‍♀","🏃‍♀️","🏃‍♂️","🏄‍♀️","🏄‍♂️","🏊‍♀️","🏊‍♂️","🏋️‍♀️","🏋️‍♂️","🏌️‍♀️","🏌️‍♂️","🚴🏿‍♀","🚴🏾‍♀","🚴🏽‍♀","🚴🏼‍♀","🚴🏻‍♀","🚴‍♀","🚴🏿","🚴🏾","🚴🏽","🚴🏼","🚴🏻","🚴","🚣🏿‍♀","🚣🏾‍♀","🚣🏽‍♀","🚣🏼‍♀","🚣🏻‍♀","🚣‍♀","🚣🏿","🚣🏾","🚣🏽","🚣🏼","🚣🏻","🚣","🤸","🤹","🤺","🤼","🤽","🤾","🤸‍♀️","🤸‍♂️","🤹‍♀️","🤹‍♂️","🤼‍♀️","🤼‍♂️","🤽‍♀️","🤽‍♂️","🤾‍♀️","🤾‍♂️","🚵🏿‍♀","🚵🏾‍♀","🚵🏽‍♀","🚵🏼‍♀","🚵🏻‍♀","🚵‍♀","🚵🏿","🚵🏾","🚵🏽","🚵🏼","🚵🏻","🚵",
+        ],
+        hand: [
+          "👌🏿","👌🏾","👌🏽","👌🏼","👌🏻","👌","👍🏿","👍🏾","👍🏽","👍🏼","👍🏻","👍","🙏🏿","🙏🏾","🙏🏽","🙏🏼","🙏🏻","🙏","🙌🏾","🙌🏽","🙌🏼","🙌🏻","🙌","✌🏿","✌🏾","✌🏽","✌🏼","✌🏻","✌️","👏🏿","👏🏾","👏🏽","👏🏼","👏🏻","👏","✋🏿","✋🏾","✋🏽","✋🏼","✋🏻","✋","👉🏿","👉🏾","👉🏽","👉🏼","👉🏻","👉","👊🏿","👊🏾","👊🏽","👊🏼","👊🏻","👊", "👈🏿","👈🏾","👈🏽","👈🏼","👈🏻","👈","👋🏿","👋🏾","👋🏽","👋🏼","👋🏻","👋","👎🏿","👎🏾","👎🏽","👎🏼","👎🏻","👎","✊🏿","✊🏾","✊🏽","✊🏼","✊🏻","✊","👇🏿","👇🏾","👇🏽","👇🏼","👇🏻","👇","👐🏿","👐🏾","👐🏽","👐🏼","👐🏻","👐","☝🏿","☝🏾","☝🏽","☝🏼","☝🏻","☝️","👆🏿","👆🏾","👆🏽","👆🏼","👆🏻","👆","🤙","🤚","🤛","🤜","🤝","🤞","✍🏿","✍🏾","✍🏽","✍🏼","✍🏻","✍️","🤘🏿","🤘🏾","🤘🏽","🤘🏼","🤘🏻","🤘","🖖🏿","🖖🏾","🖖🏽","🖖🏼","🖖🏻","🖖","🖕🏿","🖕🏾","🖕🏽","🖕🏼","🖕🏻","🖕","🖐🏿","🖐🏾","🖐🏽","🖐🏼","🖐🏻","🖐",
+        ],
+        face: [
+          "😂","🤣","😍","😭","😊","😒","😘","☺️","😩","😔","😏","😁","😉","😌","😳","😢","😎","😅","😴","😄","😑","😕","😜","😞","😋","😐","😪","😱","😡","😃","😫","😝","😤","😆","😓","😀","😷","😣","😚","😛","😥","😇","😖","😠","😬","😶","😰","😟","😨","😙","😧","😵","😮","😯","😲","😦","😗","🤗","🤕","🤔","🤓","🤒","🤐","🙄","🙃","🙂","🙁","🤠","🤡","🤢","🤤","🤥","🤦","🤧",
+
+          "😻","😹","😽","😼","🙀","😸","😿","😺","😾",
+        ],
+        baby: [
+          "👼🏿","👼🏾","👼🏽","👼🏼","👼🏻","👼","👶🏿","👶🏾","👶🏽","👶🏼","👶🏻","👶",
+        ],
+        heart: [
+          "❤️","♥️","💕","💜","💔","💖","💙","💘","💗","💞","💛","💚","💓","💟","💝","💌","🖤","🫀"
+        ],
+        symbol: [
+          "📲","🎭","♻","💯","⬅️","✅","🔴","©️","💥","💭","💩","💤","🔞","☀️","✔️","➡","🎵","✈️","☑️","‼️","✖️","🔥","♨️","☎️","💋","🆗","🌀","💢","💬","🔝","⚠️","🔸","🐾","👣","⭕","⏩","▶️","◀️","↪️","↩️","™️","⬇️","🚫","🚮","▪️","®️","🅰️","⁉️","🈹","🚼","🆕","🆓","❓","🔙","🆘","🛅","🆒","↔️","🔵","⚫","⚪","🛃","🔃","📍","#️⃣","*️⃣","0️⃣","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","ℹ️","↔","↕","↕️","↖","↖️","↗️","↘️","↙️","⌚","⌚️","⌛","⌛️","⌨","⌨️","⏏","⏪","⏫","⏬","⏭","⏮","⏯","⏸","⏹","⏺","Ⓜ️","⛎","⛔️","✝️","✡️","✳️","✴️","❇️","❎","❔","❕","❗️","❣️","➕","➖","➗","➡️","➰","➿","⤴️","⤵️","⬆️","⬛️","⬜️","⭐️","⭕️","〰️","〽️","㊗️","㊙️","🆙","🅱️","🅾️","🆔","🆚","🅿️","🏧","🎦","🉐","🆖","🈯️","🈳","🆎","🆑","🈺","🈚️","🈶","🈸","🈷","🈲","🈵","🉑","🈴","🈂️","🈁","🌫","🈷️","🔹","🔜","🔁","🔱","👤","🔘","🔒","🔄","📥","🔺","🔅","🔆","👥","🔻","📛","🚺","🔷","🔶","🕕","📩","🔛","📅","🔼","🔲","📴","🔳","🔚","🔯","🚹","🔟","📓","🔕","🕛","📶","📒","🕒","🕐","🔽","🔇","🕑","📧","🚾","🔂","📬","📗","📋","📵","🕓","🚭","🕔","📄","📊","🚷","📳","🕙","🕘","🕗","🔖","📑","📃","🕚","🕖","📨","📙","🚻","🔢","📔","🔏","🕜","📤","🔀","🕤","📂","📁","🕝","🕧","🕥","🔤","📪","🕟","🚯","🕞","🕢","🕠","🔠","🔣","🕣","🕡","🔡","🛂","🚱","🛄","🚳","👁‍🗨","🛐","🗯","🕎","🕉","🗣","🗨","⚜️",
+        ],
+        money: [
+          "💰","💸","💵","💴","🤑","💳","💶","💷","💱","💹","💲","📈","📉","💎",
+        ],
+        object: [
+          "🎈","❌","❗","⚓","🎉","🎊","💍","🔪","💣","🍴","🚨","📕","💄","📝","✂️","🔊","📚","📢","🎓","📖","💡","🔐","🔑","📞","🎨","✉️","⏰","⏱","⏲","⏳","⛏","⛑","⛓","⛱","🎐","🎎","🎌","🎋","🌂","🎍","🎫","🎏","🏮","🎟","🏺","🏷","🎞","🍽","🎒","🚿","🔋","📣","🔗","📌","🖍","🖌","🖋","🖊","🖇","🥄","🔨","🔓","🔧","📐","🛢","🛡","🛠","🛎","🛍","🗳","🗡","🗞","🗝","🗜","🗓","🗒","🗑","🗄","🗃","🗂","🔎","🔍","🕦","📦","📆","📘","📮","🔔","📯","🔬","📏","📎","📇","📭","📫","🕰","🔩","🔦","🖼","🕯",
+        ],
+        clothing: [
+          "👠","👙","👓","👟","⛸","🎩","🎽","👗","👖","👘","👡","👛","🕶","👜","👢","👕","👒","👞","👔","👚","💼","👑","🎀","👝",
+        ],
+        body: [
+          "👀","💀","💪🏿","💪🏾","💪🏽","💪🏼","💪🏻","💪","👅","💅🏿","💅🏾","💅🏽","💅🏼","💅🏻","💅","👄","👃🏿","👃🏾","👃🏽","👃🏼","👃🏻","👃","👂🏿","👂🏾","👂🏽","👂🏼","👂🏻","👂","👁","🤳","🦾","🦿","🦶","🫀","🧠","🫁","🦵"
+        ],
+        music: [
+          "💿","💽","🎶","🪕","🎼","🎸","🎹","🎷","🎛","🎚","🎙","🎺","🎻","🥁","📻","🔈","🔉","🪗",
+        ],
+        animal: [
+          "🙈","🙉","🙊","🐵","🐒","🐧","🐶","🐱","🐷","🐽","🐝","🐼","🐰","🐍","🐢","🐸","🐣","🐥","🐻","🐯","🐙","🐳","🐬","🐘","🐐","🐺","🐦","🐠","🐟","🐨","🐹","🐭","🐔","🐋","🐛","🐴","🐮","🐊","🐕","🐈","🐎","🐓","🐇","🐞","🕸","🕷","🕊","🐿","🦅","🦆","🦇","🦈","🦉","🦊","🦋","🦌","🦍","🦎","🦏","🦐","🦑","🦃","🦂","🦁","🦀","🐌","🐡","🐗","🐂","🐪","🐫","🐄","🐚","🐩","🐑","🐤","🐖","🐏","🐀","🐆","🐜","🐁","🐅","🐃",
+        ],
+        space: [
+          "✨","🌟","💫","🌞","⭐","👽","🌙","🚀","👾","🌌","📡","🛰","🔭","☄️",
+
+          "🌚","🌛","🌝","🌜","🌑","🌒","🌓","🌔","🌕","🌘","🌗","🌖",
+        ],
+        plant: [
+          "🌸","🌹","🍃","🍀","🌺","🌴","🌻","💐","🌿","🍂","🌷","🌵","🍁","🌼","🌱","🌳","🌲","🥀","💮","💠",
+        ],
+        weather: [
+          "☁","❄️","🌈","⚡","💨","🌊","☔","⛄","⛅","💧","💦","⛅️","⛈","🌪","🌩","🌨","🌧","🌦","🌥","🌤","🌬","🌁","🌡",
+        ],
+        game: [
+          "♠","♥","♦","♣","🏀","🏆","🏈","🎮","⚾️","🎯","🎾","⚽️","⛳️","🎲","🎱","🏹","🏸","🎳","🏉","🀄","🎿","🎴","🏓","🏒","🏑","🏐","🏏","🏅","🎗","🎖","🥅","🥇","🥈","🥉","🥊","🥋","🕹","🕳","👾",
+        ],
+        food: [
+          "🍕","🍟","🍔","🌾","🎣","🍞","🍗","🍤","🍝","🍥","🍜","🍳","🍱","🍚","🍣","🍖","🍲","🍛","🍡","🍙","🍘","🍢","🌯","🌮","🌭","🍿","🥐","🥓","🥖","🥗","🥘","🥙","🥞","🧀","🥚",
+        ],
+        vegan: [
+          "🍓","🍌","🍉","🍆","🍑","🍒","🍍","🍇","🍎","🍏","🍅","🍋","🍊","🌽","🌰","🍐","🍠","🍈","🌶","🥑","🥒","🥔","🥕","🥜","🥝",
+        ],
+        drink: [
+          "🍻","☕","🍺","🍷","🍹","🍸","🍼","🍵","🍯","🍾","🍶","🥛","🥂","🥃","🚰",
+        ],
+        sweet: [
+          "🎂","🍩","🍭","🍬","🍦","🍫","🍰","🍪","🍧","🍨","🍮",
+        ],
+        vice: [
+          "💉","💊","🚬","🍄","🔫","🎰","🃏",
+        ],
+        flag: [
+          "🏳‍🌈","🏁","🏴","🏳","🚩","🇺🇳",
+          "🇺🇸","🇫🇷","🇮🇹","🇬🇧","🇩🇪","🇯🇵","🇰🇷","🇷🇺","🇨🇳","🇦🇨","🇦🇩","🇦🇪","🇦🇫","🇦🇬","🇦🇮","🇦🇱","🇦🇲","🇦🇴","🇦🇶","🇦🇷","🇦🇸","🇦🇹","🇦🇺","🇦🇼","🇦🇽","🇦🇿","🇧🇦","🇧🇧","🇧🇩","🇧🇪","🇧🇫","🇧🇬","🇧🇭","🇧🇮","🇧🇯","🇧🇱","🇧🇲","🇧🇳","🇧🇴","🇧🇶","🇧🇷","🇧🇸","🇧🇹","🇧🇻","🇧🇼","🇧🇾","🇧🇿","🇨🇦","🇨🇨","🇨🇩","🇨🇫","🇨🇬","🇨🇭","🇨🇮","🇨🇰","🇨🇱","🇨🇲","🇨🇴","🇨🇵","🇨🇷","🇨🇺","🇨🇻","🇨🇼","🇨🇽","🇨🇾","🇨🇿","🇩🇬","🇩🇯","🇩🇰","🇩🇲","🇩🇴","🇩🇿","🇪🇦","🇪🇨","🇪🇪","🇪🇬","🇪🇭","🇪🇷","🇪🇸","🇪🇹","🇪🇺","🇫🇮","🇫🇯","🇫🇰","🇫🇲","🇫🇴","🇬🇦","🇬🇩","🇬🇪","🇬🇫","🇬🇬","🇬🇭","🇬🇮","🇬🇱","🇬🇲","🇬🇳","🇬🇵","🇬🇶","🇬🇷","🇬🇸","🇬🇹","🇬🇺","🇬🇼","🇬🇾","🇭🇰","🇭🇲","🇭🇳","🇭🇷","🇭🇹","🇭🇺","🇮🇨","🇮🇩","🇮🇪","🇮🇱","🇮🇲","🇮🇳","🇮🇴","🇮🇶","🇮🇷","🇮🇸","🇯🇪","🇯🇲","🇯🇴","🇰🇪","🇰🇬","🇰🇭","🇰🇮","🇰🇲","🇰🇳","🇰🇵","🇰🇼","🇰🇾","🇰🇿","🇱🇦","🇱🇧","🇱🇨","🇱🇮","🇱🇰","🇱🇷","🇱🇸","🇱🇹","🇱🇺","🇱🇻","🇱🇾","🇲🇦","🇲🇨","🇲🇩","🇲🇪","🇲🇫","🇲🇬","🇲🇭","🇲🇰","🇲🇱","🇲🇲","🇲🇳","🇲🇴","🇲🇵","🇲🇶","🇲🇷","🇲🇸","🇲🇹","🇲🇺","🇲🇻","🇲🇼","🇲🇽","🇲🇾","🇲🇿","🇳🇦","🇳🇨","🇳🇪","🇳🇫","🇳🇬","🇳🇮","🇳🇱","🇳🇴","🇳🇵","🇳🇷","🇳🇺","🇳🇿","🇴🇲","🇵🇦","🇵🇪","🇵🇫","🇵🇬","🇵🇭","🇵🇰","🇵🇱","🇵🇲","🇵🇳","🇵🇷","🇵🇸","🇵🇹","🇵🇼","🇵🇾","🇶🇦","🇷🇪","🇷🇴","🇷🇸","🇷🇼","🇸🇦","🇸🇧","🇸🇨","🇸🇩","🇸🇪","🇸🇬","🇸🇭","🇸🇮","🇸🇯","🇸🇰","🇸🇱","🇸🇲","🇸🇳","🇸🇴","🇸🇷","🇸🇸","🇸🇹","🇸🇻","🇸🇽","🇸🇾","🇸🇿","🇹🇦","🇹🇨","🇹🇩","🇹🇫","🇹🇬","🇹🇭","🇹🇯","🇹🇰","🇹🇱","🇹🇲","🇹🇳","🇹🇴","🇹🇷","🇹🇹","🇹🇻","🇹🇼","🇹🇿","🇺🇦","🇺🇬","🇺🇲","🇺🇾","🇺🇿","🇻🇦","🇻🇨","🇻🇪","🇻🇬","🇻🇮","🇻🇳","🇻🇺","🇼🇫","🇼🇸","🇽🇰","🇾🇪","🇾🇹","🇿🇦","🇿🇲","🇿🇼",
+        ],
+        supernatural: [
+          "👻","🔮","😈","👿","🎃","👹","👺","🐲","🐉","🦄","📿","🕴","👽",
+        ],
+        decemberween: [
+          "🎄","🎁","✨","❄️","☃️","⛄️","🎅🏿","🎅🏾","🎅🏽","🎅🏼","🎅🏻","🎅","🤶","🤶🏻","🤶🏼","🤶🏽","🤶🏾","🤶🏿","🧑‍🎄","🧑🏻‍🎄","🧑🏼‍🎄","🧑🏽‍🎄","🧑🏾‍🎄","🧑🏿‍🎄",
+        ],
+        place: [
+          "⛩","⛪️","🗻","⛰","🏔",
+          "💒","⛲️","⛴","⛵️","⛽️","⛺️","🏡","🏠","🌋","🏪","🏰","🏥","🏢","🏩","🏫","🏟","🏞","🏝","🏜","🏛","🏚","🏙","🏘","🏗","🏖","🏕","🏭","🏯","🏤","🏦","🏨","🏣","🏬","🗽","🗼",
+          "🌐","🌍","🌎","🌏",
+          "🛌","🛋","🛁","🛏","🚽","💈","🚪",
+          "🎪","🎡","🎢","🎠","🗿","🛤","🛣","🗺","🕍","🕌","🕋",
+          "🌅","🌃","🌆","🌉","🎑","🎆","🌠","🎇","🌄","🌇","🗾",
+        ],
+        transport: [
+          "🏎","🏍","🚘","🚗","🚙","🏇","🚲","🛒","🛴","🛵","🛶","🚢","🚠","🚟","🛩","🛥","🚒","🚚","🚃","🚤","🚁","🚔","🚓","🚖","🚍","🚑","🛳","🚡","🚄","🚛","🚌","🚂","🚕","💺","🚋","🚎","🚅","🚐","🚊","🚉","🛫","🛬","🚞","🚜","🚇","🚆","🚝","🚈",
+          "🚏","🚸","🛑","🔰","🚦","🚥","🚧",
+        ],
+        media: [
+          "🖲","🖱","🖨","🖥","📽","📸","🔌","🤖","📻","💿","📀","💽","📱","📹","📷","🎧","🎤","🎬","🎥","📺","💻","📼","📡","🛰","📟","💾","📠","📰","📜",
+        ]
+      }
+    </script>
+
+    <script type="module">
+      /*
+        Copyright ©2021, Forrest Oliphant
+        Non-commercial license: for educational and personal use only.
+        If you use this code in a commercial project or NFT, please send/split @forresto 7% royalties:
+        * Tezos: tz1a8U75BzpwevEveL3yGY8QrdRr7KVVLcXU
+        * Paypal: https://www.paypal.me/forresto
+      */
+
+      let debug = new URLSearchParams(document.location.search).get("debug");
+      const debugEl = document.getElementById("debug");
+      debugEl.style.display = debug ? "block" : "none";
+      let animationFrame;
+
+      function init() {
+        if (animationFrame) {
+          cancelAnimationFrame(animationFrame);
+        }
+
+        // Reboot fxrand
+        // prettier-ignore
+        let b58dec = (str) => str.split('').reduce((p,c,i) => p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length-i-1)), 0)
+        let fxhashTrunc = fxhash.slice(2);
+        let regex = new RegExp(
+          ".{" + ((fxhashTrunc.length / 4) | 0) + "}",
+          "g"
+        );
+        let hashes = fxhashTrunc.match(regex).map((h) => b58dec(h));
+        let sfc32 = (a, b, c, d) => {
+          return () => {
+            a |= 0;
+            b |= 0;
+            c |= 0;
+            d |= 0;
+            var t = (((a + b) | 0) + d) | 0;
+            d = (d + 1) | 0;
+            a = b ^ (b >>> 9);
+            b = (c + (c << 3)) | 0;
+            c = (c << 21) | (c >>> 11);
+            c = (c + t) | 0;
+            return (t >>> 0) / 4294967296;
+          };
+        };
+        fxrand = sfc32(...hashes);
+
+        // Random utils
+        function randomBetween(a, b) {
+          return a + fxrand() * (b - a);
+        }
+
+        // My stuff
+
+        const emojiCount = 2 + Math.floor(fxrand() * 12);
+        const infinite = fxrand() < 1 / 32;
+
+        const paletteKeys = Object.keys(EMOJI);
+        const paletteCount =
+          fxrand() < 1 / 40
+            ? 0
+            : fxrand() < 1 / 20
+            ? 1
+            : 2 + Math.floor(fxrand() * 2);
+        const paletteName =
+          paletteCount === 0
+            ? "wild"
+            : paletteCount === 1
+            ? paletteKeys[Math.floor(fxrand() * paletteKeys.length)]
+            : "mix";
+
+        const mixPaletteNames =
+          paletteCount === 0
+            ? paletteKeys
+            : paletteCount === 1
+            ? [paletteName]
+            : Array(paletteCount)
+                .fill("")
+                .map(
+                  () => paletteKeys[Math.floor(fxrand() * paletteKeys.length)]
+                );
+
+        const p =
+          (2 + Math.floor(fxrand() * 2) * 2) * (fxrand() < 0.5 ? 1 : -1);
+        const q =
+          (3 + Math.floor(fxrand() * 2) * 2) * (fxrand() < 0.5 ? 1 : -1);
+
+        window.$fxhashFeatures = {
+          emojiCount,
+          paletteName,
+          paletteCount,
+          p,
+          q,
+        };
+        console.log(window.$fxhashFeatures, mixPaletteNames);
+
+        debugEl.textContent =
+          fxhash + "\n" + JSON.stringify(window.$fxhashFeatures, null, 2);
+
+        function randomEmoji() {
+          const group =
+            paletteCount === 0
+              ? EMOJI[paletteKeys[Math.floor(fxrand() * paletteKeys.length)]]
+              : paletteCount === 1
+              ? EMOJI[paletteName]
+              : EMOJI[
+                  mixPaletteNames[Math.floor(fxrand() * mixPaletteNames.length)]
+                ];
+          return group[Math.floor(fxrand() * group.length)];
+        }
+
+        const emojiGroup = Array(emojiCount).fill("").map(randomEmoji);
+
+        const TAU = Math.PI * 2;
+
+        // Make a canvas with the pixel density, that resizes with the window size
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        let dpr = window.devicePixelRatio || 1;
+        let width;
+        let height;
+        let radius;
+
+        canvas.addEventListener("click", () => {
+          debug = !debug;
+          debugEl.style.display = debug ? "block" : "none";
+        });
+
+        let paused = false;
+        const pauseEl = document.createElement("button");
+        pauseEl.textContent = "pause";
+        debugEl.prepend(pauseEl);
+        pauseEl.addEventListener("click", () => {
+          paused = !paused;
+          pauseEl.textContent = paused ? "resume" : "pause";
+        });
+
+        // const bgCanvas = document.getElementById("bg");
+        // const bgContext = bgCanvas.getContext("2d");
+
+        // Resize canvas with window
+        function resize() {
+          let dpr = window.devicePixelRatio;
+          width = canvas.width = window.innerWidth * dpr;
+          height = canvas.height = window.innerHeight * dpr;
+          radius = Math.min(width, height) / 2;
+          context.font =
+            42 * dpr + 'px "Noto Color Emoji", "Noto Sans", sans-serif';
+          context.textAlign = "center";
+          context.textBaseline = "middle";
+        }
+        resize();
+
+        // Particles
+        let prevParticle;
+        function makeParticle(_, i) {
+          const particle = {
+            index: i,
+            text: emojiGroup[i % emojiGroup.length],
+            x: width / 2,
+            y: height / 2,
+            z: 0,
+            // xScale: 1 + randomBetween(-0.25, 0.25),
+            // yScale: 1 + randomBetween(-0.25, 0.25),
+            size: 1,
+            heading: 0,
+            prevParticle,
+          };
+          prevParticle = particle;
+          return particle;
+        }
+        const particles = new Array(64).fill(0).map(makeParticle);
+        particles[0].prevParticle = particles[particles.length - 1];
+
+        // Animate
+        let frame = 0;
+        function draw() {
+          if (paused) {
+            animationFrame = window.requestAnimationFrame(draw);
+            return;
+          }
+
+          context.clearRect(0, 0, width, height);
+          // bgContext.clearRect(0, 0, width, height);
+
+          // Lines
+          for (let particle of particles) {
+            const { index, text, x, y, z, heading, size, prevParticle } =
+              particle;
+
+            context.save();
+            context.translate(width / 2, height / 2);
+
+            context.strokeStyle = "#000";
+            context.lineWidth = 16;
+            context.beginPath();
+            context.moveTo(prevParticle.x, prevParticle.y);
+            context.lineTo(x, y);
+            context.stroke();
+
+            context.strokeStyle = "#FFF";
+            context.lineWidth = 8;
+            context.beginPath();
+            context.moveTo(prevParticle.x, prevParticle.y);
+            context.lineTo(x, y);
+            context.stroke();
+
+            context.restore();
+          }
+
+          // Stamp Emoji
+          for (let particle of particles) {
+            const { index, text, x, y, z, heading, size } = particle;
+
+            context.save();
+            context.translate(width / 2, height / 2);
+            context.translate(x, y);
+
+            context.fillStyle = "#000";
+            context.rotate(particle.heading);
+            context.fillText(text, 0, 0);
+
+            context.restore();
+
+            // Position for next frame
+            const phi = frame / 240 + (index / particles.length) * TAU;
+            const r = Math.cos(q * phi) + 2;
+            const nextX = r * Math.cos(p * phi) * radius * 0.25;
+            const nextY = r * Math.sin(p * phi) * radius * 0.25;
+            const nextZ = 0 - Math.sin(q * phi) * radius * 0.25;
+
+            particle.heading = Math.atan2(y - nextY, x - nextX);
+
+            particle.x = nextX;
+            particle.y = nextY;
+            particle.z = nextZ;
+          }
+
+          // Sort by z for next frame
+          particles.sort((a, b) => a.z - b.z);
+
+          frame++;
+          animationFrame = window.requestAnimationFrame(draw);
+        }
+        draw();
+      }
+      init();
+      window.addEventListener("resize", init);
+    </script>
+  </body>
+</html>

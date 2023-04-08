@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>forresto/char-mandala-bts</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- prettier-ignore -->
+    <script id="fxhash-snippet">
+  //---- do not edit the following code (you can indent as you wish)
+  let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+  var fxhash = new URLSearchParams(document.location.search).get("fxhash") || "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
+  let b58dec = (str) => str.split('').reduce((p,c,i) => p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length-i-1)), 0)
+  let fxhashTrunc = fxhash.slice(2)
+  let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')
+  let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+  let sfc32 = (a, b, c, d) => {
+    return () => {
+      a |= 0; b |= 0; c |= 0; d |= 0
+      var t = (a + b | 0) + d | 0
+      d = d + 1 | 0
+      a = b ^ b >>> 9
+      b = c + (c << 3) | 0
+      c = c << 21 | c >>> 11
+      c = c + t | 0
+      return (t >>> 0) / 4294967296
+    }
+  }
+  var fxrand = sfc32(...hashes)
+  //---- /do not edit the following code
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+      }
+      canvas {
+        margin: auto;
+        max-width: 100%;
+        max-height: 100%;
+      }
+      #debug {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.75);
+        color: black;
+        max-height: 100%;
+        overflow: auto;
+        width: 150px;
+      }
+      input {
+        max-width: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      /*
+        Copyright ©2021, Forrest Oliphant
+        Non-commercial license: for educational and personal use only.
+        If you use this code in a commercial project or NFT, please send @forresto 7% royalties:
+        * Tezos: tz1a8U75BzpwevEveL3yGY8QrdRr7KVVLcXU
+        * Paypal: https://www.paypal.me/forresto
+      */
+
+      let animationFrameRef;
+      let hue;
+      let shadowColor = "hsla(0, 100%, 0%, 0.25)";
+      // fxhash is set as window var in head script
+
+      function init() {
+        while (document.body.children.length) {
+          document.body.removeChild(document.body.children[0]);
+        }
+        if (animationFrameRef) {
+          cancelAnimationFrame(animationFrameRef);
+        }
+
+        // prettier-ignore
+        (function fxrandReset(){
+          let b58dec = (str) => str.split('').reduce((p,c,i) => p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length-i-1)), 0)
+          let fxhashTrunc = fxhash.slice(2)
+          let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')
+          let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+          let sfc32 = (a, b, c, d) => {
+            return () => {
+              a |= 0; b |= 0; c |= 0; d |= 0
+              var t = (a + b | 0) + d | 0
+              d = d + 1 | 0
+              a = b ^ b >>> 9
+              b = c + (c << 3) | 0
+              c = c << 21 | c >>> 11
+              c = c + t | 0
+              return (t >>> 0) / 4294967296
+            }
+          }
+          fxrand = sfc32(...hashes)
+        })();
+
+        const particleCount = 2 + Math.floor(fxrand() * 6);
+        const infinite = fxrand() < 1 / 32;
+        const life =
+          (infinite
+            ? Infinity
+            : fxrand() < 1 / 12
+            ? 6 * 60
+            : 12 + 4 * Math.floor(fxrand() * 12)) * 60;
+
+        let spawn = life === Infinity;
+
+        const loopLength = 4 + Math.floor(fxrand() * 4) * 4;
+        const loopLengthFrames = loopLength * 60;
+
+        if (hue === undefined) {
+          hue = Math.floor(fxrand() * 360);
+        } else {
+          // Preserve fxrand call count
+          fxrand();
+        }
+
+        window.$fxhashFeatures = {
+          particleCount,
+          loopLength: loopLengthFrames,
+          life: life,
+          hueBase: ["r", "o", "y", "g", "b", "i", "v", "r"][
+            Math.floor((hue / 360) * 8)
+          ],
+        };
+        console.log(window.$fxhashFeatures, fxhash, hue);
+
+        let debug = new URLSearchParams(document.location.search).get("debug");
+        const TAU = Math.PI * 2;
+        let paused = false;
+
+        const dpr = window.devicePixelRatio || 1;
+        const chipSize = 100 * dpr;
+        const canvas = document.createElement("canvas");
+        const width = (canvas.width = window.innerWidth * dpr);
+        const height = (canvas.height = window.innerHeight * dpr);
+        const radius = Math.max(width, height) / 2;
+        document.body.appendChild(canvas);
+
+        canvas.addEventListener("click", () => {
+          debug = !debug;
+          debugEl.style.display = debug ? "block" : "none";
+        });
+
+        // Set up canvas context
+        const context = canvas.getContext("2d");
+        if (!debug) {
+          context.fillStyle = "black";
+          context.fillRect(0, 0, width, height);
+        }
+
+        const debugEl = document.createElement("div");
+        debugEl.id = "debug";
+        document.body.appendChild(debugEl);
+        if (debug) {
+          debugEl.style.display = "block";
+        }
+        debugEl.textContent = JSON.stringify(window.$fxhashFeatures, null, 2);
+        // ---
+        debugEl.prepend(document.createElement("hr"));
+        const frameEl = document.createElement("span");
+        frameEl.textContent = "0";
+        debugEl.prepend(frameEl);
+        const playEl = document.createElement("button");
+        playEl.textContent = "Pause";
+        playEl.addEventListener("click", () => {
+          paused = !paused;
+          playEl.textContent = paused ? "Play" : "Pause";
+        });
+        debugEl.prepend(playEl);
+        // ---
+        debugEl.appendChild(document.createElement("hr"));
+        const fxhashLabelEl = document.createElement("label");
+        fxhashLabelEl.textContent = "fxhash";
+        const fxhashEl = document.createElement("input");
+        fxhashEl.type = "text";
+        fxhashEl.value = fxhash;
+        fxhashEl.addEventListener("change", () => {
+          fxhash = fxhashEl.value;
+        });
+        fxhashLabelEl.appendChild(fxhashEl);
+        debugEl.appendChild(fxhashLabelEl);
+        const shadowLabelEl = document.createElement("label");
+        shadowLabelEl.textContent = "Shadow";
+        const shadowEl = document.createElement("input");
+        shadowEl.type = "text";
+        shadowEl.value = shadowColor;
+        shadowEl.addEventListener("change", () => {
+          shadowColor = shadowEl.value;
+        });
+        shadowLabelEl.appendChild(shadowEl);
+        debugEl.appendChild(shadowLabelEl);
+        const hueLabelEl = document.createElement("label");
+        hueLabelEl.textContent = "Base hue";
+        const hueEl = document.createElement("input");
+        hueEl.type = "number";
+        hueEl.min = 0;
+        hueEl.max = 360;
+        hueEl.value = hue;
+        hueEl.addEventListener("change", () => {
+          hue = hueEl.valueAsNumber;
+        });
+        hueLabelEl.appendChild(hueEl);
+        debugEl.appendChild(hueLabelEl);
+        const rebootEl = document.createElement("button");
+        rebootEl.textContent = "Reboot";
+        rebootEl.addEventListener("click", () => {
+          init();
+        });
+        debugEl.appendChild(rebootEl);
+        debugEl.appendChild(document.createElement("hr"));
+        const spawnLabelEl = document.createElement("label");
+        spawnLabelEl.textContent = "Keep replacing particles";
+        const spawnEl = document.createElement("input");
+        spawnEl.type = "checkbox";
+        spawnEl.checked = spawn;
+        spawnEl.addEventListener("change", () => {
+          spawn = spawnEl.checked;
+        });
+        spawnLabelEl.appendChild(spawnEl);
+        debugEl.appendChild(spawnLabelEl);
+        const addParticleEl = document.createElement("button");
+        addParticleEl.textContent = "Add particle";
+        addParticleEl.addEventListener("click", () => {
+          particles.push(makeParticle(null, particles.length));
+        });
+        debugEl.appendChild(addParticleEl);
+
+        function getHueStep() {
+          let hueStep =
+            fxrand() < 1 / 2
+              ? 0
+              : fxrand() < 1 / 2
+              ? 180
+              : fxrand() < 1 / 2
+              ? 120
+              : Math.floor(fxrand() * 30);
+          hueStep = hueStep - 5 + Math.floor(fxrand() * 10);
+          return hueStep;
+        }
+
+        function getHSLA() {
+          let hueStep = getHueStep();
+          const sat = fxrand() < 7 / 8 ? 100 : 100 - Math.floor(fxrand() * 10);
+          const lum =
+            fxrand() < 7 / 8
+              ? 45 + Math.floor(fxrand() * 10)
+              : fxrand() < 1 / 2
+              ? Math.floor(fxrand() * 10)
+              : 100 - Math.floor(fxrand() * 10);
+          const alpha = fxrand() < 7 / 8 ? 1 : Math.floor(fxrand() * 100) / 100;
+          return `hsla(${(hue + hueStep) % 360}, ${sat}%, ${lum}%, ${alpha})`;
+        }
+
+        // Paint one palette
+        function paintPalette(gradientPalette, charPalette, particlePalette) {
+          const gradientContext = gradientPalette.getContext("2d");
+          const charContext = charPalette.getContext("2d");
+          const particleContext = particlePalette.getContext("2d");
+
+          const gradient = gradientContext.createLinearGradient(
+            0,
+            0 + fxrand() * chipSize,
+            0 + chipSize,
+            0 + fxrand() * chipSize
+          );
+          const stops = 2 + Math.floor(fxrand() * 4);
+          for (let i = 0; i < stops; i++) {
+            gradient.addColorStop(fxrand(), getHSLA());
+          }
+          gradientContext.fillStyle = gradient;
+          gradientContext.fillRect(0, 0, chipSize, chipSize);
+
+          // Dots
+          function drawDot(dotContext) {
+            const radius = (1 + fxrand() * 10) * dpr;
+            dotContext.fillStyle =
+              fxrand() < 1 / 2 ? getHSLA() : fxrand() < 1 / 2 ? "#FFF" : "#000";
+            dotContext.beginPath();
+            dotContext.arc(
+              0 + chipSize / 4 + (fxrand() * chipSize) / 2,
+              0 + chipSize / 4 + (fxrand() * chipSize) / 2,
+              radius,
+              0,
+              TAU
+            );
+            dotContext.fill();
+          }
+          if (fxrand() < 1 / 2) drawDot(gradientContext);
+          if (fxrand() < 1 / 2) drawDot(gradientContext);
+          if (fxrand() < 1 / 2) drawDot(gradientContext);
+          if (fxrand() < 1 / 2) drawDot(gradientContext);
+
+          // Stripes
+          function drawStripe() {
+            gradientContext.strokeStyle = fxrand() < 1 / 2 ? "#fff" : "#000";
+            gradientContext.lineWidth = dpr * (1 + fxrand() * 2);
+            gradientContext.beginPath();
+            gradientContext.moveTo(0, 0 + fxrand() * chipSize);
+            gradientContext.lineTo(0 + chipSize, 0 + fxrand() * chipSize);
+            gradientContext.stroke();
+          }
+          if (fxrand() < 1 / 2) drawStripe();
+          if (fxrand() < 1 / 2) drawStripe();
+
+          // Build char
+          charContext.font = `bold ${42 * dpr}px serif`;
+          charContext.textAlign = "center";
+          charContext.textBaseline = "middle";
+
+          const count = 2 + Math.floor(fxrand() * 4);
+          let cx = 0 + chipSize * 0.5;
+          let cy = 0 + chipSize * 0.5;
+          charContext.fillStyle = "black";
+          charContext.save();
+          charContext.translate(cx, cy);
+          for (let i = 0; i < count; i++) {
+            const char = String.fromCharCode(21 + Math.floor(fxrand() * 106));
+            charContext.fillText(char, 0, 0);
+            charContext.rotate(fxrand() * TAU);
+            const shrink = 1 / Math.pow(2, i + 1);
+            charContext.translate(0, shrink * 42 * dpr);
+            charContext.scale(shrink, shrink);
+          }
+          charContext.restore();
+          if (fxrand() < 1 / 2) drawDot(charContext);
+          if (fxrand() < 1 / 2) drawDot(charContext);
+
+          charContext.globalCompositeOperation = "source-in";
+          charContext.drawImage(gradientPalette, 0, 0, chipSize, chipSize);
+          charContext.globalCompositeOperation = "source-over";
+
+          particleContext.shadowColor = shadowColor;
+          particleContext.shadowBlur = dpr * 10;
+          particleContext.drawImage(charPalette, 0, 0, chipSize, chipSize);
+        }
+
+        // Particles
+        function makeParticle(_, i) {
+          const gradientPalette = document.createElement("canvas");
+          gradientPalette.width = chipSize;
+          gradientPalette.height = chipSize;
+          const charPalette = document.createElement("canvas");
+          charPalette.width = chipSize;
+          charPalette.height = chipSize;
+          const particlePalette = document.createElement("canvas");
+          particlePalette.width = chipSize;
+          particlePalette.height = chipSize;
+          paintPalette(gradientPalette, charPalette, particlePalette);
+
+          const particle = {
+            index: i,
+            x: width / 2,
+            y: height / 2,
+            heading: fxrand() * TAU,
+            headingDrift: (fxrand() * TAU * 15) / 360,
+            headingDriftDrift: 0.1 + (fxrand() * TAU * 15) / 360,
+            velocity: (0.1 * dpr + fxrand() * 7) * dpr * 0.5,
+            acceleration: (0.1 * dpr + fxrand() * 7) * dpr * 0.5,
+            accelerationLoopLength: (5 + Math.floor(fxrand() * 20)) * 60,
+            loopOffset: fxrand(),
+            symmetryCount: 2 + Math.floor(fxrand() * 7),
+            gradientPalette,
+            charPalette,
+            particlePalette,
+          };
+
+          // Debug
+          const elId = "debug" + i;
+          const debugElChild =
+            document.getElementById(elId) || document.createElement("div");
+          debugElChild.innerHTML = "";
+          debugElChild.id = elId;
+          debugElChild.appendChild(document.createElement("hr"));
+          const removeParticleEl = document.createElement("button");
+          removeParticleEl.textContent = "Remove";
+          removeParticleEl.addEventListener("click", () => {
+            particles.splice(particles.indexOf(particle), 1);
+            console.log(particles);
+            debugElChild.remove();
+          });
+          debugElChild.appendChild(removeParticleEl);
+          const { index, velocity, symmetryCount } = particle;
+          const numEl = document.createElement("p");
+          numEl.textContent = JSON.stringify(
+            {
+              index,
+              velocity: Math.round(velocity * 100) / 100,
+              symmetryCount,
+            },
+            null,
+            2
+          );
+          debugElChild.appendChild(numEl);
+          debugElChild.appendChild(gradientPalette);
+          debugElChild.appendChild(particlePalette);
+
+          debugEl.appendChild(debugElChild);
+
+          return particle;
+        }
+        const particles = new Array(particleCount).fill(0).map(makeParticle);
+
+        // Animate
+        let frame = 0;
+        function draw() {
+          if (paused) {
+            animationFrameRef = window.requestAnimationFrame(draw);
+            return;
+          }
+          if (spawn && frame % loopLengthFrames === 0) {
+            // Replace a random particle
+            const i = Math.floor(fxrand() * particles.length);
+            particles[i] = makeParticle(null, i);
+          }
+          for (let particle of particles) {
+            const {
+              index,
+              accelerationLoopLength,
+              symmetryCount,
+              particlePalette,
+            } = particle;
+
+            particle.heading +=
+              particle.headingDrift +
+              particle.headingDriftDrift *
+                Math.cos(
+                  (particle.loopOffset + frame / loopLengthFrames) * TAU
+                );
+            const velocity =
+              particle.velocity +
+              Math.sin((frame / accelerationLoopLength) * TAU) *
+                particle.acceleration;
+            particle.x += Math.sin(particle.heading) * velocity;
+            particle.y += Math.cos(particle.heading) * velocity;
+            if (
+              particle.x < -radius ||
+              particle.x > width + radius ||
+              particle.y < -radius ||
+              particle.y > height + radius
+            ) {
+              particle.x = 0;
+              particle.y = 0;
+            }
+
+            for (let i = 0; i < symmetryCount; i++) {
+              context.save();
+              context.translate(width / 2, height / 2);
+              context.rotate((TAU / symmetryCount) * i);
+              context.translate(-width / 2, -height / 2);
+              context.translate(particle.x, particle.y);
+              context.rotate(particle.heading);
+              context.drawImage(
+                particlePalette,
+                0,
+                0,
+                chipSize,
+                chipSize,
+                -chipSize / 2,
+                -chipSize / 2,
+                chipSize,
+                chipSize
+              );
+              context.restore();
+            }
+          }
+          frame++;
+          frameEl.textContent = frame;
+          if (frame === life) {
+            paused = true;
+            playEl.textContent = "Play";
+          }
+          animationFrameRef = window.requestAnimationFrame(draw);
+        }
+        draw();
+      }
+      init();
+
+      // Quick way to implement restart
+      window.addEventListener("resize", init);
+    </script>
+  </body>
+</html>

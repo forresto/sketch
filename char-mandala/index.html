@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>forresto/char-mandala</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- prettier-ignore -->
+    <script id="fxhash-snippet">
+  //---- do not edit the following code (you can indent as you wish)
+  let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+  var fxhash = new URLSearchParams(document.location.search).get("fxhash") || "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
+  let b58dec = (str) => str.split('').reduce((p,c,i) => p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length-i-1)), 0)
+  let fxhashTrunc = fxhash.slice(2)
+  let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')
+  let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+  let sfc32 = (a, b, c, d) => {
+    return () => {
+      a |= 0; b |= 0; c |= 0; d |= 0
+      var t = (a + b | 0) + d | 0
+      d = d + 1 | 0
+      a = b ^ b >>> 9
+      b = c + (c << 3) | 0
+      c = c << 21 | c >>> 11
+      c = c + t | 0
+      return (t >>> 0) / 4294967296
+    }
+  }
+  var fxrand = sfc32(...hashes)
+  //---- /do not edit the following code
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+      }
+      canvas {
+        margin: auto;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      /*
+        Copyright ©2021, Forrest Oliphant
+        Non-commercial license: for educational and personal use only.
+        If you use this code in a commercial project or NFT, please send @forresto 7% royalties:
+        * Tezos: tz1a8U75BzpwevEveL3yGY8QrdRr7KVVLcXU
+        * Paypal: https://www.paypal.me/forresto
+      */
+
+      const particleCount = 2 + Math.floor(fxrand() * 6);
+      const infinite = fxrand() < 1 / 32;
+      const life =
+        (infinite
+          ? Infinity
+          : fxrand() < 1 / 12
+          ? 6 * 60
+          : 12 + 4 * Math.floor(fxrand() * 12)) * 60;
+
+      const loopLength = 4 + Math.floor(fxrand() * 4) * 4;
+      const loopLengthFrames = loopLength * 60;
+
+      const hue = Math.floor(fxrand() * 360);
+
+      window.$fxhashFeatures = {
+        particleCount,
+        loopLength,
+        life: life,
+        hueBase: ["r", "o", "y", "g", "b", "i", "v", "r"][
+          Math.floor((hue / 360) * 8)
+        ],
+      };
+      console.log(window.$fxhashFeatures, fxhash, hue);
+
+      const debug = new URLSearchParams(document.location.search).get("debug");
+      const TAU = Math.PI * 2;
+      let paused = false;
+      let dpr = window.devicePixelRatio || 1;
+
+      // Make a canvas with the pixel density, that resizes with the window size
+      const canvas = document.createElement("canvas");
+      let width;
+      let height;
+      let radius;
+      document.body.appendChild(canvas);
+
+      canvas.addEventListener("click", () => {
+        paused = !paused;
+      });
+
+      // Set up canvas context
+      const context = canvas.getContext("2d");
+
+      // Resize canvas with window
+      function resize() {
+        let dpr = window.devicePixelRatio;
+        const newWidth = Math.max(720, window.innerWidth) * dpr;
+        const newHeight = Math.max(720, window.innerHeight) * dpr;
+        if (width !== newHeight || height !== newHeight) {
+          width = canvas.width = newWidth;
+          height = canvas.height = newHeight;
+          context.fillStyle = "black";
+          if (!debug) {
+            context.fillRect(0, 0, width, height);
+          }
+          radius = Math.max(width, height) / 2;
+        }
+      }
+      window.addEventListener("resize", resize);
+      resize();
+
+      // Palette to copy from
+      const paletteCanvas = document.createElement("canvas");
+      const paletteContext = paletteCanvas.getContext("2d");
+      const chipSize = 100 * dpr;
+      paletteCanvas.width = chipSize * 7;
+      paletteCanvas.height = chipSize * 1;
+      paletteContext.font = `bold ${42 * dpr}px serif`;
+      paletteContext.textAlign = "center";
+      paletteContext.textBaseline = "middle";
+      if (debug) {
+        paletteCanvas.style.position = "absolute";
+        paletteCanvas.style.top = "0";
+        paletteCanvas.style.left = "0";
+        document.body.appendChild(paletteCanvas);
+      }
+
+      const colorsCanvas = document.createElement("canvas");
+      const colorsContext = colorsCanvas.getContext("2d");
+      colorsCanvas.width = chipSize * 7;
+      colorsCanvas.height = chipSize * 1;
+      colorsCanvas.style.position = "absolute";
+      if (debug) {
+        colorsCanvas.style.bottom = "0";
+        colorsCanvas.style.left = "0";
+        document.body.appendChild(colorsCanvas);
+      }
+
+      function getHueStep() {
+        let hueStep =
+          fxrand() < 1 / 2
+            ? 0
+            : fxrand() < 1 / 2
+            ? 180
+            : fxrand() < 1 / 2
+            ? 120
+            : Math.floor(fxrand() * 30);
+        hueStep = hueStep - 5 + Math.floor(fxrand() * 10);
+        return hueStep;
+      }
+
+      function getHSLA() {
+        let hueStep = getHueStep();
+        const sat = fxrand() < 7 / 8 ? 100 : 100 - Math.floor(fxrand() * 10);
+        const lum =
+          fxrand() < 7 / 8
+            ? 45 + Math.floor(fxrand() * 10)
+            : fxrand() < 1 / 2
+            ? Math.floor(fxrand() * 10)
+            : 100 - Math.floor(fxrand() * 10);
+        const alpha = fxrand() < 7 / 8 ? 1 : Math.floor(fxrand() * 100) / 100;
+        return `hsla(${(hue + hueStep) % 360}, ${sat}%, ${lum}%, ${alpha})`;
+      }
+
+      // Paint one palette
+      function paintPalette(i) {
+        const x = i * chipSize;
+        const y = 0;
+        colorsContext.clearRect(x, y, chipSize, chipSize);
+        paletteContext.clearRect(x, y, chipSize, height);
+
+        const gradient = colorsContext.createLinearGradient(
+          x,
+          y + fxrand() * chipSize,
+          x + chipSize,
+          y + fxrand() * chipSize
+        );
+        const stops = 2 + Math.floor(fxrand() * 4);
+        for (let i = 0; i < stops; i++) {
+          gradient.addColorStop(fxrand(), getHSLA());
+        }
+        colorsContext.fillStyle = gradient;
+        colorsContext.fillRect(x, y, chipSize, chipSize);
+
+        // Dots
+        function drawDot(dotContext) {
+          const radius = (1 + fxrand() * 10) * dpr;
+          dotContext.fillStyle =
+            fxrand() < 1 / 2 ? getHSLA() : fxrand() < 1 / 2 ? "#FFF" : "#000";
+          dotContext.beginPath();
+          dotContext.arc(
+            x + chipSize / 4 + (fxrand() * chipSize) / 2,
+            y + chipSize / 4 + (fxrand() * chipSize) / 2,
+            radius,
+            0,
+            TAU
+          );
+          dotContext.fill();
+        }
+        if (fxrand() < 1 / 2) drawDot(colorsContext);
+        if (fxrand() < 1 / 2) drawDot(colorsContext);
+        if (fxrand() < 1 / 2) drawDot(colorsContext);
+        if (fxrand() < 1 / 2) drawDot(colorsContext);
+
+        // Stripes
+        function drawStripe() {
+          colorsContext.strokeStyle = fxrand() < 1 / 2 ? "#fff" : "#000";
+          colorsContext.lineWidth = dpr * (1 + fxrand() * 2);
+          colorsContext.beginPath();
+          colorsContext.moveTo(x, y + fxrand() * chipSize);
+          colorsContext.lineTo(x + chipSize, y + fxrand() * chipSize);
+          colorsContext.stroke();
+        }
+        if (fxrand() < 1 / 2) drawStripe();
+        if (fxrand() < 1 / 2) drawStripe();
+
+        // Build char
+        const count = 2 + Math.floor(fxrand() * 4);
+        let cx = x + chipSize * (1 / 2);
+        let cy = 0 + chipSize * (1 / 2);
+        paletteContext.fillStyle = "black";
+        paletteContext.save();
+        paletteContext.translate(cx, cy);
+        for (let i = 0; i < count; i++) {
+          const char = String.fromCharCode(21 + Math.floor(fxrand() * 106));
+          paletteContext.fillText(char, 0, 0);
+          paletteContext.rotate(fxrand() * TAU);
+          const shrink = 1 / Math.pow(2, i + 1);
+          paletteContext.translate(0, shrink * 42 * dpr);
+          paletteContext.scale(shrink, shrink);
+        }
+        paletteContext.restore();
+        if (fxrand() < 1 / 2) drawDot(paletteContext);
+        if (fxrand() < 1 / 2) drawDot(paletteContext);
+      }
+
+      // TODO: make them changeable
+      function stampPalette() {
+        paletteContext.globalCompositeOperation = "source-in";
+        paletteContext.drawImage(
+          colorsCanvas,
+          0,
+          0,
+          colorsCanvas.width,
+          colorsCanvas.height,
+          0,
+          0,
+          paletteCanvas.width,
+          paletteCanvas.height
+        );
+        paletteContext.globalCompositeOperation = "source-over";
+      }
+
+      // Particles
+      function makeParticle(_, i) {
+        paintPalette(i);
+        return {
+          index: i,
+          x: width / 2,
+          y: height / 2,
+          heading: fxrand() * TAU,
+          headingDrift: (fxrand() * TAU * 15) / 360,
+          headingDriftDrift: 0.1 + (fxrand() * TAU * 15) / 360,
+          velocity: (0.1 * dpr + fxrand() * 7) * dpr * 0.5,
+          acceleration: (0.1 * dpr + fxrand() * 7) * dpr * 0.5,
+          accelerationLoopLength: (5 + Math.floor(fxrand() * 20)) * 60,
+          loopOffset: fxrand(),
+          symmetryCount: 2 + Math.floor(fxrand() * 7),
+        };
+      }
+      const particles = new Array(particleCount).fill(0).map(makeParticle);
+      stampPalette();
+
+      // Animate
+      let frame = 0;
+      function draw() {
+        if (paused) {
+          window.requestAnimationFrame(draw);
+          return;
+        }
+        if (infinite && frame % loopLengthFrames === 0) {
+          // Replace a random particle
+          const i = Math.floor(fxrand() * particles.length);
+          particles[i] = makeParticle(null, i);
+          stampPalette();
+        }
+        for (let particle of particles) {
+          const { index, accelerationLoopLength, symmetryCount } = particle;
+
+          particle.heading +=
+            particle.headingDrift +
+            particle.headingDriftDrift *
+              Math.cos((particle.loopOffset + frame / loopLengthFrames) * TAU);
+          const velocity =
+            particle.velocity +
+            Math.sin((frame / accelerationLoopLength) * TAU) *
+              particle.acceleration;
+          particle.x += Math.sin(particle.heading) * velocity;
+          particle.y += Math.cos(particle.heading) * velocity;
+          if (
+            particle.x < -radius ||
+            particle.x > width + radius ||
+            particle.y < -radius ||
+            particle.y > height + radius
+          ) {
+            particle.x = 0;
+            particle.y = 0;
+          }
+
+          for (let i = 0; i < symmetryCount; i++) {
+            context.save();
+            context.translate(width / 2, height / 2);
+            context.rotate((TAU / symmetryCount) * i);
+            context.translate(-width / 2, -height / 2);
+            context.translate(particle.x, particle.y);
+            context.rotate(particle.heading);
+            context.drawImage(
+              paletteCanvas,
+              index * chipSize,
+              0,
+              chipSize,
+              chipSize,
+              -chipSize / 2,
+              -chipSize / 2,
+              chipSize,
+              chipSize
+            );
+            context.restore();
+          }
+        }
+        frame++;
+        if (frame < life) {
+          window.requestAnimationFrame(draw);
+        }
+      }
+      draw();
+
+      // BG
+      // document.body.style.backgroundColor = fxrand() < 1 / 2 ? "#fff" : "#000";
+    </script>
+  </body>
+</html>
