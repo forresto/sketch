@@ -7,3 +7,9 @@ cube: [sketch.paperjs.org](http://sketch.paperjs.org/#S/vVdRb9s2EP4rhIEBkm3Isl13
 labyrinth: http://output.jsbin.com/fukuqid
 
 breathing feedback triangle: https://forresto.github.io/sketch/breathing-feedback-triangle/
+
+## war.js
+
+2023-04
+
+[War 👎](https://forresto.github.io/sketch/war/) the card game with deterministic outcome based on seeded random shuffle phrases... it's a way to flip a coin.
