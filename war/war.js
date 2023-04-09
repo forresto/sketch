@@ -153,12 +153,12 @@ function step() {
     turnCards(p2Pile, true);
 
     if (player1Value > player2Value) {
-      p1Won.push(...p2Pile, ...p1Pile);
+      p1Won.push(...p1Pile, ...p2Pile);
       p1Pile = [];
       p2Pile = [];
       return "drawing";
     } else if (player2Value > player1Value) {
-      p2Won.push(...p1Pile, ...p2Pile);
+      p2Won.push(...p2Pile, ...p1Pile);
       p1Pile = [];
       p2Pile = [];
       return "drawing";
@@ -168,6 +168,8 @@ function step() {
   } else if (state === "bet 1") {
     return draw(false, "bet 2");
   } else if (state === "bet 2") {
+    return draw(false, "bet 3");
+  } else if (state === "bet 3") {
     return draw(true, "compare");
   } else if (state === "game over") {
     turnCards(p1Pile, true);
