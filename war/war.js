@@ -149,15 +149,16 @@ function step() {
     const player1Value = getCardValue(p1Card);
     const player2Value = getCardValue(p2Card);
 
-    turnCards(p1Pile, true);
-    turnCards(p2Pile, true);
-
     if (player1Value > player2Value) {
+      turnCards(p1Pile, true);
+      turnCards(p2Pile, true);
       p1Won.push(...p1Pile, ...p2Pile);
       p1Pile = [];
       p2Pile = [];
       return "drawing";
     } else if (player2Value > player1Value) {
+      turnCards(p1Pile, true);
+      turnCards(p2Pile, true);
       p2Won.push(...p2Pile, ...p1Pile);
       p1Pile = [];
       p2Pile = [];
